@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { runnerInputSchema, type RunnerInput, waveStartTimes } from "@shared/schema";
@@ -27,14 +28,13 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, LightbulbIcon, Timer } from "lucide-react";
+import { CheckCircle, LightbulbIcon, Clock } from "lucide-react";
 
 interface RunnerFormProps {
   onSubmitSuccess: (data: any) => void;
 }
 
 export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { toast } = useToast();
   
   const form = useForm<RunnerInput>({
@@ -67,71 +67,13 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
     },
   });
 
-  const uploadMutation = useMutation({
-    mutationFn: async (file: File) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      
-      const response = await fetch("/api/upload-csv", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
-      
-      if (!response.ok) {
-        throw new Error("Failed to upload CSV file");
-      }
-      
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "File uploaded",
-        description: "Your CSV file has been successfully uploaded.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to upload CSV file: ${error.message}`,
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: RunnerInput) => {
-    calculateMutation.mutate(data);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      setSelectedFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleUpload = () => {
-    if (selectedFile) {
-      uploadMutation.mutate(selectedFile);
-    }
-  };
-
   const handlePaceChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
     const formattedValue = formatPaceInput(e.target.value);
     onChange(formattedValue);
+  };
+
+  const onSubmit = (data: RunnerInput) => {
+    calculateMutation.mutate(data);
   };
 
   return (
@@ -212,49 +154,11 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 className="w-full bg-primary text-white hover:bg-opacity-90"
                 disabled={calculateMutation.isPending}
               >
-                <Running className="mr-2 h-4 w-4" />
+                <Clock className="mr-2 h-4 w-4" />
                 {calculateMutation.isPending ? 'Calculating...' : 'Calculate Runner Timeline'}
               </Button>
             </form>
           </Form>
-
-          <div className="mt-6 pt-6 border-t border-neutral-200">
-            <h3 className="text-lg font-medium text-neutral-900 mb-3">Upload CSV Data</h3>
-            <div 
-              className="border-2 border-dashed border-neutral-300 rounded-md p-6 text-center"
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-            >
-              <div className="space-y-2">
-                <FileUpload className="h-6 w-6 mx-auto text-neutral-400" />
-                <p className="text-sm text-neutral-600">
-                  {selectedFile ? `Selected: ${selectedFile.name}` : "Drag and drop your CSV file here, or"}
-                </p>
-                <div className="flex justify-center">
-                  <label htmlFor="fileUpload" className="text-secondary font-medium text-sm hover:text-secondary hover:underline cursor-pointer">
-                    Browse files
-                  </label>
-                  <input 
-                    type="file" 
-                    className="hidden" 
-                    id="fileUpload" 
-                    accept=".csv"
-                    onChange={handleFileChange}
-                  />
-                </div>
-                {selectedFile && (
-                  <Button 
-                    onClick={handleUpload} 
-                    variant="outline" 
-                    className="mt-2"
-                    disabled={uploadMutation.isPending}
-                  >
-                    {uploadMutation.isPending ? 'Uploading...' : 'Upload File'}
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
         </CardContent>
       </Card>
 

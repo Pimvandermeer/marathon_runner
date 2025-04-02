@@ -69,33 +69,16 @@ export default function Timeline({
           <div className="bg-neutral-200 rounded-lg overflow-hidden aspect-video flex items-center justify-center relative">
             <div className="text-neutral-600">
               <Map className="h-12 w-12 mx-auto mb-2 text-neutral-400" />
-              <p className="text-center">Interactive Marathon Route Map</p>
-              <p className="text-sm text-center mt-1">Shows runner's current position and recommended viewing locations</p>
+              <p className="text-center">Rotterdam Marathon Route</p>
+              <p className="text-sm text-center mt-1">Official course map with viewing locations</p>
             </div>
             
             {hasRunnerInfo && (
-              <>
-                <div className="absolute" style={{ top: "40%", left: "25%" }}>
-                  <div className="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center">
-                    <Map className="h-3 w-3" />
-                  </div>
-                </div>
-                <div className="absolute" style={{ top: "50%", left: "45%" }}>
-                  <div className="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center">
-                    <Map className="h-3 w-3" />
-                  </div>
-                </div>
-                <div className="absolute" style={{ top: "30%", left: "65%" }}>
-                  <div className="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center">
-                    <Map className="h-3 w-3" />
-                  </div>
-                </div>
-                <div className="absolute" style={{ top: "60%", left: "75%" }}>
-                  <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center animate-pulse">
-                    <span className="text-xs">▶</span>
-                  </div>
-                </div>
-              </>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-primary/10 flex items-center justify-center">
+                <p className="text-lg font-medium text-neutral-700 bg-white/70 px-4 py-2 rounded-lg shadow-sm">
+                  Rotterdam Marathon 2025
+                </p>
+              </div>
             )}
           </div>
           

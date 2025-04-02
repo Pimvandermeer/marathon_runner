@@ -1,4 +1,4 @@
-import { MapPin, FlagCheckered } from "lucide-react";
+import { MapPin, Flag } from "lucide-react";
 import { type LocationTime } from "@shared/schema";
 
 interface LocationItemProps {
@@ -12,7 +12,7 @@ export default function LocationItem({ location, isFinish = false }: LocationIte
       <div className="flex items-start">
         <div className={`${isFinish ? 'bg-primary' : 'bg-secondary'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1`}>
           {isFinish ? (
-            <FlagCheckered className="h-4 w-4" />
+            <Flag className="h-4 w-4" />
           ) : (
             <MapPin className="h-4 w-4" />
           )}
