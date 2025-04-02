@@ -25,10 +25,22 @@ export function getPercentagePosition(distance: number, totalDistance: number = 
   return (distance / totalDistance) * 100;
 }
 
-// Format time for display (HH:MM)
+// Format time for display (convert 24h to 12h with AM/PM)
 export function formatTime(time: string): string {
   if (!time) return "";
-  return time;
+  
+  // Parse the time (expected format is HH:MM or HH:MM:SS)
+  const parts = time.split(':');
+  if (parts.length < 2) return time;
+  
+  const hours = parseInt(parts[0], 10);
+  const minutes = parts[1].padStart(2, '0');
+  
+  // Convert to 12-hour format
+  const period = hours >= 12 ? 'PM' : 'AM';
+  const hours12 = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+  
+  return `${hours12}:${minutes} ${period}`;
 }
 
 // Format distance for display

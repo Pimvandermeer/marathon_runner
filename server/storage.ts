@@ -16,24 +16,39 @@ function paceToMinutes(pace: string): number {
   return minutes + (seconds / 60);
 }
 
-// Utility function to add time to a base time
+// Utility function to add time to a base time with Rotterdam timezone (UTC+2 for summer time)
 function addTime(baseTime: string, minutesToAdd: number): string {
-  const [hours, minutes] = baseTime.split(":").map(Number);
+  // Create a date object set to April 13, 2025 (Rotterdam Marathon date)
+  const marathonDate = new Date('2025-04-13T00:00:00');
+  const [baseHours, baseMinutes] = baseTime.split(":").map(Number);
   
-  let totalMinutes = hours * 60 + minutes + minutesToAdd;
-  const newHours = Math.floor(totalMinutes / 60) % 24;
-  const newMinutes = Math.floor(totalMinutes % 60);
+  // Set the time to the base time
+  marathonDate.setHours(baseHours, baseMinutes, 0, 0);
   
-  return `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;
+  // Add the minutes
+  marathonDate.setMinutes(marathonDate.getMinutes() + minutesToAdd);
+  
+  // Format the time in 24-hour format
+  const newHours = marathonDate.getHours().toString().padStart(2, '0');
+  const newMinutes = marathonDate.getMinutes().toString().padStart(2, '0');
+  
+  return `${newHours}:${newMinutes}`;
 }
 
-// Utility function to format elapsed time in HH:MM:SS
+// Utility function to format elapsed time in a natural format (Xh Ym Zs)
 function formatElapsedTime(minutes: number): string {
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = Math.floor(minutes % 60);
   const seconds = Math.floor((minutes * 60) % 60);
   
-  return `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  // For display in timeline, use a more readable format
+  if (hours > 0) {
+    return `${hours}h ${remainingMinutes}m ${seconds}s`;
+  } else if (remainingMinutes > 0) {
+    return `${remainingMinutes}m ${seconds}s`;
+  } else {
+    return `${seconds}s`;
+  }
 }
 
 export interface IStorage {
@@ -142,27 +157,37 @@ export class MemStorage implements IStorage {
       };
     });
     
-    // Simulate current race time based on the current time
-    // For demo purposes, we'll calculate a position based on the current time of day
-    // This creates a more realistic simulation of a runner's position
+    // Simulate race day scenario - April 13, 2025
+    // Create a simulated marathon race day with the current time of day
+    const marathonDate = new Date('2025-04-13T00:00:00');
     const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
     
-    // Determine a position in the race based on the current time (simulated)
+    // Set marathon date to have the same time of day as now
+    marathonDate.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+    
+    // Extract hours and minutes from the marathon date
+    const currentHour = marathonDate.getHours();
+    const currentMinute = marathonDate.getMinutes();
+    
+    // Parse the user's start time
+    const [startHour, startMinute] = startTime.split(":").map(Number);
+    
+    // Determine a position in the race based on elapsed time since wave start (simulated)
     // We'll scale this to be between 0 and 42.195 km
     let currentDistance;
     
-    // Simulate based on time of day (for demo purposes)
-    if (currentHour >= 12) {
-      // Afternoon: Runner is likely past halfway point
-      currentDistance = Math.min(42.195, 20 + (currentMinute / 60) * 22);
-    } else if (currentHour >= 10) {
-      // Late morning: Runner is in first half
-      currentDistance = Math.min(42.195, (currentMinute / 60) * 20);
-    } else {
-      // Early morning or default: Runner hasn't started yet
+    // Calculate minutes elapsed since the wave start time
+    const currentTotalMinutes = currentHour * 60 + currentMinute;
+    const startTotalMinutes = startHour * 60 + startMinute;
+    const elapsedMinutesSinceStart = Math.max(0, currentTotalMinutes - startTotalMinutes);
+    
+    // If the race hasn't started yet for this wave, set distance to 0
+    if (elapsedMinutesSinceStart <= 0) {
       currentDistance = 0;
+    } else {
+      // Calculate how far they would have run based on their pace
+      // This ensures the distance is tied to both the current time and the runner's pace
+      currentDistance = Math.min(42.195, (elapsedMinutesSinceStart / paceInMinutes));
     }
     
     // Calculate times based on the current position
