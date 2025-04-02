@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -8,9 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   base: '/marathon_runner/',
-  plugins: [
-    react(),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './client/src'),
@@ -25,17 +22,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'client/index.html'),
-      output: {
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        chunkFileNames: 'assets/[name].[hash].js',
-        entryFileNames: 'assets/[name].[hash].js',
-      }
-    },
-    sourcemap: true,
-    assetsDir: 'assets',
-    // Ensure base URL matches your GitHub Pages path
-    base: '/marathon_runner/'
+    }
   },
 });
