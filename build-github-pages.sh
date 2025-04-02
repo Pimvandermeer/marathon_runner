@@ -10,13 +10,16 @@ mkdir -p ./dist
 echo "Building for GitHub Pages..."
 npx vite build --config vite.config.github.ts
 
-# Copy the 404.html file to the dist directory for GitHub Pages SPA support
-cp client/404.html dist/404.html
+# Move the HTML files to the root of the dist directory
+if [ -f "dist/client/index.html" ]; then
+  mv dist/client/index.html dist/index.html
+  
+  # Copy the 404.html file to the dist directory for GitHub Pages SPA support
+  cp client/404.html dist/404.html
+  
+  rmdir dist/client 2>/dev/null || true
+fi
 
-# Create a .nojekyll file to prevent GitHub Pages from ignoring files that begin with an underscore
-touch dist/.nojekyll
-
-# Print build info
 echo "Build completed successfully! The static files are in the dist directory."
 echo "To deploy to GitHub Pages:"
 echo "1. Create a GitHub repository for your project"
