@@ -16,7 +16,7 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
   
   return (
     <Card className="bg-white shadow-md mb-6">
-      <CardContent className="p-6">
+      <CardContent className="p-6 overflow-hidden">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-neutral-900">Marathon Route Map</h2>
           
@@ -40,11 +40,12 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
         </div>
         
         <div className="rounded-lg overflow-hidden relative">
-          <div className="max-h-[600px] overflow-hidden">
+          <div style={{ maxWidth: "100%", height: "auto", display: "block" }}>
             <img 
               src={marathonMapSrc} 
               alt="Rotterdam Marathon Route Map" 
-              className="w-full object-contain rounded-lg shadow-md"
+              className="w-full h-auto object-contain rounded-lg shadow-md"
+              style={{ display: "block", maxWidth: "100%" }}
             />
           </div>
           
