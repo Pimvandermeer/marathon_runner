@@ -22,12 +22,18 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
           
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center">
-              <div className="h-3 w-3 rounded-full bg-secondary mr-2"></div>
+              <div className="relative mr-2">
+                <div className="h-3 w-3 rounded-full bg-secondary"></div>
+                <MapPin className="h-5 w-5 absolute -top-1 -left-1 text-secondary" />
+              </div>
               <span className="text-neutral-700">Viewing Spots</span>
             </div>
             
             <div className="flex items-center">
-              <div className="h-3 w-3 rounded-full bg-primary mr-2"></div>
+              <div className="relative mr-2">
+                <div className="h-3 w-3 rounded-full bg-primary"></div>
+                <MapPin className="h-5 w-5 absolute -top-1 -left-1 text-primary" />
+              </div>
               <span className="text-neutral-700">Finish Line</span>
             </div>
           </div>
@@ -55,14 +61,20 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
               }}
             >
               <div className="relative group">
-                <MapPin className="h-6 w-6 drop-shadow-md stroke-[2.5] fill-white/25" />
+                <div className="flex items-center justify-center">
+                  <div className={`h-4 w-4 rounded-full ${
+                    location.kilometer >= 42 ? 'bg-primary' : 'bg-secondary'
+                  } shadow-lg`}></div>
+                  <MapPin className="h-7 w-7 drop-shadow-md stroke-[3] absolute fill-white/10" />
+                </div>
                 
                 {/* Tooltip */}
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1 mb-1
                               opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
-                              bg-white p-2 rounded shadow-lg text-xs min-w-[100px] z-10 pointer-events-none">
+                              bg-white p-2 rounded shadow-lg text-xs min-w-[120px] z-10 pointer-events-none">
                   <div className="font-medium text-neutral-900">{location.name}</div>
                   <div className="text-neutral-500">{location.kilometer.toFixed(1)} km</div>
+                  <div className="text-neutral-500 text-xs mt-1">{location.description}</div>
                 </div>
               </div>
             </div>

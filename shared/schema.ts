@@ -103,15 +103,15 @@ export const marathonLandmarks = [
 
 // Default viewing locations with map positioning coordinates
 export const defaultViewingLocations = [
-  { name: "Start - Coolsingel", kilometer: 0, description: "The starting point on Coolsingel", mapPositionX: 47, mapPositionY: 52 },
-  { name: "Willemsbridge", kilometer: 5, description: "Good viewing spot near Willemsbridge with easy access", mapPositionX: 55, mapPositionY: 42 },
-  { name: "Erasmus Bridge", kilometer: 10.5, description: "Iconic bridge with excellent views and access from public transport", mapPositionX: 41, mapPositionY: 63 },
-  { name: "Nieuwe Maas River", kilometer: 15, description: "Scenic route along the river with good vantage points", mapPositionX: 30, mapPositionY: 67 },
-  { name: "Half Marathon Point", kilometer: 21.1, description: "Half marathon point with lots of crowd support", mapPositionX: 24, mapPositionY: 45 },
-  { name: "Stadion Feijenoord", kilometer: 25, description: "Near the stadium with plenty of viewing space", mapPositionX: 53, mapPositionY: 74 },
-  { name: "Kralingse Plas", kilometer: 30, description: "Beautiful lake area with open spaces for viewing", mapPositionX: 72, mapPositionY: 30 },
-  { name: "Boszoom", kilometer: 35, description: "Good spot with direct access from metro stations", mapPositionX: 69, mapPositionY: 42 },
-  { name: "Blaak Metro Station", kilometer: 37.5, description: "Urban area with good transport connections", mapPositionX: 54, mapPositionY: 48 },
-  { name: "Westersingel", kilometer: 40, description: "Final stretch approaching the finish line", mapPositionX: 50, mapPositionY: 47 },
-  { name: "Finish Line - Coolsingel", kilometer: 42.195, description: "Celebrate at the finish! Get there early for a good spot.", mapPositionX: 47, mapPositionY: 52 }
+  { name: "Start - Coolsingel", kilometer: 0, description: "The starting point on Coolsingel", mapPositionX: 50, mapPositionY: 60 },
+  { name: "Willemsbridge", kilometer: 5, description: "Good viewing spot near Willemsbridge with easy access", mapPositionX: 82, mapPositionY: 62 },
+  { name: "Erasmus Bridge", kilometer: 10.5, description: "Iconic bridge with excellent views and access from public transport", mapPositionX: 63, mapPositionY: 48 },
+  { name: "Nieuwe Maas River", kilometer: 15, description: "Scenic route along the river with good vantage points", mapPositionX: 75, mapPositionY: 82 },
+  { name: "Half Marathon Point", kilometer: 21.1, description: "Half marathon point with lots of crowd support", mapPositionX: 29, mapPositionY: 85 },
+  { name: "Stadion Feijenoord", kilometer: 25, description: "Near the stadium with plenty of viewing space", mapPositionX: 71, mapPositionY: 85 },
+  { name: "Kralingse Plas", kilometer: 30, description: "Beautiful lake area with open spaces for viewing", mapPositionX: 81, mapPositionY: 27 },
+  { name: "Boszoom", kilometer: 35, description: "Good spot with direct access from metro stations", mapPositionX: 76, mapPositionY: 37 },
+  { name: "Blaak Metro Station", kilometer: 37.5, description: "Urban area with good transport connections", mapPositionX: 50, mapPositionY: 45 },
+  { name: "Westersingel", kilometer: 40, description: "Final stretch approaching the finish line", mapPositionX: 41, mapPositionY: 55 },
+  { name: "Finish Line - Coolsingel", kilometer: 42.195, description: "Celebrate at the finish! Get there early for a good spot.", mapPositionX: 48, mapPositionY: 60 }
 ];
