@@ -5,6 +5,7 @@ import { runnerInputSchema, type RunnerInput, waveStartTimes } from "@shared/sch
 import { useToast } from "@/hooks/use-toast";
 import { formatPaceInput, validatePaceInput } from "@/lib/utils";
 import { calculateRunnerPredictions } from "@/data/staticData";
+import { useMutation } from '@tanstack/react-query'; // Added import
 
 import {
   Card,
@@ -35,7 +36,7 @@ interface RunnerFormProps {
 
 export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   const { toast } = useToast();
-  
+
   const form = useForm<RunnerInput>({
     resolver: zodResolver(runnerInputSchema),
     defaultValues: {
@@ -54,14 +55,14 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
 
   const onSubmit = (data: RunnerInput) => {
     setIsCalculating(true);
-    
+
     try {
       // Use the static calculation function instead of API call
       const result = calculateRunnerPredictions(data);
-      
+
       // Pass the result to the parent component
       onSubmitSuccess(result);
-      
+
       toast({
         title: "Runner timeline calculated",
         description: "Your runner's timeline has been successfully calculated.",
@@ -82,7 +83,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
       <Card className="bg-white shadow-md">
         <CardContent className="p-6">
           <h2 className="text-xl font-semibold text-neutral-900 mb-4">Runner Information</h2>
-          
+
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
@@ -111,7 +112,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="pace"
@@ -135,7 +136,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="runnerName"
@@ -149,7 +150,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                   </FormItem>
                 )}
               />
-              
+
               <Button 
                 type="submit" 
                 className="w-full bg-primary text-white hover:bg-opacity-90"
