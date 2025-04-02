@@ -52,8 +52,8 @@ export const runnerPredictionSchema = z.object({
     kilometer: z.number(),
     description: z.string().nullable(),
     estimatedTime: z.string(),
-    mapPositionX: z.number().optional(),
-    mapPositionY: z.number().optional(),
+    mapPositionX: z.number().nullable(),
+    mapPositionY: z.number().nullable(),
   })),
   currentLocation: z.object({
     distance: z.number(),
@@ -68,8 +68,8 @@ export const locationTimeSchema = z.object({
   kilometer: z.number(),
   description: z.string().nullable(), // Changed to nullable to fix type issues
   estimatedTime: z.string(),
-  mapPositionX: z.number().optional(),
-  mapPositionY: z.number().optional(),
+  mapPositionX: z.number().nullable(),
+  mapPositionY: z.number().nullable(),
 });
 
 // Type definitions
