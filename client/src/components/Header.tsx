@@ -16,7 +16,7 @@ export default function Header() {
             </p>
           </div>
           <div className="text-xs sm:text-sm text-neutral-500">
-            April 14, 2025
+            April 13, 2025
           </div>
         </div>
       </div>

@@ -81,10 +81,9 @@ export default function Home() {
       {/* Hero */}
       <div className="bg-gradient-to-r from-blue-500 to-primary rounded-xl overflow-hidden shadow-lg mb-8">
         <div className="px-6 py-10 md:px-10 md:py-16 text-white">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Marathon Runner Supporter Guide</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Rotterdam Marathon Supporter Tool</h1>
           <p className="text-lg md:text-xl opacity-90 max-w-2xl">
-            Enter your runner's wave and expected pace to get precise location predictions throughout the marathon.
-            You can track multiple runners at the same time!
+            Track runners during the marathon by entering their wave and expected pace.
           </p>
         </div>
       </div>
