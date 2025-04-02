@@ -23,18 +23,18 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center">
               <div className="relative mr-2">
-                <div className="h-3 w-3 rounded-full bg-secondary"></div>
-                <MapPin className="h-5 w-5 absolute -top-1 -left-1 text-secondary" />
+                <div className="h-4 w-4 rounded-full bg-secondary border-2 border-white shadow-sm"></div>
+                <MapPin className="h-6 w-6 absolute -top-1 -left-1 text-secondary" />
               </div>
-              <span className="text-neutral-700">Viewing Spots</span>
+              <span className="text-neutral-700 font-medium">Viewing Spots</span>
             </div>
             
             <div className="flex items-center">
               <div className="relative mr-2">
-                <div className="h-3 w-3 rounded-full bg-primary"></div>
-                <MapPin className="h-5 w-5 absolute -top-1 -left-1 text-primary" />
+                <div className="h-4 w-4 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+                <MapPin className="h-6 w-6 absolute -top-1 -left-1 text-primary" />
               </div>
-              <span className="text-neutral-700">Finish Line</span>
+              <span className="text-neutral-700 font-medium">Finish Line</span>
             </div>
           </div>
         </div>
@@ -63,19 +63,19 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
             >
               <div className="relative group">
                 <div className="flex items-center justify-center">
-                  <div className={`h-4 w-4 rounded-full ${
+                  <div className={`h-5 w-5 rounded-full ${
                     location.kilometer >= 42 ? 'bg-primary' : 'bg-secondary'
-                  } shadow-lg`}></div>
-                  <MapPin className="h-7 w-7 drop-shadow-md stroke-[3] absolute fill-white/10" />
+                  } shadow-lg border-2 border-white`}></div>
+                  <MapPin className="h-8 w-8 drop-shadow-md stroke-[3] absolute fill-white/10" />
                 </div>
                 
                 {/* Tooltip */}
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1 mb-1
                               opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
-                              bg-white p-2 rounded shadow-lg text-xs min-w-[120px] z-10 pointer-events-none">
-                  <div className="font-medium text-neutral-900">{location.name}</div>
-                  <div className="text-neutral-500">{location.kilometer.toFixed(1)} km</div>
-                  <div className="text-neutral-500 text-xs mt-1">{location.description}</div>
+                              bg-white p-3 rounded-md shadow-lg text-xs min-w-[150px] z-10 pointer-events-none">
+                  <div className="font-semibold text-neutral-900 text-sm">{location.name}</div>
+                  <div className="text-neutral-700 font-medium">{location.kilometer.toFixed(1)} km</div>
+                  <div className="text-neutral-600 text-xs mt-1">{location.description}</div>
                 </div>
               </div>
             </div>
