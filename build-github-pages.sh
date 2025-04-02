@@ -10,9 +10,13 @@ mkdir -p ./dist
 echo "Building for GitHub Pages..."
 npx vite build --config vite.config.github.ts
 
-# Move the HTML file to the root of the dist directory
+# Move the HTML files to the root of the dist directory
 if [ -f "dist/client/index.html" ]; then
   mv dist/client/index.html dist/index.html
+  
+  # Copy the 404.html file to the dist directory for GitHub Pages SPA support
+  cp client/404.html dist/404.html
+  
   rmdir dist/client 2>/dev/null || true
 fi
 

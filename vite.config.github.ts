@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // https://vitejs.dev/config/
 export default defineConfig({
   // Base path for GitHub Pages deployment
-  base: './',
+  base: '/marathon_runner/',
   
   plugins: [
     react(),
