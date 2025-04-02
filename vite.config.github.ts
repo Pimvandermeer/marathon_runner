@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -22,10 +23,6 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    assetsDir: 'assets',
-    sourcemap: true,
-    rollupOptions: {
-      input: path.resolve(__dirname, 'client/index.html'),
-    }
+    sourcemap: true
   },
 });
