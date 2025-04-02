@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { formatDistance } from "@/lib/utils";
 import { marathonLandmarks } from "@shared/schema";
+import { Timer, Flag, Clock, MapPin } from "lucide-react";
 
 interface TimelineVisualizationProps {
   currentPosition: number;
@@ -13,7 +14,8 @@ export default function TimelineVisualization({
   elapsedTime,
   estimatedFinish
 }: TimelineVisualizationProps) {
-  const [markers, setMarkers] = useState<Array<{distance: number, position: number, active: boolean}>>([]);
+  const [markers, setMarkers] = useState<Array<{distance: number, position: number, active: boolean, name: string}>>([]);
+  const remainingDistance = 42.195 - currentPosition;
   
   useEffect(() => {
     // Create markers based on marathon landmarks
@@ -22,7 +24,8 @@ export default function TimelineVisualization({
       return {
         distance: landmark.distance,
         position,
-        active: Math.abs(landmark.distance - currentPosition) < 1
+        name: landmark.name,
+        active: currentPosition >= landmark.distance - 0.5 && currentPosition <= landmark.distance + 0.5
       };
     });
     
@@ -31,11 +34,23 @@ export default function TimelineVisualization({
   
   return (
     <div className="relative mb-8 px-2">
-      {/* Timeline track with markers */}
-      <div className="timeline-track h-2 bg-neutral-200 rounded-full relative mb-10">
-        {/* Runner position indicator with glow effect */}
+      <div className="mb-4 flex justify-between items-center">
+        <h3 className="text-lg font-semibold text-neutral-800">Runner Progress</h3>
+        <div className="text-sm text-neutral-500">
+          {formatDistance(currentPosition)} of {formatDistance(42.195)}
+        </div>
+      </div>
+      
+      {/* Timeline track with gradient progress */}
+      <div className="h-2.5 bg-neutral-200 rounded-full relative mb-10 overflow-hidden">
         <div 
-          className="absolute h-4 w-4 bg-primary rounded-full shadow-lg shadow-primary/40 border-2 border-white z-10 -top-1 transform -translate-x-1/2"
+          className="absolute h-full bg-gradient-to-r from-blue-500 to-primary rounded-full"
+          style={{ width: `${(currentPosition / 42.195) * 100}%` }}
+        />
+        
+        {/* Runner position indicator with pulsing effect */}
+        <div 
+          className="absolute h-5 w-5 bg-primary rounded-full shadow-lg shadow-primary/40 border-2 border-white z-10 top-1/2 transform -translate-y-1/2 -translate-x-1/2 animate-pulse"
           style={{ left: `${(currentPosition / 42.195) * 100}%` }}
         />
         
@@ -43,15 +58,27 @@ export default function TimelineVisualization({
         {markers.map((marker, index) => (
           <div 
             key={index}
-            className={`absolute w-3 h-3 rounded-full bg-secondary border border-white top-1/2 transform -translate-y-1/2 -translate-x-1/2 ${
-              marker.active ? 'bg-primary' : ''
-            }`}
+            className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 group"
             style={{ left: `${marker.position}%` }}
-          />
+          >
+            <div 
+              className={`w-3 h-3 rounded-full ${
+                marker.active ? 'bg-primary scale-125' : 'bg-secondary'
+              } border border-white transition-all duration-300`}
+            />
+            
+            {/* Marker tooltip */}
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1 mb-1
+                          opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
+                          bg-white p-2 rounded-md shadow-md text-xs min-w-[80px] text-center z-10 pointer-events-none">
+              <div className="font-semibold text-neutral-900">{marker.name}</div>
+              <div className="text-neutral-600">{marker.distance.toFixed(1)} km</div>
+            </div>
+          </div>
         ))}
       </div>
       
-      {/* Distance labels - now properly positioned under the timeline */}
+      {/* Distance labels - properly positioned under the timeline */}
       <div className="flex justify-between text-xs font-medium text-neutral-600 absolute w-full -bottom-6 left-0">
         {marathonLandmarks.map((landmark, index) => (
           <div 
@@ -67,24 +94,36 @@ export default function TimelineVisualization({
         ))}
       </div>
       
-      {/* Stats cards with improved styling */}
+      {/* Stats cards with improved styling and icons */}
       <div className="grid grid-cols-3 gap-4 mt-16">
-        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
-          <span className="block text-sm text-neutral-500 mb-1">Current Position</span>
-          <span className="text-xl font-semibold text-neutral-900">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200 shadow-sm">
+          <div className="flex items-center mb-2">
+            <Flag className="h-4 w-4 text-blue-600 mr-2" />
+            <span className="text-sm font-medium text-blue-800">Distance</span>
+          </div>
+          <span className="text-xl font-semibold text-neutral-900 block">
             {formatDistance(currentPosition)}
+          </span>
+          <span className="text-xs text-blue-700 mt-1 block">
+            {formatDistance(remainingDistance)} to finish
           </span>
         </div>
         
-        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
-          <span className="block text-sm text-neutral-500 mb-1">Elapsed Time</span>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200 shadow-sm">
+          <div className="flex items-center mb-2">
+            <Timer className="h-4 w-4 text-green-600 mr-2" />
+            <span className="text-sm font-medium text-green-800">Elapsed Time</span>
+          </div>
           <span className="text-xl font-mono font-semibold text-neutral-900">
             {elapsedTime}
           </span>
         </div>
         
-        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
-          <span className="block text-sm text-neutral-500 mb-1">Estimated Finish</span>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200 shadow-sm">
+          <div className="flex items-center mb-2">
+            <Clock className="h-4 w-4 text-purple-600 mr-2" />
+            <span className="text-sm font-medium text-purple-800">Estimated Finish</span>
+          </div>
           <span className="text-xl font-mono font-semibold text-neutral-900">
             {estimatedFinish}
           </span>
