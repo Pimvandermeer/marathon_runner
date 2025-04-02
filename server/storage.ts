@@ -66,7 +66,9 @@ export class MemStorage implements IStorage {
     // Initialize with default viewing locations
     this.marathonLocations = defaultViewingLocations.map(location => ({
       id: this.locationId++,
-      ...location
+      name: location.name,
+      kilometer: location.kilometer,
+      description: location.description || null
     }));
   }
 
@@ -93,18 +95,27 @@ export class MemStorage implements IStorage {
   
   async createMarathonLocation(location: InsertMarathonLocation): Promise<MarathonLocation> {
     const id = this.locationId++;
-    const newLocation: MarathonLocation = { ...location, id };
+    const newLocation: MarathonLocation = { 
+      id,
+      name: location.name,
+      kilometer: location.kilometer,
+      description: location.description || null
+    };
     this.marathonLocations.push(newLocation);
     return newLocation;
   }
   
   async calculateRunnerPredictions(runnerInput: RunnerInput): Promise<{
     locationTimes: LocationTime[],
-    currentLocation: { distance: number, elapsedTime: string, estimatedFinish: string }
+    currentLocation: { distance: number, elapsedTime: string, estimatedFinish: string },
+    runner: { id: string, name: string, wave: string, pace: string }
   }> {
-    const { wave, pace } = runnerInput;
+    const { wave, pace, runnerName, id } = runnerInput;
     const paceInMinutes = paceToMinutes(pace);
     const startTime = waveStartTimes[wave];
+    
+    // Create a unique ID if one wasn't provided
+    const runnerId = id || `runner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
     
     // Calculate location times
     const locationTimes: LocationTime[] = this.marathonLocations.map(location => {
@@ -119,8 +130,30 @@ export class MemStorage implements IStorage {
       };
     });
     
-    // Calculate current location (for demo, assume halfway through)
-    const currentDistance = 21.1;
+    // Simulate current race time based on the current time
+    // For demo purposes, we'll calculate a position based on the current time of day
+    // This creates a more realistic simulation of a runner's position
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    // Determine a position in the race based on the current time (simulated)
+    // We'll scale this to be between 0 and 42.195 km
+    let currentDistance;
+    
+    // Simulate based on time of day (for demo purposes)
+    if (currentHour >= 12) {
+      // Afternoon: Runner is likely past halfway point
+      currentDistance = Math.min(42.195, 20 + (currentMinute / 60) * 22);
+    } else if (currentHour >= 10) {
+      // Late morning: Runner is in first half
+      currentDistance = Math.min(42.195, (currentMinute / 60) * 20);
+    } else {
+      // Early morning or default: Runner hasn't started yet
+      currentDistance = 0;
+    }
+    
+    // Calculate times based on the current position
     const elapsedTimeMinutes = currentDistance * paceInMinutes;
     const elapsedTime = formatElapsedTime(elapsedTimeMinutes);
     const estimatedFinishMinutes = 42.195 * paceInMinutes;
@@ -132,6 +165,12 @@ export class MemStorage implements IStorage {
         distance: currentDistance,
         elapsedTime,
         estimatedFinish
+      },
+      runner: {
+        id: runnerId,
+        name: runnerName || "Runner",
+        wave,
+        pace
       }
     };
   }
