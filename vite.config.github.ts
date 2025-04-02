@@ -27,8 +27,15 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'client/index.html'),
+      output: {
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      }
     },
+    sourcemap: true,
     assetsDir: 'assets',
-    sourcemap: true
+    // Ensure base URL matches your GitHub Pages path
+    base: '/marathon_runner/'
   },
 });
