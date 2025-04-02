@@ -30,27 +30,36 @@ export default function TimelineVisualization({
   }, [currentPosition]);
   
   return (
-    <div className="relative">
-      <div className="timeline-track mb-14 h-1 bg-neutral-200 relative">
+    <div className="relative mb-8 px-2">
+      {/* Timeline track with markers */}
+      <div className="timeline-track h-2 bg-neutral-200 rounded-full relative mb-10">
+        {/* Runner position indicator with glow effect */}
+        <div 
+          className="absolute h-4 w-4 bg-primary rounded-full shadow-lg shadow-primary/40 border-2 border-white z-10 -top-1 transform -translate-x-1/2"
+          style={{ left: `${(currentPosition / 42.195) * 100}%` }}
+        />
+        
+        {/* Static markers */}
         {markers.map((marker, index) => (
           <div 
             key={index}
-            className={`absolute w-4 h-4 rounded-full bg-secondary top-1/2 transform -translate-y-1/2 -translate-x-1/2 ${marker.active ? 'active bg-primary shadow-lg shadow-primary/30' : ''}`}
+            className={`absolute w-3 h-3 rounded-full bg-secondary border border-white top-1/2 transform -translate-y-1/2 -translate-x-1/2 ${
+              marker.active ? 'bg-primary' : ''
+            }`}
             style={{ left: `${marker.position}%` }}
           />
         ))}
       </div>
       
-      {/* Distance labels */}
-      <div className="flex justify-between text-sm text-neutral-600 absolute w-full">
+      {/* Distance labels - now properly positioned under the timeline */}
+      <div className="flex justify-between text-xs font-medium text-neutral-600 absolute w-full -bottom-6 left-0">
         {marathonLandmarks.map((landmark, index) => (
           <div 
             key={index} 
-            className="text-center"
+            className="absolute transform -translate-x-1/2 text-center"
             style={{ 
-              width: landmark.distance === 42.195 ? "40px" : "20px", 
-              marginLeft: index === 0 ? "-8px" : undefined,
-              marginRight: index === marathonLandmarks.length - 1 ? "-12px" : undefined
+              left: `${(landmark.distance / 42.195) * 100}%`,
+              width: "40px"
             }}
           >
             {landmark.distance === 21.1 ? "21.1" : Math.round(landmark.distance)}
@@ -58,38 +67,24 @@ export default function TimelineVisualization({
         ))}
       </div>
       
-      {/* Landmark labels */}
-      <div className="flex justify-between text-xs text-neutral-500 mt-6 absolute w-full">
-        {marathonLandmarks.map((landmark, index) => (
-          <div 
-            key={index} 
-            className="text-center"
-            style={{ 
-              width: "50px", 
-              marginLeft: index === 0 ? "-12px" : "-25px",
-              marginRight: index === marathonLandmarks.length - 1 ? "-8px" : undefined
-            }}
-          >
-            {landmark.name}
-          </div>
-        ))}
-      </div>
-      
-      <div className="flex justify-between items-center mt-10 pt-4">
-        <div>
-          <span className="block text-sm text-neutral-500">Current Position</span>
+      {/* Stats cards with improved styling */}
+      <div className="grid grid-cols-3 gap-4 mt-16">
+        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
+          <span className="block text-sm text-neutral-500 mb-1">Current Position</span>
           <span className="text-xl font-semibold text-neutral-900">
             {formatDistance(currentPosition)}
           </span>
         </div>
-        <div>
-          <span className="block text-sm text-neutral-500">Elapsed Time</span>
+        
+        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
+          <span className="block text-sm text-neutral-500 mb-1">Elapsed Time</span>
           <span className="text-xl font-mono font-semibold text-neutral-900">
             {elapsedTime}
           </span>
         </div>
-        <div>
-          <span className="block text-sm text-neutral-500">Estimated Finish</span>
+        
+        <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 shadow-sm">
+          <span className="block text-sm text-neutral-500 mb-1">Estimated Finish</span>
           <span className="text-xl font-mono font-semibold text-neutral-900">
             {estimatedFinish}
           </span>

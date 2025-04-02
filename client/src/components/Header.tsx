@@ -20,20 +20,19 @@ export default function Header() {
                 <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Home</span>
               </Link>
               <Link href="/">
-                <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Runners</span>
+                <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Marathon Info</span>
               </Link>
               <Link href="/">
-                <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Guide</span>
-              </Link>
-              <Link href="/">
-                <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Contact</span>
+                <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Viewing Spots</span>
               </Link>
             </div>
           </div>
           <div className="hidden md:flex">
-            <Button className="bg-primary text-white hover:bg-opacity-90">
-              Start Tracking
-            </Button>
+            <Link href="/">
+              <Button variant="outline" className="hover:bg-primary hover:text-white">
+                Runner Resources
+              </Button>
+            </Link>
           </div>
           <div className="md:hidden">
             <Sheet>
@@ -48,16 +47,13 @@ export default function Header() {
                     <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Home</span>
                   </Link>
                   <Link href="/">
-                    <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Runners</span>
+                    <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Marathon Info</span>
                   </Link>
                   <Link href="/">
-                    <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Guide</span>
+                    <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Viewing Spots</span>
                   </Link>
-                  <Link href="/">
-                    <span className="text-neutral-700 hover:text-primary font-medium cursor-pointer">Contact</span>
-                  </Link>
-                  <Button className="bg-primary text-white hover:bg-opacity-90 mt-4">
-                    Start Tracking
+                  <Button variant="outline" className="hover:bg-primary hover:text-white mt-4">
+                    Runner Resources
                   </Button>
                 </div>
               </SheetContent>

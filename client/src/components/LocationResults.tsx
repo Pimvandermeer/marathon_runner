@@ -13,20 +13,20 @@ export default function LocationResults({ locations, isLoading = false }: Locati
   const hasLocations = locations && locations.length > 0;
   
   return (
-    <div className="mt-6 pt-6 border-t border-neutral-200">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-medium text-neutral-900">Where to Watch</h3>
+    <div className="mt-8 pt-6 border-t border-neutral-200">
+      <div className="flex justify-between items-center mb-5">
+        <h3 className="text-lg font-semibold text-neutral-900">Where to Watch</h3>
         {hasLocations && (
-          <Button variant="ghost" className="text-secondary text-sm font-medium">
-            <Download className="h-4 w-4 mr-1" />
-            Save as PDF
+          <Button variant="outline" size="sm" className="text-primary hover:text-white hover:bg-primary">
+            <Download className="h-4 w-4 mr-2" />
+            Save Itinerary
           </Button>
         )}
       </div>
       
-      <div className="bg-neutral-50 rounded-lg p-4 mb-4 border border-neutral-200">
+      <div className="bg-white rounded-lg p-5 mb-4 border border-neutral-100 shadow-sm">
         {isLoading ? (
-          <div className="flex justify-center py-4">
+          <div className="flex justify-center py-6">
             <div className="animate-pulse flex space-x-4">
               <div className="rounded-full bg-slate-200 h-10 w-10"></div>
               <div className="flex-1 space-y-6 py-1">
@@ -42,12 +42,17 @@ export default function LocationResults({ locations, isLoading = false }: Locati
             </div>
           </div>
         ) : !hasLocations ? (
-          <div className="text-center text-neutral-500 italic py-4">
-            <Info className="h-5 w-5 mx-auto mb-2" />
-            Enter runner details to see calculated viewing locations and times
+          <div className="flex flex-col items-center justify-center text-center py-8 px-4">
+            <div className="bg-blue-50 rounded-full p-3 mb-3">
+              <Info className="h-6 w-6 text-blue-500" />
+            </div>
+            <p className="text-neutral-700 mb-2 font-medium">No Viewing Locations Yet</p>
+            <p className="text-neutral-500 max-w-sm">
+              Enter runner details in the form above to see calculated viewing locations and times
+            </p>
           </div>
         ) : (
-          <div>
+          <div className="space-y-4">
             {locations.map((location, index) => (
               <LocationItem 
                 key={index} 
