@@ -16,7 +16,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Rotterdam '25</h3>
             <p className="text-neutral-300 text-sm">
-              The official supporter guide for the Rotterdam Marathon 2025. Help your runner achieve their best by being at the right place at the right time.
+              A supporter tool for the Rotterdam Marathon 2025. Track runners and plan where to support them throughout the race.
             </p>
           </div>
           <div>
@@ -72,7 +72,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-neutral-800 mt-8 pt-8 text-center text-sm text-neutral-400">
-          <p>&copy; 2025 Rotterdam Marathon. All rights reserved.</p>
+          <p>&copy; 2025 Rotterdam Supporter. All rights reserved.</p>
         </div>
       </div>
     </footer>

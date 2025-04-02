@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { MapPin } from "lucide-react";
 import marathonMapSrc from "@assets/NNMR25-parcourskaart_NN-Marathon-1086x1536.jpg";
+import { defaultViewingLocations } from "@shared/schema";
 
 interface RouteMapProps {
   runnerInfo?: {
@@ -15,18 +17,68 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
   return (
     <Card className="bg-white shadow-md mb-6">
       <CardContent className="p-6 overflow-hidden">
-        <div className="mb-4">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-neutral-900">Rotterdam Marathon Route Map</h2>
+          
+          <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center">
+              <div className="relative mr-2">
+                <div className="h-4 w-4 rounded-full bg-secondary border-2 border-white shadow-sm"></div>
+                <MapPin className="h-6 w-6 absolute -top-1 -left-1 text-secondary" />
+              </div>
+              <span className="text-neutral-700 font-medium">Viewing Spots</span>
+            </div>
+            
+            <div className="flex items-center">
+              <div className="relative mr-2">
+                <div className="h-4 w-4 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+                <MapPin className="h-6 w-6 absolute -top-1 -left-1 text-primary" />
+              </div>
+              <span className="text-neutral-700 font-medium">Finish Line</span>
+            </div>
+          </div>
         </div>
         
         <div className="rounded-lg overflow-hidden relative flex justify-center">
-          <div style={{ width: "80%", maxWidth: "700px", height: "auto", display: "block" }}>
+          <div style={{ width: "90%", maxWidth: "800px", height: "auto", display: "block", position: "relative" }}>
             <img 
               src={marathonMapSrc} 
               alt="Rotterdam Marathon Route Map" 
               className="w-full h-auto object-contain rounded-lg shadow-md"
               style={{ display: "block", maxWidth: "100%" }}
             />
+            
+            {/* Show interactive viewing spots markers */}
+            {defaultViewingLocations.map((location, index) => (
+              <div 
+                key={index}
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${
+                  location.kilometer >= 42 ? 'text-primary' : 'text-secondary'
+                }`}
+                style={{ 
+                  left: `${location.mapPositionX}%`, 
+                  top: `${location.mapPositionY}%`,
+                }}
+              >
+                <div className="relative group">
+                  <div className="flex items-center justify-center">
+                    <div className={`h-5 w-5 rounded-full ${
+                      location.kilometer >= 42 ? 'bg-primary' : 'bg-secondary'
+                    } shadow-lg border-2 border-white`}></div>
+                    <MapPin className="h-8 w-8 drop-shadow-md stroke-[3] absolute fill-white/10" />
+                  </div>
+                  
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1 mb-1
+                                opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
+                                bg-white p-3 rounded-md shadow-lg text-xs min-w-[150px] z-10 pointer-events-none">
+                    <div className="font-semibold text-neutral-900 text-sm">{location.name}</div>
+                    <div className="text-neutral-700 font-medium">{location.kilometer.toFixed(1)} km</div>
+                    <div className="text-neutral-600 text-xs mt-1">{location.description}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           
           {hasRunnerInfo && (
@@ -40,7 +92,7 @@ export default function RouteMap({ runnerInfo }: RouteMapProps) {
         </div>
         
         <div className="mt-4 bg-blue-50 p-3 rounded-md border border-blue-100 text-sm text-blue-700">
-          <p>Rotterdam Marathon - April 13, 2025</p>
+          <p>Rotterdam Marathon - April 13, 2025 • Interactive map with {defaultViewingLocations.length} viewing spots</p>
         </div>
       </CardContent>
     </Card>
