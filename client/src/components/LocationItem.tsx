@@ -1,5 +1,6 @@
 import { MapPin, Flag } from "lucide-react";
 import { type LocationTime } from "@shared/schema";
+import DirectionsButton from "./DirectionsButton";
 
 interface LocationItemProps {
   location: LocationTime;
@@ -30,6 +31,14 @@ export default function LocationItem({ location, isFinish = false }: LocationIte
             </span>
             {location.description && location.description}
           </p>
+          
+          <div className="mt-3 flex">
+            <DirectionsButton 
+              latitude={location.latitude} 
+              longitude={location.longitude}
+              locationName={location.name}
+            />
+          </div>
         </div>
       </div>
     </div>

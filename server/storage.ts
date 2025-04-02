@@ -70,7 +70,9 @@ export class MemStorage implements IStorage {
       kilometer: location.kilometer,
       description: location.description || null,
       mapPositionX: location.mapPositionX,
-      mapPositionY: location.mapPositionY
+      mapPositionY: location.mapPositionY,
+      latitude: location.latitude,
+      longitude: location.longitude
     }));
   }
 
@@ -103,7 +105,9 @@ export class MemStorage implements IStorage {
       kilometer: location.kilometer,
       description: location.description || null,
       mapPositionX: location.mapPositionX || null,
-      mapPositionY: location.mapPositionY || null
+      mapPositionY: location.mapPositionY || null,
+      latitude: location.latitude || null,
+      longitude: location.longitude || null
     };
     this.marathonLocations.push(newLocation);
     return newLocation;
@@ -132,7 +136,9 @@ export class MemStorage implements IStorage {
         description: location.description,
         estimatedTime,
         mapPositionX: location.mapPositionX,
-        mapPositionY: location.mapPositionY
+        mapPositionY: location.mapPositionY,
+        latitude: location.latitude,
+        longitude: location.longitude
       };
     });
     
