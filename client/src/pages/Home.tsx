@@ -2,11 +2,12 @@ import { useState } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
-import { type LocationTime, type RunnerPredictionResult } from "@shared/schema";
+import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { calculateRunnerPredictions } from "@/data/staticData";
 
 // Define a type for our runner data
 type RunnerData = {

@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { runnerInputSchema, type RunnerInput, waveStartTimes } from "@shared/schema";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { formatPaceInput, validatePaceInput } from "@/lib/utils";
+import { calculateRunnerPredictions } from "@/data/staticData";
 
 import {
   Card,
@@ -46,26 +45,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
     },
   });
 
-  const calculateMutation = useMutation({
-    mutationFn: async (data: RunnerInput) => {
-      const response = await apiRequest("POST", "/api/calculate-predictions", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      onSubmitSuccess(data);
-      toast({
-        title: "Runner timeline calculated",
-        description: "Your runner's timeline has been successfully calculated.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to calculate runner timeline: ${error.message}`,
-        variant: "destructive",
-      });
-    },
-  });
+  const [isCalculating, setIsCalculating] = useState(false);
 
   const handlePaceChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
     const formattedValue = formatPaceInput(e.target.value);
@@ -73,7 +53,28 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   };
 
   const onSubmit = (data: RunnerInput) => {
-    calculateMutation.mutate(data);
+    setIsCalculating(true);
+    
+    try {
+      // Use the static calculation function instead of API call
+      const result = calculateRunnerPredictions(data);
+      
+      // Pass the result to the parent component
+      onSubmitSuccess(result);
+      
+      toast({
+        title: "Runner timeline calculated",
+        description: "Your runner's timeline has been successfully calculated.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: `Failed to calculate runner timeline: ${error.message}`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsCalculating(false);
+    }
   };
 
   return (
@@ -152,10 +153,10 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
               <Button 
                 type="submit" 
                 className="w-full bg-primary text-white hover:bg-opacity-90"
-                disabled={calculateMutation.isPending}
+                disabled={isCalculating}
               >
                 <Clock className="mr-2 h-4 w-4" />
-                {calculateMutation.isPending ? 'Calculating...' : 'Calculate Runner Timeline'}
+                {isCalculating ? 'Calculating...' : 'Calculate Runner Timeline'}
               </Button>
             </form>
           </Form>
