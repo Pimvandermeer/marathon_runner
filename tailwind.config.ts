@@ -22,8 +22,15 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "hsl(358, 100%, 68%)", // Marathon red - direct HSL value
           foreground: "hsl(var(--primary-foreground))",
+        },
+        // Direct marathon colors
+        marathon: {
+          red: "hsl(358, 100%, 68%)",
+          redDark: "hsl(358, 100%, 58%)",
+          blue: "hsl(210, 100%, 50%)",
+          gray: "hsl(210, 10%, 90%)",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Fallback color values if theme variables don't load */
+    /* Direct color definitions to ensure they work everywhere */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -35,5 +35,58 @@
     @apply font-sans antialiased min-h-screen;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+  }
+
+  /* Explicit color utility classes to use in components */
+  .bg-primary {
+    background-color: hsl(358, 100%, 68%); /* Marathon red */
+  }
+  
+  .text-primary {
+    color: hsl(358, 100%, 68%); /* Marathon red */
+  }
+  
+  .border-primary {
+    border-color: hsl(358, 100%, 68%); /* Marathon red */
+  }
+  
+  .hover\:bg-primary:hover {
+    background-color: hsl(358, 100%, 58%); /* Darker marathon red */
+  }
+
+  /* Marathon-specific classes */
+  .bg-marathon-red {
+    background-color: hsl(358, 100%, 68%);
+  }
+  
+  .bg-marathon-redDark {
+    background-color: hsl(358, 100%, 58%);
+  }
+  
+  .bg-marathon-blue {
+    background-color: hsl(210, 100%, 50%);
+  }
+  
+  .bg-marathon-gray {
+    background-color: hsl(210, 10%, 90%);
+  }
+  
+  .text-marathon-red {
+    color: hsl(358, 100%, 68%);
+  }
+  
+  .text-marathon-blue {
+    color: hsl(210, 100%, 50%);
+  }
+  
+  /* Marathon buttons with consistent styling */
+  .btn-primary {
+    background-color: hsl(358, 100%, 68%);
+    color: white;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-primary:hover {
+    background-color: hsl(358, 100%, 58%);
   }
 }
