@@ -65,43 +65,42 @@ function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
     return "0:00";
   }
 
+  console.log("Calculating pace from finish time:", finishTime);
+  
   const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
   
   // Parse finish and start times
-  let finishHours = 0;
-  let finishMinutes = 0;
+  let totalFinishMinutes = 0;
   
   // Handle different formats (with or without colon)
   if (finishTime.includes(':')) {
     const parts = finishTime.split(':');
-    finishHours = parseInt(parts[0] || '0', 10);
-    finishMinutes = parseInt(parts[1] || '0', 10);
+    const hours = parseInt(parts[0] || '0', 10);
+    const minutes = parseInt(parts[1] || '0', 10);
+    totalFinishMinutes = hours * 60 + minutes;
   } else {
     // Try to parse as number of minutes
-    const totalMinutes = parseInt(finishTime, 10) || 0;
-    finishHours = Math.floor(totalMinutes / 60);
-    finishMinutes = totalMinutes % 60;
+    totalFinishMinutes = parseInt(finishTime, 10) || 0;
   }
   
-  const [startHours, startMinutes] = startTime.split(':').map(Number);
+  // For finish time input, we're not calculating from start time, but total race time
+  // A marathon is 42.195 km, so we need to divide the total minutes by that distance
   
-  // Calculate total minutes for run
-  const startTotalMinutes = startHours * 60 + startMinutes;
-  const finishTotalMinutes = finishHours * 60 + finishMinutes;
-  
-  // Handle case where finish time is on the next day (unlikely for marathon but just in case)
-  const runTimeMinutes = finishTotalMinutes < startTotalMinutes 
-    ? (finishTotalMinutes + 24 * 60) - startTotalMinutes
-    : finishTotalMinutes - startTotalMinutes;
+  console.log("Total finish minutes:", totalFinishMinutes);
   
   // Calculate pace (minutes per km)
-  const paceMinutes = runTimeMinutes / 42.195;
+  const paceMinutes = totalFinishMinutes / 42.195;
+  
+  console.log("Calculated pace minutes:", paceMinutes);
   
   // Format to mm:ss
   const mins = Math.floor(paceMinutes);
   const secs = Math.round((paceMinutes - mins) * 60);
   
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
+  const result = `${mins}:${secs.toString().padStart(2, '0')}`;
+  console.log("Formatted pace result:", result);
+  
+  return result;
 }
 
 // Function to calculate runner predictions (static version of the backend function)
