@@ -42,15 +42,34 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
     defaultValues: {
       wave: undefined,
       pace: "",
+      finishTime: "",
       runnerName: "",
     },
   });
 
   const [isCalculating, setIsCalculating] = useState(false);
+  const [inputMethod, setInputMethod] = useState<'pace' | 'finish'>('pace');
 
   const handlePaceChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
     const formattedValue = formatPaceInput(e.target.value);
     onChange(formattedValue);
+  };
+  
+  const handleFinishTimeChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
+    // Simple format validation for hh:mm
+    let value = e.target.value.replace(/[^0-9:]/g, '');
+    
+    // Add colon if needed
+    if (value.length === 2 && !value.includes(':')) {
+      value += ':';
+    }
+    
+    // Limit to 5 characters (hh:mm)
+    if (value.length > 5) {
+      value = value.substring(0, 5);
+    }
+    
+    onChange(value);
   };
 
   const onSubmit = (data: RunnerInput) => {
@@ -113,29 +132,84 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="pace"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Expected Pace (min/km)</FormLabel>
-                    <div className="relative">
-                      <FormControl>
-                        <Input 
-                          placeholder="e.g. 5:30" 
-                          {...field} 
-                          onChange={(e) => handlePaceChange(e, field.onChange)}
-                          className="font-mono"
-                        />
-                      </FormControl>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <span className="text-neutral-500 text-sm">min/km</span>
-                      </div>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
+              <div className="mb-4">
+                <div className="flex space-x-2 mb-2">
+                  <Button
+                    type="button"
+                    variant={inputMethod === 'pace' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setInputMethod('pace')}
+                    className="flex-1"
+                  >
+                    Enter Pace
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={inputMethod === 'finish' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setInputMethod('finish')}
+                    className="flex-1"
+                  >
+                    Enter Finish Time
+                  </Button>
+                </div>
+                
+                {inputMethod === 'pace' ? (
+                  <FormField
+                    control={form.control}
+                    name="pace"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Expected Pace (min/km)</FormLabel>
+                        <div className="relative">
+                          <FormControl>
+                            <Input 
+                              placeholder="e.g. 5:30" 
+                              {...field} 
+                              onChange={(e) => handlePaceChange(e, field.onChange)}
+                              className="font-mono"
+                            />
+                          </FormControl>
+                          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <span className="text-neutral-500 text-sm">min/km</span>
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">
+                          The pace you expect to maintain throughout the marathon
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ) : (
+                  <FormField
+                    control={form.control}
+                    name="finishTime"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Target Finish Time (h:mm)</FormLabel>
+                        <div className="relative">
+                          <FormControl>
+                            <Input 
+                              placeholder="e.g. 4:30" 
+                              {...field} 
+                              onChange={(e) => handleFinishTimeChange(e, field.onChange)}
+                              className="font-mono"
+                            />
+                          </FormControl>
+                          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <span className="text-neutral-500 text-sm">hours</span>
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">
+                          Your target total marathon time
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 )}
-              />
+              </div>
 
               <FormField
                 control={form.control}

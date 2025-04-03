@@ -128,14 +128,45 @@ export class MemStorage implements IStorage {
     return newLocation;
   }
   
+  // Function to calculate pace from target finish time
+  private calculatePaceFromFinishTime(wave: string, finishTime: string): string {
+    const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
+    
+    // Parse finish and start times
+    const [finishHours, finishMinutes] = finishTime.split(':').map(Number);
+    const [startHours, startMinutes] = startTime.split(':').map(Number);
+    
+    // Calculate total minutes for run
+    const startTotalMinutes = startHours * 60 + startMinutes;
+    const finishTotalMinutes = finishHours * 60 + finishMinutes;
+    
+    // Handle case where finish time is on the next day (unlikely for marathon but just in case)
+    const runTimeMinutes = finishTotalMinutes < startTotalMinutes 
+      ? (finishTotalMinutes + 24 * 60) - startTotalMinutes
+      : finishTotalMinutes - startTotalMinutes;
+    
+    // Calculate pace (minutes per km)
+    const paceMinutes = runTimeMinutes / 42.195;
+    
+    // Format to mm:ss
+    const mins = Math.floor(paceMinutes);
+    const secs = Math.round((paceMinutes - mins) * 60);
+    
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
   async calculateRunnerPredictions(runnerInput: RunnerInput): Promise<{
     locationTimes: LocationTime[],
     currentLocation: { distance: number, elapsedTime: string, estimatedFinish: string },
     runner: { id: string, name: string, wave: string, pace: string }
   }> {
-    const { wave, pace, runnerName, id } = runnerInput;
-    const paceInMinutes = paceToMinutes(pace);
-    const startTime = waveStartTimes[wave];
+    const { wave, pace, finishTime, runnerName, id } = runnerInput;
+    
+    // Determine pace - either use provided pace or calculate from finish time
+    // Default to a safe value if neither pace nor finishTime is provided
+    const effectivePace: string = pace || (finishTime ? this.calculatePaceFromFinishTime(wave, finishTime) : "0:00");
+    const paceInMinutes = paceToMinutes(effectivePace);
+    const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
     
     // Create a unique ID if one wasn't provided
     const runnerId = id || `runner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
@@ -207,7 +238,7 @@ export class MemStorage implements IStorage {
         id: runnerId,
         name: runnerName || "Runner",
         wave,
-        pace
+        pace: effectivePace
       }
     };
   }

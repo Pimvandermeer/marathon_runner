@@ -38,9 +38,13 @@ export const insertMarathonLocationSchema = createInsertSchema(marathonLocations
 // Schema for runner data input
 export const runnerInputSchema = z.object({
   wave: z.enum(["1", "2", "3", "4"]),
-  pace: z.string().regex(/^\d+:\d{2}$/, "Pace must be in format mm:ss"),
+  pace: z.string().regex(/^\d+:\d{2}$/, "Pace must be in format mm:ss").optional(),
+  finishTime: z.string().regex(/^\d{1,2}:\d{2}$/, "Finish time must be in format hh:mm").optional(),
   runnerName: z.string().optional(),
   id: z.string().optional(), // Add unique ID for multiple runners
+}).refine(data => data.pace || data.finishTime, {
+  message: "Either pace or finish time must be provided",
+  path: ["pace"] // highlight the pace field if both are missing
 });
 
 // Schema for runner's predictions result
@@ -94,9 +98,9 @@ export type RunnerPredictionResult = z.infer<typeof runnerPredictionSchema>;
 // Wave start times (in 24-hour format)
 export const waveStartTimes = {
   "1": "10:00",
-  "2": "10:15",
-  "3": "10:30",
-  "4": "10:45"
+  "2": "10:07",
+  "3": "10:14",
+  "4": "10:21"
 };
 
 // Key landmarks for the timeline
