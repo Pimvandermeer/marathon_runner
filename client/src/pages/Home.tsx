@@ -164,9 +164,22 @@ export default function Home() {
       <div className="bg-gradient-to-r from-blue-500 to-primary rounded-xl overflow-hidden shadow-lg mb-8">
         <div className="px-6 py-10 md:px-10 md:py-16 text-white">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">{t("app.title")}</h1>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl">
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mb-3">
             {t("app.subtitle")}
           </p>
+          <p className="text-md opacity-80 max-w-2xl mb-5">
+            Runners: Share this tool with your supporters to help them track you during the race!
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button 
+              variant="outline" 
+              size="default"
+              className="bg-white text-primary hover:bg-primary hover:text-white font-medium"
+              onClick={() => window.location.href = 'mailto:mail@pimvandermeer.nl'}
+            >
+              Contact Us
+            </Button>
+          </div>
           
           {/* Marathon selector hidden until we support multiple marathons */}
         </div>

@@ -77,12 +77,12 @@ export default function Timeline({
                   {runnerInfo.name ? runnerInfo.name : "Runner"} - Wave {runnerInfo.wave} - Pace {runnerInfo.pace} min/km
                 </div>
                 <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="flex items-center gap-1.5 text-sm"
+                  variant="default" 
+                  size="default" 
+                  className="flex items-center gap-2 font-medium bg-primary text-white hover:bg-primary/90"
                   onClick={createShareableLink}
                 >
-                  <Share2 className="h-4 w-4" />
+                  <Share2 className="h-5 w-5" />
                   Share
                 </Button>
               </>

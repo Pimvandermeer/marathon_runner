@@ -25,14 +25,8 @@ export default function LocationResults({
   
   return (
     <div className="mt-8 pt-6 border-t border-neutral-200">
-      <div className="flex justify-between items-center mb-5">
+      <div className="mb-5">
         <h3 className="text-lg font-semibold text-neutral-900">Where to Watch</h3>
-        {hasLocations && (
-          <Button variant="outline" size="sm" className="text-primary hover:text-white hover:bg-primary">
-            <Download className="h-4 w-4 mr-2" />
-            Save Itinerary
-          </Button>
-        )}
       </div>
       
       <div className="bg-white rounded-lg p-5 mb-4 border border-neutral-100 shadow-sm">
