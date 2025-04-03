@@ -90,12 +90,7 @@ const enTranslations: Record<string, string> = {
   "marathon.info.visitWebsite": "Visit Website",
   "marathon.info.country": "Country",
   "marathon.info.transport": "Transport Information",
-  "marathon.info.timezone": "Timezone",
-  
-  // Directions
-  "directions.viewOnMap": "View on Map",
-  "directions.getDirections": "Get Directions",
-  "directions.close": "Close"
+  "marathon.info.timezone": "Timezone"
 };
 
 // Dutch translations
@@ -175,12 +170,7 @@ const nlTranslations: Record<string, string> = {
   "marathon.info.visitWebsite": "Bezoek Website",
   "marathon.info.country": "Land",
   "marathon.info.transport": "Vervoersinformatie",
-  "marathon.info.timezone": "Tijdzone",
-  
-  // Directions
-  "directions.viewOnMap": "Bekijk op Kaart",
-  "directions.getDirections": "Routebeschrijving",
-  "directions.close": "Sluiten"
+  "marathon.info.timezone": "Tijdzone"
 };
 
 // Collection of all translations
