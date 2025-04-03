@@ -170,16 +170,6 @@ export default function Home() {
           <p className="text-md opacity-80 max-w-2xl mb-5">
             Runners: Share this tool with your supporters to help them track you during the race!
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Button 
-              variant="outline" 
-              size="default"
-              className="bg-white text-primary hover:bg-primary hover:text-white font-medium"
-              onClick={() => window.location.href = 'mailto:mail@pimvandermeer.nl'}
-            >
-              Contact Us
-            </Button>
-          </div>
           
           {/* Marathon selector hidden until we support multiple marathons */}
         </div>
