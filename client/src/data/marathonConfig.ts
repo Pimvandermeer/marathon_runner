@@ -8,6 +8,7 @@ export interface MarathonConfig {
   date: string;
   logo: string;
   routeMap: string;
+  gpxRoute?: string; // Optional GPX route file path
   description: string;
   websiteUrl: string;
   cityInfo: {
