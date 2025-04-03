@@ -15,8 +15,15 @@ export default function MarathonSelector() {
   const { toast } = useToast();
   const { t } = useLanguage();
   
+  // For now, only show Rotterdam
+  const rotterdamMarathon = availableMarathons.find(m => m.id === 'rotterdam');
+  const visibleMarathons = rotterdamMarathon ? [rotterdamMarathon] : [];
+  
   // Handle marathon selection change
   const handleMarathonChange = (marathonId: string) => {
+    // For now only allow Rotterdam
+    if (marathonId !== 'rotterdam') return;
+    
     setCurrentMarathon(marathonId);
     const newMarathon = availableMarathons.find(m => m.id === marathonId);
     
@@ -41,12 +48,13 @@ export default function MarathonSelector() {
       <Select
         value={selectedMarathon.id}
         onValueChange={handleMarathonChange}
+        disabled={visibleMarathons.length <= 1}
       >
         <SelectTrigger className="w-[200px]">
           <SelectValue placeholder={t("marathon.selectPlaceholder")} />
         </SelectTrigger>
         <SelectContent>
-          {availableMarathons.map(marathon => (
+          {visibleMarathons.map(marathon => (
             <SelectItem key={marathon.id} value={marathon.id}>
               {marathon.name} {marathon.year}
             </SelectItem>

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
-import MarathonInfo from "@/components/MarathonInfo";
 import SpectatorTips from "@/components/SpectatorTips";
 import MarathonSelector from "@/components/MarathonSelector";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
@@ -177,9 +176,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
-      {/* Marathon Information */}
-      <MarathonInfo />
       
       {/* Marathon Route Map */}
       <RouteMap />

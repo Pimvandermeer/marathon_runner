@@ -20,7 +20,7 @@ export default function RouteMap() {
         <img 
           src={marathon.routeMap} 
           alt={`${marathon.name} route map`} 
-          className="w-full h-full object-cover cursor-pointer hover:opacity-95 transition-opacity"
+          className="w-full h-full object-contain p-2 cursor-pointer hover:opacity-95 transition-opacity"
           onClick={toggleMapSize}
         />
       </div>
