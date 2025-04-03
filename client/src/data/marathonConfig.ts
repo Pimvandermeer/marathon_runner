@@ -34,12 +34,12 @@ export interface MarathonConfig {
 
 // Import the marathon configurations
 import rotterdamConfig from './marathons/rotterdam.json';
-import amsterdamConfig from './marathons/amsterdam.json';
+// Amsterdam marathon will be added in the future
+// import amsterdamConfig from './marathons/amsterdam.json';
 
-// List of available marathons
+// List of available marathons (only Rotterdam for now)
 export const availableMarathons: MarathonConfig[] = [
-  rotterdamConfig as MarathonConfig,
-  amsterdamConfig as MarathonConfig
+  rotterdamConfig as MarathonConfig
 ];
 
 // Default marathon
