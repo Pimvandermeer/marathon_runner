@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: '/marathon_runner/',
+  base: './',
   plugins: [react()],
   resolve: {
     alias: {
@@ -20,8 +20,9 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, './shared'),
     },
   },
+  root: path.resolve(__dirname, 'client'),
   build: {
-    outDir: 'dist',
+    outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
     sourcemap: true
   },

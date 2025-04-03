@@ -1,57 +1,47 @@
-# Rotterdam Marathon Supporter App
+# Marathon Tracker App
 
-A web application that helps marathon spectators track runners during the Rotterdam '25 marathon. The application transforms race data into an interactive interface that predicts where runners will be at specific times based on their starting wave and expected pace.
+A cutting-edge marathon tracking web application that transforms spectator engagement through innovative real-time visualization and interactive technologies, enabling comprehensive runner tracking and performance analysis.
 
 ## Features
 
-- **Runner Tracking**: Enter a runner's name, starting wave, and expected pace to predict their location throughout the race
-- **Interactive Timeline**: Visual timeline showing when the runner will pass specific viewing locations
-- **Location Details**: Information about each viewing location including distance, expected time, and estimated finish time
-- **Google Maps Integration**: Get directions to viewing locations with a single click
-- **Route Map**: Visual representation of the marathon route with key landmarks
-- **Responsive Design**: Works on mobile devices for on-the-go tracking
+- Predict runner locations based on starting wave and expected finish time
+- Visual timeline of runner's journey through the marathon
+- Multi-language support (Dutch and English)
+- Shareable links for runner tracking
+- Support for multiple marathons (Rotterdam, Amsterdam)
+- Pace comparison to see if runners are faster or slower than expected
 
-## Getting Started
+## Deployment Options
 
-### Development
+This application can be built as a static site since all calculations are performed client-side.
+
+### Option 1: Static Build
+
+To create a static build that can be deployed to any static hosting service:
 
 ```bash
-# Install dependencies
-npm install
+chmod +x ./build-static.sh
+./build-static.sh
+```
 
-# Start the development server
+This will generate the static files in the `static-build` directory.
+
+### Option 2: GitHub Pages
+
+To deploy to GitHub Pages:
+
+1. Push this code to a GitHub repository
+2. Enable GitHub Pages in the repository settings
+3. Set up CI/CD with the included GitHub Actions workflow by setting the Pages source to "GitHub Actions"
+
+The GitHub Actions workflow will automatically build and deploy the application to GitHub Pages.
+
+## Development
+
+To run the application locally:
+
+```bash
 npm run dev
 ```
 
-### Building for Production
-
-```bash
-# Build for production
-npm run build
-
-# Start the production server
-npm run start
-```
-
-### Deploying to GitHub Pages
-
-This application can be deployed as a static site to GitHub Pages for easy sharing. Since the backend won't be available in this deployment, the application will use static data calculations instead.
-
-To deploy:
-
-1. Fork or clone this repository to your GitHub account
-2. Go to your repository's Settings > Pages
-3. Set the source to 'GitHub Actions'
-4. The workflow will automatically deploy your app whenever you push to the main branch
-
-## Technology Stack
-
-- Frontend: React, TypeScript, Tailwind CSS, Shadcn UI
-- Backend: Node.js, Express
-- Data Handling: Zod for validation, TanStack Query for data fetching
-- Mapping: Static marathon route map with visual indicators
-- Deployment: GitHub Pages for static deployment
-
-## License
-
-This project is licensed under the MIT License.
+This will start the development server.

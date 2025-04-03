@@ -7,19 +7,17 @@
 rm -rf ./dist
 mkdir -p ./dist
 
-# Build the frontend only using the GitHub config
+# Build the frontend only
 echo "Building for GitHub Pages..."
-npx vite build --config vite.config.github.ts
+cd client
+npx vite build --outDir ../dist
 
-# Move the HTML files to the root of the dist directory
-if [ -f "dist/client/index.html" ]; then
-  mv dist/client/index.html dist/index.html
-  
-  # Copy the 404.html file to the dist directory for GitHub Pages SPA support
-  cp client/404.html dist/404.html
-  
-  rmdir dist/client 2>/dev/null || true
-fi
+# Copy the 404.html file to the dist directory for GitHub Pages SPA support
+cp 404.html ../dist/404.html
+cd ..
+
+# Copy the CNAME file to maintain custom domain configuration
+cp CNAME dist/CNAME
 
 echo "Build completed successfully! The static files are in the dist directory."
 echo "To deploy to GitHub Pages:"
