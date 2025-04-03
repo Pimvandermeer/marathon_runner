@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
-import SpectatorTips from "@/components/SpectatorTips";
 import MarathonSelector from "@/components/MarathonSelector";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
 import { X, Info } from "lucide-react";
@@ -179,9 +178,6 @@ export default function Home() {
       
       {/* Marathon Route Map */}
       <RouteMap />
-      
-      {/* Spectator Tips */}
-      <SpectatorTips />
       
       {/* Runner Information and Timeline */}
       <h2 className="text-2xl font-bold mb-4">{t("timeline.title")}</h2>
