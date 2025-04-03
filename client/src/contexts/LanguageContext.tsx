@@ -53,6 +53,14 @@ const enTranslations: Record<string, string> = {
   "footer.developed": "Developed by",
   "footer.rights": "All rights reserved.",
   "footer.language": "Language",
+  "footer.description": "A supporter tool for the Rotterdam Marathon 2025. Track runners and plan where to support them throughout the race.",
+  
+  // Tips for supporters
+  "tips.title": "Tips for Supporters",
+  "tips.early": "Arrive at viewing spots 15 minutes early",
+  "tips.transport": "Account for public transport delays on marathon day",
+  "tips.supplies": "Bring water and snacks for your runner",
+  "tips.signs": "Make brightly colored signs to stand out",
 };
 
 // Dutch translations
@@ -95,6 +103,14 @@ const nlTranslations: Record<string, string> = {
   "footer.developed": "Ontwikkeld door",
   "footer.rights": "Alle rechten voorbehouden.",
   "footer.language": "Taal",
+  "footer.description": "Een hulpmiddel voor supporters van de Rotterdam Marathon 2025. Volg lopers en plan waar je ze kunt aanmoedigen tijdens de wedstrijd.",
+  
+  // Tips for supporters
+  "tips.title": "Tips voor Supporters",
+  "tips.early": "Kom 15 minuten eerder aan bij kijkpunten",
+  "tips.transport": "Houd rekening met vertragingen in het openbaar vervoer op marathondag",
+  "tips.supplies": "Neem water en snacks mee voor je loper",
+  "tips.signs": "Maak felgekleurde borden om op te vallen",
 };
 
 // Collection of all translations

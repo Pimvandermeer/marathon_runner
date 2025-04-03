@@ -298,24 +298,24 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         <CardContent className="p-6">
           <h3 className="text-lg font-medium text-neutral-900 mb-3 flex items-center">
             <LightbulbIcon className="h-5 w-5 mr-2 text-amber-400" />
-            Tips for Supporters
+            {t("tips.title")}
           </h3>
           <ul className="space-y-3 text-sm text-neutral-700">
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Arrive at viewing spots 15 minutes early</span>
+              <span>{t("tips.early")}</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Account for public transport delays on marathon day</span>
+              <span>{t("tips.transport")}</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Bring water and snacks for your runner</span>
+              <span>{t("tips.supplies")}</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Make brightly colored signs to stand out</span>
+              <span>{t("tips.signs")}</span>
             </li>
           </ul>
         </CardContent>
