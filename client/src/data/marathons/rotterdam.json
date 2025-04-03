@@ -22,17 +22,21 @@
   "marathonLandmarks": [
     { "distance": 0, "name": "Start - Coolsingel" },
     { "distance": 5, "name": "Erasmus Bridge" },
-    { "distance": 15, "name": "Kralingse Bos" },
-    { "distance": 21.1, "name": "Half Marathon" },
-    { "distance": 30, "name": "Churchillplein" },
-    { "distance": 40, "name": "Blaak" },
+    { "distance": 10, "name": "Stadion Feijenoord" },
+    { "distance": 15, "name": "Zuidplein" },
+    { "distance": 20, "name": "Maastunnel" },
+    { "distance": 21.1, "name": "Half Marathon Point" },
+    { "distance": 25, "name": "Westblaak" },
+    { "distance": 30, "name": "Scheepvaartkwartier" },
+    { "distance": 35, "name": "Kralingse Plas" },
+    { "distance": 40, "name": "Oostplein" },
     { "distance": 42.195, "name": "Finish - Coolsingel" }
   ],
   "viewingLocations": [
     {
-      "name": "Coolsingel - Start",
+      "name": "Coolsingel - Start/Finish",
       "kilometer": 0,
-      "description": "The starting area of the marathon near Rotterdam City Hall",
+      "description": "The starting and finishing area of the marathon near Rotterdam City Hall",
       "mapPositionX": 50,
       "mapPositionY": 50,
       "latitude": 51.9227,
@@ -42,72 +46,92 @@
       "name": "Erasmus Bridge",
       "kilometer": 5,
       "description": "Iconic bridge with good viewing spots",
-      "mapPositionX": 35,
-      "mapPositionY": 60,
+      "mapPositionX": 40,
+      "mapPositionY": 40,
       "latitude": 51.9091,
       "longitude": 4.4858
     },
     {
-      "name": "Parkkade",
-      "kilometer": 8,
-      "description": "Along the waterfront with excellent views",
+      "name": "Stadion Feijenoord",
+      "kilometer": 10,
+      "description": "Famous football stadium area with plenty of space for spectators",
+      "mapPositionX": 60,
+      "mapPositionY": 65,
+      "latitude": 51.8937,
+      "longitude": 4.5227
+    },
+    {
+      "name": "Zuidplein",
+      "kilometer": 15,
+      "description": "Shopping center area with good transport connections",
+      "mapPositionX": 45,
+      "mapPositionY": 80,
+      "latitude": 51.8857,
+      "longitude": 4.4924
+    },
+    {
+      "name": "Maastunnel",
+      "kilometer": 20,
+      "description": "Historic tunnel area with viewing spots at both ends",
       "mapPositionX": 30,
-      "mapPositionY": 45,
-      "latitude": 51.9029,
-      "longitude": 4.4662
+      "mapPositionY": 75,
+      "latitude": 51.9003,
+      "longitude": 4.4762
+    },
+    {
+      "name": "Half Marathon Point",
+      "kilometer": 21.1,
+      "description": "The halfway point with timing mats and official photographers",
+      "mapPositionX": 25,
+      "mapPositionY": 70,
+      "latitude": 51.9070,
+      "longitude": 4.4660
+    },
+    {
+      "name": "Westblaak",
+      "kilometer": 25,
+      "description": "Urban area with cafes and good viewing spots",
+      "mapPositionX": 45,
+      "mapPositionY": 55,
+      "latitude": 51.9173,
+      "longitude": 4.4731
+    },
+    {
+      "name": "Scheepvaartkwartier",
+      "kilometer": 30,
+      "description": "Historic maritime district with waterfront views",
+      "mapPositionX": 30,
+      "mapPositionY": 35,
+      "latitude": 51.9125,
+      "longitude": 4.4719
     },
     {
       "name": "Kralingse Plas",
-      "kilometer": 16,
-      "description": "Beautiful lake area where runners circle around",
+      "kilometer": 35,
+      "description": "Beautiful lake area with park seating and refreshment stands",
       "mapPositionX": 70,
       "mapPositionY": 30,
       "latitude": 51.9366,
       "longitude": 4.5097
     },
     {
-      "name": "Half Marathon Point",
-      "kilometer": 21.1,
-      "description": "The halfway point near Nesselande area",
-      "mapPositionX": 80,
-      "mapPositionY": 20,
-      "latitude": 51.9594,
-      "longitude": 4.5397
-    },
-    {
-      "name": "Churchillplein",
-      "kilometer": 30,
-      "description": "Central location with easy access to refreshments",
-      "mapPositionX": 55,
-      "mapPositionY": 45,
-      "latitude": 51.9210,
-      "longitude": 4.4793
-    },
-    {
-      "name": "Blaak",
+      "name": "Oostplein",
       "kilometer": 40,
-      "description": "You can see the runners approach the final stretch",
-      "mapPositionX": 45,
-      "mapPositionY": 55,
-      "latitude": 51.9200,
-      "longitude": 4.4887
-    },
-    {
-      "name": "Coolsingel - Finish",
-      "kilometer": 42.195,
-      "description": "Exciting finish area with grandstands",
-      "mapPositionX": 50,
-      "mapPositionY": 50,
-      "latitude": 51.9227,
-      "longitude": 4.4766
+      "description": "Central square where runners approach the final stretch",
+      "mapPositionX": 60,
+      "mapPositionY": 40,
+      "latitude": 51.9249,
+      "longitude": 4.4903
     }
   ],
   "spectatorTips": [
     "Arrive at viewing spots at least 20 minutes before your runner is expected",
     "Use a bike to navigate between viewing spots - Rotterdam is very bike-friendly",
-    "Consider purchasing a RET day ticket for public transport",
-    "The finish area gets extremely crowded - secure your spot early",
-    "Good spots to see your runner multiple times: Coolsingel (start and finish) and areas around Blaak",
-    "Download the official marathon app for real-time tracking"
+    "Consider purchasing a RET day ticket for public transport - metro lines connect many viewing spots",
+    "The finish area at Coolsingel gets extremely crowded - secure your spot at least 45 minutes early",
+    "Good viewing strategy: Start → Erasmus Bridge (5km) → Maastunnel (20km) → Kralingse Plas (35km) → Finish",
+    "Kralingse Plas area offers both good viewing and picnic spots - bring some snacks and drinks",
+    "The Erasmus Bridge and Coolsingel areas have the most entertainment and atmosphere",
+    "Download the official NN Marathon Rotterdam app for real-time tracking"
   ]
 }
