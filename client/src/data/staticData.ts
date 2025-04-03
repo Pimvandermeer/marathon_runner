@@ -1,4 +1,5 @@
-import { LocationTime, RunnerInput, waveStartTimes, defaultViewingLocations } from '@shared/schema';
+import { LocationTime, RunnerInput } from '@shared/schema';
+import { getWaveStartTimes, getViewingLocations } from '@/data/marathonConfig';
 
 // Utility function to convert pace (mm:ss) to minutes
 function paceToMinutes(pace: string): number {
@@ -46,17 +47,19 @@ function formatElapsedTime(minutes: number): string {
   }
 }
 
-// Static data for marathon locations
-export const marathonLocations = defaultViewingLocations.map((location: any, index: number) => ({
-  id: index + 1,
-  name: location.name,
-  kilometer: location.kilometer,
-  description: location.description || null,
-  mapPositionX: location.mapPositionX,
-  mapPositionY: location.mapPositionY,
-  latitude: location.latitude,
-  longitude: location.longitude
-}));
+// Get marathon locations from the configuration
+export function getMarathonLocations() {
+  return getViewingLocations().map((location, index) => ({
+    id: index + 1,
+    name: location.name,
+    kilometer: location.kilometer,
+    description: location.description || null,
+    mapPositionX: location.mapPositionX,
+    mapPositionY: location.mapPositionY,
+    latitude: location.latitude,
+    longitude: location.longitude
+  }));
+}
 
 // Function to calculate pace from target finish time
 function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
@@ -67,7 +70,8 @@ function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
 
   console.log("Calculating pace from finish time:", finishTime);
   
-  const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
+  const waveStartTimes = getWaveStartTimes();
+  const startTime = waveStartTimes[wave];
   
   // Parse finish and start times
   let totalFinishMinutes = 0;
@@ -132,13 +136,15 @@ export function calculateRunnerPredictions(runnerInput: RunnerInput) {
     throw new Error("Invalid pace value. Please enter a valid pace or finish time.");
   }
   
-  const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
+  const waveStartTimes = getWaveStartTimes();
+  const startTime = waveStartTimes[wave];
   
   // Create a unique ID if one wasn't provided
   const runnerId = id || `runner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
   
   // Calculate location times
-  const locationTimes: LocationTime[] = marathonLocations.map((location: any) => {
+  const locations = getMarathonLocations();
+  const locationTimes: LocationTime[] = locations.map((location: any) => {
     const timeToReachInMinutes = location.kilometer * paceInMinutes;
     const estimatedTime = addTime(startTime, timeToReachInMinutes);
     
@@ -154,17 +160,13 @@ export function calculateRunnerPredictions(runnerInput: RunnerInput) {
     };
   });
   
-  // Simulate race day scenario - April 13, 2025
-  // Create a simulated marathon race day with the current time of day
-  const marathonDate = new Date('2025-04-13T00:00:00');
-  const now = new Date();
+  // Simulate race day scenario based on marathon configuration
+  // Get the current marathon configuration
+  const currentDate = new Date();
   
-  // Set marathon date to have the same time of day as now
-  marathonDate.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
-  
-  // Extract hours and minutes from the marathon date
-  const currentHour = marathonDate.getHours();
-  const currentMinute = marathonDate.getMinutes();
+  // Extract hours and minutes from the current date
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
   
   // Parse the user's start time
   const [startHour, startMinute] = startTime.split(":").map(Number);
@@ -209,5 +211,5 @@ export function calculateRunnerPredictions(runnerInput: RunnerInput) {
 
 // Function to get all marathon locations
 export function getAllMarathonLocations() {
-  return marathonLocations;
+  return getViewingLocations();
 }

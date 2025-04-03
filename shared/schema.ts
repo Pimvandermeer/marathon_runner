@@ -37,7 +37,7 @@ export const insertMarathonLocationSchema = createInsertSchema(marathonLocations
 
 // Schema for runner data input
 export const runnerInputSchema = z.object({
-  wave: z.enum(["1", "2", "3", "4", "5"]),
+  wave: z.string(), // Changed to string to allow for any wave value from configuration
   pace: z.string().optional(),
   finishTime: z.string().optional(),
   runnerName: z.string().optional(),

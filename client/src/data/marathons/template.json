@@ -1,0 +1,59 @@
+{
+  "id": "marathon-id",
+  "name": "Marathon Name",
+  "year": "YYYY",
+  "date": "YYYY-MM-DD",
+  "logo": "/marathons/marathon-id/logo.png",
+  "routeMap": "/marathons/marathon-id/route-map.jpg",
+  "description": "A brief description of the marathon, its features, and what makes it special.",
+  "websiteUrl": "https://www.marathonwebsite.com/",
+  "cityInfo": {
+    "country": "Country Name",
+    "transportInfo": "Information about public transportation options in the city during marathon day.",
+    "timezone": "Continent/City"
+  },
+  "waveStartTimes": {
+    "1": "HH:MM",
+    "2": "HH:MM",
+    "3": "HH:MM"
+  },
+  "marathonLandmarks": [
+    { "distance": 0, "name": "Start" },
+    { "distance": 21.1, "name": "Half Marathon" },
+    { "distance": 42.195, "name": "Finish" }
+  ],
+  "viewingLocations": [
+    { 
+      "name": "Location Name", 
+      "kilometer": 0, 
+      "description": "Description of this viewing location", 
+      "mapPositionX": 50, 
+      "mapPositionY": 50, 
+      "latitude": 0.0, 
+      "longitude": 0.0
+    },
+    { 
+      "name": "Half Marathon Point", 
+      "kilometer": 21.1, 
+      "description": "Description of this viewing location", 
+      "mapPositionX": 50, 
+      "mapPositionY": 75, 
+      "latitude": 0.0, 
+      "longitude": 0.0
+    },
+    { 
+      "name": "Finish Line", 
+      "kilometer": 42.195, 
+      "description": "Description of this viewing location", 
+      "mapPositionX": 50, 
+      "mapPositionY": 50, 
+      "latitude": 0.0, 
+      "longitude": 0.0
+    }
+  ],
+  "spectatorTips": [
+    "Tip 1 for spectators",
+    "Tip 2 for spectators",
+    "Tip 3 for spectators"
+  ]
+}

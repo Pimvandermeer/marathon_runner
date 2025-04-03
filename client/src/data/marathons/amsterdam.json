@@ -1,0 +1,120 @@
+{
+  "id": "amsterdam",
+  "name": "Amsterdam Marathon",
+  "year": "2025",
+  "date": "2025-10-19",
+  "logo": "/marathons/amsterdam/logo.png",
+  "routeMap": "/marathons/amsterdam/route-map.jpg",
+  "description": "The Amsterdam Marathon is a flat and fast course through the beautiful city of Amsterdam, passing many famous landmarks like the Rijksmuseum, Vondelpark, and along the Amstel River.",
+  "websiteUrl": "https://www.tcsamsterdammarathon.nl/",
+  "cityInfo": {
+    "country": "Netherlands",
+    "transportInfo": "Amsterdam has excellent public transport with metro, tram, and bus services. Consider purchasing a GVB day pass for easy travel between viewing spots. Bikes are also a great way to navigate the city on marathon day.",
+    "timezone": "Europe/Amsterdam"
+  },
+  "waveStartTimes": {
+    "1": "09:00",
+    "2": "09:10",
+    "3": "09:20",
+    "4": "09:30"
+  },
+  "marathonLandmarks": [
+    { "distance": 0, "name": "Start - Olympic Stadium" },
+    { "distance": 10, "name": "Vondelpark" },
+    { "distance": 21.1, "name": "Half Marathon" },
+    { "distance": 30, "name": "Amstel River" },
+    { "distance": 36, "name": "Museumplein" },
+    { "distance": 42.195, "name": "Finish - Olympic Stadium" }
+  ],
+  "viewingLocations": [
+    { 
+      "name": "Olympic Stadium - Start", 
+      "kilometer": 0, 
+      "description": "Watch the runners start their journey at the historic Olympic Stadium", 
+      "mapPositionX": 50, 
+      "mapPositionY": 50, 
+      "latitude": 52.3428, 
+      "longitude": 4.8542
+    },
+    { 
+      "name": "Vondelpark", 
+      "kilometer": 10, 
+      "description": "Beautiful park setting with multiple viewing spots", 
+      "mapPositionX": 40, 
+      "mapPositionY": 30, 
+      "latitude": 52.3579, 
+      "longitude": 4.8686
+    },
+    { 
+      "name": "Rijksmuseum", 
+      "kilometer": 14.5, 
+      "description": "Iconic museum backdrop for watching runners", 
+      "mapPositionX": 55, 
+      "mapPositionY": 25, 
+      "latitude": 52.3599, 
+      "longitude": 4.8852
+    },
+    { 
+      "name": "Half Marathon Point", 
+      "kilometer": 21.1, 
+      "description": "Half marathon point along the Amstel River", 
+      "mapPositionX": 70, 
+      "mapPositionY": 40, 
+      "latitude": 52.3264, 
+      "longitude": 4.9150
+    },
+    { 
+      "name": "Amstel Bridge", 
+      "kilometer": 25, 
+      "description": "Good vantage point as runners cross the Amstel", 
+      "mapPositionX": 65, 
+      "mapPositionY": 55, 
+      "latitude": 52.3105, 
+      "longitude": 4.9081
+    },
+    { 
+      "name": "Amstelpark", 
+      "kilometer": 30, 
+      "description": "Green area with space to cheer for runners", 
+      "mapPositionX": 50, 
+      "mapPositionY": 65, 
+      "latitude": 52.3283, 
+      "longitude": 4.8911
+    },
+    { 
+      "name": "De Pijp", 
+      "kilometer": 35, 
+      "description": "Vibrant neighborhood with cafes to wait for your runner", 
+      "mapPositionX": 45, 
+      "mapPositionY": 45, 
+      "latitude": 52.3531, 
+      "longitude": 4.8960
+    },
+    { 
+      "name": "Museumplein", 
+      "kilometer": 38, 
+      "description": "Cultural center of Amsterdam with good viewing opportunities", 
+      "mapPositionX": 52, 
+      "mapPositionY": 30, 
+      "latitude": 52.3580, 
+      "longitude": 4.8830
+    },
+    { 
+      "name": "Olympic Stadium - Finish", 
+      "kilometer": 42.195, 
+      "description": "Cheer your runner to the finish inside the historic stadium", 
+      "mapPositionX": 50, 
+      "mapPositionY": 50, 
+      "latitude": 52.3428, 
+      "longitude": 4.8542
+    }
+  ],
+  "spectatorTips": [
+    "Arrive at viewing spots 15-20 minutes before your runner is expected",
+    "Use public transport or bicycle between viewing locations",
+    "Consider using the city's bike-sharing service to navigate quickly",
+    "The area around the Olympic Stadium gets very crowded - arrive early",
+    "Bring an umbrella as Amsterdam weather can be unpredictable",
+    "Some good spots to see your runner multiple times: Vondelpark and Museumplein"
+  ]
+}

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { runnerInputSchema, type RunnerInput, waveStartTimes } from "@shared/schema";
+import { runnerInputSchema, type RunnerInput } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
-import { formatPaceInput, validatePaceInput } from "@/lib/utils";
+import { formatPaceInput } from "@/lib/utils";
 import { calculateRunnerPredictions } from "@/data/staticData";
 import { useMutation } from '@tanstack/react-query'; // Added import
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getWaveStartTimes } from "@/data/marathonConfig";
 
 import {
   Card,
@@ -175,11 +176,11 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="1">Wave 1 - 10:00</SelectItem>
-                        <SelectItem value="2">Wave 2 - 10:07</SelectItem>
-                        <SelectItem value="3">Wave 3 - 10:14</SelectItem>
-                        <SelectItem value="4">Wave 4 - 10:21</SelectItem>
-                        <SelectItem value="5">Wave 5 - 10:28</SelectItem>
+                        {Object.entries(getWaveStartTimes()).map(([wave, time]) => (
+                          <SelectItem key={wave} value={wave}>
+                            Wave {wave} - {time}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

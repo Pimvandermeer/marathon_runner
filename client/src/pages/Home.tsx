@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
+import MarathonInfo from "@/components/MarathonInfo";
+import SpectatorTips from "@/components/SpectatorTips";
+import MarathonSelector from "@/components/MarathonSelector";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
 import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +13,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { calculateRunnerPredictions } from "@/data/staticData";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getCurrentMarathon } from "@/data/marathonConfig";
 
 // Define a type for our runner data
 type RunnerData = {
@@ -55,14 +59,18 @@ export default function Home() {
       setIsLoading(true);
       
       try {
+        // Get current marathon waves
+        const marathon = getCurrentMarathon();
+        const validWaves = Object.keys(marathon.waveStartTimes);
+        
         // Validate wave number
-        if (!["1", "2", "3", "4", "5"].includes(wave)) {
+        if (!validWaves.includes(wave)) {
           throw new Error("Invalid wave number");
         }
         
         const runnerInput: RunnerInput = {
           runnerName: name || 'Shared Runner',
-          wave: wave as "1" | "2" | "3" | "4" | "5",
+          wave: wave as any, // Type will be validated by the schema
           pace
         };
         
@@ -150,6 +158,9 @@ export default function Home() {
     }
   };
   
+  // Get current marathon
+  const marathon = getCurrentMarathon();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero */}
@@ -159,12 +170,22 @@ export default function Home() {
           <p className="text-lg md:text-xl opacity-90 max-w-2xl">
             {t("app.subtitle")}
           </p>
+          
+          {/* Marathon selector in the hero area */}
+          <div className="mt-6">
+            <MarathonSelector />
+          </div>
         </div>
       </div>
       
+      {/* Marathon Information */}
+      <MarathonInfo />
+      
       {/* Marathon Route Map */}
-      <h2 className="text-2xl font-bold mb-4">Rotterdam Marathon 2025 Route</h2>
-      <RouteMap runnerInfo={selectedRunner?.info} />
+      <RouteMap />
+      
+      {/* Spectator Tips */}
+      <SpectatorTips />
       
       {/* Runner Information and Timeline */}
       <h2 className="text-2xl font-bold mb-4">{t("timeline.title")}</h2>

@@ -1,48 +1,37 @@
-import { Card, CardContent } from "@/components/ui/card";
-import marathonMapSrc from "@assets/NNMR25-parcourskaart_NN-Marathon-1086x1536.jpg";
+import { useState } from 'react';
+import { getCurrentMarathon } from '@/data/marathonConfig';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-interface RouteMapProps {
-  runnerInfo?: {
-    name: string;
-    wave: string;
-    pace: string;
+export default function RouteMap() {
+  const { t } = useLanguage();
+  const [isMapEnlarged, setIsMapEnlarged] = useState(false);
+  const marathon = getCurrentMarathon();
+  
+  const toggleMapSize = () => {
+    setIsMapEnlarged(!isMapEnlarged);
   };
-}
-
-export default function RouteMap({ runnerInfo }: RouteMapProps) {
-  const hasRunnerInfo = !!runnerInfo;
   
   return (
-    <Card className="bg-white shadow-md mb-6">
-      <CardContent className="p-6 overflow-hidden">
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold text-neutral-900">Rotterdam Marathon Route Map</h2>
-        </div>
-        
-        <div className="rounded-lg overflow-hidden relative flex justify-center">
-          <div style={{ width: "90%", maxWidth: "800px", height: "auto", display: "block", position: "relative" }}>
-            <img 
-              src={marathonMapSrc} 
-              alt="Rotterdam Marathon Route Map" 
-              className="w-full h-auto object-contain rounded-lg shadow-md"
-              style={{ display: "block", maxWidth: "100%" }}
-            />
-          </div>
-          
-          {hasRunnerInfo && (
-            <div className="absolute bottom-3 right-3 bg-white/90 p-3 rounded-md shadow-md text-sm">
-              <p className="font-medium text-neutral-800">
-                Runner: {runnerInfo.name || "Runner"} - Wave {runnerInfo.wave}
-              </p>
-              <p className="text-neutral-600">Pace: {runnerInfo.pace} min/km</p>
-            </div>
-          )}
-        </div>
-        
-        <div className="mt-4 bg-blue-50 p-3 rounded-md border border-blue-100 text-sm text-blue-700">
-          <p>Rotterdam Marathon - April 13, 2025</p>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="relative mt-4 mb-8">
+      <h2 className="text-xl font-semibold mb-2">{t('map.title')}</h2>
+      <div 
+        className={`route-map-container rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 ${isMapEnlarged ? 'h-[70vh]' : 'h-[300px]'}`}
+      >
+        <img 
+          src={marathon.routeMap} 
+          alt={`${marathon.name} route map`} 
+          className="w-full h-full object-cover cursor-pointer hover:opacity-95 transition-opacity"
+          onClick={toggleMapSize}
+        />
+      </div>
+      <div className="flex justify-end mt-2">
+        <button 
+          onClick={toggleMapSize}
+          className="text-sm text-primary hover:underline"
+        >
+          {isMapEnlarged ? t('map.shrink') : t('map.enlarge')}
+        </button>
+      </div>
+    </div>
   );
 }

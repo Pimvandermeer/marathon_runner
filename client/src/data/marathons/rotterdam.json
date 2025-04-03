@@ -1,0 +1,113 @@
+{
+  "id": "rotterdam",
+  "name": "Rotterdam Marathon",
+  "year": "2025",
+  "date": "2025-04-13",
+  "logo": "/marathons/rotterdam/logo.png",
+  "routeMap": "/marathons/rotterdam/route-map.jpg",
+  "description": "The Rotterdam Marathon is known for its fast and flat course through the heart of Rotterdam. With enthusiastic crowds lining the streets, it's one of the fastest marathons in the world.",
+  "websiteUrl": "https://www.nnmarathonrotterdam.nl/",
+  "cityInfo": {
+    "country": "Netherlands",
+    "transportInfo": "Rotterdam has excellent public transport with metro, tram, and bus services. The RET Day Ticket is a good option for marathon day when moving between viewing spots.",
+    "timezone": "Europe/Amsterdam"
+  },
+  "waveStartTimes": {
+    "1": "10:00",
+    "2": "10:07",
+    "3": "10:14",
+    "4": "10:21",
+    "5": "10:28"
+  },
+  "marathonLandmarks": [
+    { "distance": 0, "name": "Start - Coolsingel" },
+    { "distance": 5, "name": "Erasmus Bridge" },
+    { "distance": 15, "name": "Kralingse Bos" },
+    { "distance": 21.1, "name": "Half Marathon" },
+    { "distance": 30, "name": "Churchillplein" },
+    { "distance": 40, "name": "Blaak" },
+    { "distance": 42.195, "name": "Finish - Coolsingel" }
+  ],
+  "viewingLocations": [
+    {
+      "name": "Coolsingel - Start",
+      "kilometer": 0,
+      "description": "The starting area of the marathon near Rotterdam City Hall",
+      "mapPositionX": 50,
+      "mapPositionY": 50,
+      "latitude": 51.9227,
+      "longitude": 4.4766
+    },
+    {
+      "name": "Erasmus Bridge",
+      "kilometer": 5,
+      "description": "Iconic bridge with good viewing spots",
+      "mapPositionX": 35,
+      "mapPositionY": 60,
+      "latitude": 51.9091,
+      "longitude": 4.4858
+    },
+    {
+      "name": "Parkkade",
+      "kilometer": 8,
+      "description": "Along the waterfront with excellent views",
+      "mapPositionX": 30,
+      "mapPositionY": 45,
+      "latitude": 51.9029,
+      "longitude": 4.4662
+    },
+    {
+      "name": "Kralingse Plas",
+      "kilometer": 16,
+      "description": "Beautiful lake area where runners circle around",
+      "mapPositionX": 70,
+      "mapPositionY": 30,
+      "latitude": 51.9366,
+      "longitude": 4.5097
+    },
+    {
+      "name": "Half Marathon Point",
+      "kilometer": 21.1,
+      "description": "The halfway point near Nesselande area",
+      "mapPositionX": 80,
+      "mapPositionY": 20,
+      "latitude": 51.9594,
+      "longitude": 4.5397
+    },
+    {
+      "name": "Churchillplein",
+      "kilometer": 30,
+      "description": "Central location with easy access to refreshments",
+      "mapPositionX": 55,
+      "mapPositionY": 45,
+      "latitude": 51.9210,
+      "longitude": 4.4793
+    },
+    {
+      "name": "Blaak",
+      "kilometer": 40,
+      "description": "You can see the runners approach the final stretch",
+      "mapPositionX": 45,
+      "mapPositionY": 55,
+      "latitude": 51.9200,
+      "longitude": 4.4887
+    },
+    {
+      "name": "Coolsingel - Finish",
+      "kilometer": 42.195,
+      "description": "Exciting finish area with grandstands",
+      "mapPositionX": 50,
+      "mapPositionY": 50,
+      "latitude": 51.9227,
+      "longitude": 4.4766
+    }
+  ],
+  "spectatorTips": [
+    "Arrive at viewing spots at least 20 minutes before your runner is expected",
+    "Use a bike to navigate between viewing spots - Rotterdam is very bike-friendly",
+    "Consider purchasing a RET day ticket for public transport",
+    "The finish area gets extremely crowded - secure your spot early",
+    "Good spots to see your runner multiple times: Coolsingel (start and finish) and areas around Blaak",
+    "Download the official marathon app for real-time tracking"
+  ]
+}

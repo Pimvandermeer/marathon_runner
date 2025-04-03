@@ -53,7 +53,7 @@ const enTranslations: Record<string, string> = {
   "footer.developed": "Developed by",
   "footer.rights": "All rights reserved.",
   "footer.language": "Language",
-  "footer.description": "A supporter tool for the Rotterdam Marathon 2025. Track runners and plan where to support them throughout the race.",
+  "footer.description": "A supporter tool for marathon runners. Track runners and plan where to support them throughout the race.",
   
   // Tips for supporters
   "tips.title": "Tips for Supporters",
@@ -71,6 +71,26 @@ const enTranslations: Record<string, string> = {
   "timeComparison.onPace": "On target pace",
   "timeComparison.expected": "Expected pace",
   "timeComparison.actual": "Actual pace",
+  
+  // Marathon selection
+  "marathon.select": "Select Marathon",
+  "marathon.selectPlaceholder": "Choose a marathon",
+  "marathon.changed": "Marathon Changed",
+  "marathon.changedDescription": "Switched to {marathon}. Runner information will be reset.",
+  
+  // Route map
+  "map.title": "Marathon Route Map",
+  "map.enlarge": "Enlarge map",
+  "map.shrink": "Shrink map",
+  
+  // Marathon info
+  "marathon.info.title": "Marathon Information",
+  "marathon.info.date": "Date",
+  "marathon.info.website": "Official Website",
+  "marathon.info.visitWebsite": "Visit Website",
+  "marathon.info.country": "Country",
+  "marathon.info.transport": "Transport Information",
+  "marathon.info.timezone": "Timezone"
 };
 
 // Dutch translations
@@ -113,7 +133,7 @@ const nlTranslations: Record<string, string> = {
   "footer.developed": "Ontwikkeld door",
   "footer.rights": "Alle rechten voorbehouden.",
   "footer.language": "Taal",
-  "footer.description": "Een hulpmiddel voor supporters van de Rotterdam Marathon 2025. Volg lopers en plan waar je ze kunt aanmoedigen tijdens de wedstrijd.",
+  "footer.description": "Een hulpmiddel voor marathon supporters. Volg lopers en plan waar je ze kunt aanmoedigen tijdens de wedstrijd.",
   
   // Tips for supporters
   "tips.title": "Tips voor Supporters",
@@ -131,6 +151,26 @@ const nlTranslations: Record<string, string> = {
   "timeComparison.onPace": "Op doeltempo",
   "timeComparison.expected": "Verwacht tempo",
   "timeComparison.actual": "Werkelijk tempo",
+  
+  // Marathon selection
+  "marathon.select": "Selecteer Marathon",
+  "marathon.selectPlaceholder": "Kies een marathon",
+  "marathon.changed": "Marathon Gewijzigd",
+  "marathon.changedDescription": "Gewisseld naar {marathon}. Lopersinformatie wordt gereset.",
+  
+  // Route map
+  "map.title": "Marathon Routekaart",
+  "map.enlarge": "Vergroot kaart",
+  "map.shrink": "Verklein kaart",
+  
+  // Marathon info
+  "marathon.info.title": "Marathon Informatie",
+  "marathon.info.date": "Datum",
+  "marathon.info.website": "Officiële Website",
+  "marathon.info.visitWebsite": "Bezoek Website",
+  "marathon.info.country": "Land",
+  "marathon.info.transport": "Vervoersinformatie",
+  "marathon.info.timezone": "Tijdzone"
 };
 
 // Collection of all translations
