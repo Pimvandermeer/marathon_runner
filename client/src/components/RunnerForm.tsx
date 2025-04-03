@@ -50,6 +50,16 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   const [isCalculating, setIsCalculating] = useState(false);
   const [inputMethod, setInputMethod] = useState<'pace' | 'finish'>('pace');
 
+  // When switching input methods, clear the other field's value
+  const handleInputMethodSwitch = (method: 'pace' | 'finish') => {
+    if (method === 'pace') {
+      form.setValue('finishTime', '');
+    } else {
+      form.setValue('pace', '');
+    }
+    setInputMethod(method);
+  };
+
   const handlePaceChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
     const formattedValue = formatPaceInput(e.target.value);
     onChange(formattedValue);
@@ -59,14 +69,42 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
     // Simple format validation for hh:mm
     let value = e.target.value.replace(/[^0-9:]/g, '');
     
-    // Add colon if needed
-    if (value.length === 2 && !value.includes(':')) {
-      value += ':';
+    // Only allow one colon
+    const colonCount = (value.match(/:/g) || []).length;
+    if (colonCount > 1) {
+      value = value.substring(0, value.lastIndexOf(':')) + 
+        value.substring(value.lastIndexOf(':') + 1);
     }
     
-    // Limit to 5 characters (hh:mm)
-    if (value.length > 5) {
-      value = value.substring(0, 5);
+    // Add colon after first digit if there are at least 2 digits and no colon yet
+    if (colonCount === 0 && value.length >= 2) {
+      value = value.substring(0, 1) + ':' + value.substring(1);
+    }
+    
+    // Format seconds part if needed
+    if (colonCount === 1) {
+      const [hours, minutes] = value.split(':');
+      
+      // If minutes part is more than 2 digits, truncate to 2
+      if (minutes && minutes.length > 2) {
+        value = `${hours}:${minutes.substring(0, 2)}`;
+      }
+      
+      // Add leading zero to minutes if needed
+      if (minutes && minutes.length === 1) {
+        value = `${hours}:${minutes.padStart(2, '0')}`;
+      }
+    }
+    
+    // Limit to max of 4 characters (h:mm or hh:m)
+    if (value.length > 4 && !value.includes(':')) {
+      value = value.substring(0, 4);
+    } else if (value.length > 5) {
+      // For format with colon (h:mm or hh:mm)
+      const [hours, mins] = value.split(':');
+      if (hours.length > 2) {
+        value = hours.substring(0, 2) + ':' + mins;
+      }
     }
     
     onChange(value);
@@ -139,7 +177,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     type="button"
                     variant={inputMethod === 'pace' ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setInputMethod('pace')}
+                    onClick={() => handleInputMethodSwitch('pace')}
                     className="flex-1"
                   >
                     Enter Pace
@@ -148,7 +186,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     type="button"
                     variant={inputMethod === 'finish' ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setInputMethod('finish')}
+                    onClick={() => handleInputMethodSwitch('finish')}
                     className="flex-1"
                   >
                     Enter Finish Time
