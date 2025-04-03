@@ -39,7 +39,6 @@
     { "distance": 31.6, "name": "Start Bosdreef" },
     { "distance": 35, "name": "35 km" },
     { "distance": 36.1, "name": "Kralingsezoom" },
-    { "distance": 36.4, "name": "SPP-cheerzone" },
     { "distance": 37.6, "name": "Voorschoterlaan" },
     { "distance": 39, "name": "Boezembocht" },
     { "distance": 40, "name": "40 km" },
@@ -52,8 +51,8 @@
       "description": "The starting area of the marathon near Rotterdam City Hall",
       "mapPositionX": 50,
       "mapPositionY": 50,
-      "latitude": 51.9227,
-      "longitude": 4.4766
+      "latitude": 51.922600,
+      "longitude": 4.476944
     },
     {
       "name": "Wilhelminaplein (Metrostation)",
@@ -61,8 +60,8 @@
       "description": "First metro stop, easy to reach and close to the start",
       "mapPositionX": 48,
       "mapPositionY": 52,
-      "latitude": 51.9162,
-      "longitude": 4.4817
+      "latitude": 51.906611,
+      "longitude": 4.484722
     },
     {
       "name": "5 km Point",
@@ -97,8 +96,8 @@
       "description": "Large shopping center with metro connection",
       "mapPositionX": 33,
       "mapPositionY": 78,
-      "latitude": 51.8857,
-      "longitude": 4.4924
+      "latitude": 51.884722,
+      "longitude": 4.491944
     },
     {
       "name": "Halve Marathon Point",
@@ -115,8 +114,8 @@
       "description": "Metro station with harbor views",
       "mapPositionX": 35,
       "mapPositionY": 60,
-      "latitude": 51.8986,
-      "longitude": 4.4867
+      "latitude": 51.899167,
+      "longitude": 4.486111
     },
     {
       "name": "25 km Point",
@@ -133,8 +132,8 @@
       "description": "Central metro station with many cafes nearby",
       "mapPositionX": 45,
       "mapPositionY": 50,
-      "latitude": 51.9164,
-      "longitude": 4.4733
+      "latitude": 51.91612255907438,
+      "longitude": 4.473101279013896
     },
     {
       "name": "30 km Point",
@@ -160,26 +159,8 @@
       "description": "Parking available, good spot for cheering runners near the final stretch",
       "mapPositionX": 65,
       "mapPositionY": 35,
-      "latitude": 51.9274,
-      "longitude": 4.5397
-    },
-    {
-      "name": "SPP-cheerzone",
-      "kilometer": 36.4,
-      "description": "Official cheerzone with music and atmosphere",
-      "mapPositionX": 66,
-      "mapPositionY": 34,
-      "latitude": 51.9280,
-      "longitude": 4.5310
-    },
-    {
-      "name": "Voorschoterlaan (Metrostation)",
-      "kilometer": 37.6,
-      "description": "Easy access metro station to see runners in the final stretch",
-      "mapPositionX": 62,
-      "mapPositionY": 35,
-      "latitude": 51.9249,
-      "longitude": 4.5050
+      "latitude": 51.927500,
+      "longitude": 4.539444
     },
     {
       "name": "40 km Point",
@@ -196,17 +177,16 @@
       "description": "Exciting finish area with grandstands",
       "mapPositionX": 50,
       "mapPositionY": 50,
-      "latitude": 51.9227,
-      "longitude": 4.4766
+      "latitude": 51.922600,
+      "longitude": 4.476944
     }
   ],
   "spectatorTips": [
     "Use the metro stations (Ⓜ️) as primary viewing spots - they offer easy access and good places to watch",
     "Purchase a RET day ticket for unlimited metro travel between viewing locations",
     "Consider using the Park & Ride (🅿️) at Kralingsezoom if coming by car - it's near the 36km mark",
-    "The SPP-cheerzone at 36.4km has a festive atmosphere and is great for supporting runners",
     "Runners pass Slinge metro station twice (at 13.1km and 15.8km) - perfect for seeing your runner twice with minimal movement",
-    "Good metro strategy: Start → Wilhelminaplein (1km) → Zuidplein (18.6km) → Voorschoterlaan (37.6km) → Finish",
+    "Good metro strategy: Start → Wilhelminaplein (1km) → Zuidplein (18.6km) → Kralingsezoom (36.1km) → Finish",
     "The finish area at Coolsingel gets extremely crowded - arrive at least 45 minutes early",
     "For the fastest runners, view expected passing times in the '<' column; for average runners use the '=' column; and for slower runners use the '>' column in the timetable",
     "Download the official NN Marathon Rotterdam app for real-time tracking"
