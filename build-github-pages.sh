@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # This script builds the application for GitHub Pages deployment
