@@ -3,13 +3,24 @@ import LocationItem from "./LocationItem";
 import { Button } from "@/components/ui/button";
 import { Download, Info } from "lucide-react";
 import { type LocationTime } from "@shared/schema";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LocationResultsProps {
   locations: LocationTime[];
   isLoading?: boolean;
+  originalPrediction?: LocationTime[];  // Original prediction for comparison
+  actualPace?: string;  // Current actual pace for comparison
+  expectedPace?: string; // Expected pace from the original calculation
 }
 
-export default function LocationResults({ locations, isLoading = false }: LocationResultsProps) {
+export default function LocationResults({ 
+  locations, 
+  isLoading = false, 
+  originalPrediction = [],
+  actualPace,
+  expectedPace
+}: LocationResultsProps) {
+  const { t } = useLanguage();
   const hasLocations = locations && locations.length > 0;
   
   return (
@@ -53,13 +64,38 @@ export default function LocationResults({ locations, isLoading = false }: Locati
           </div>
         ) : (
           <div className="space-y-4">
-            {locations.map((location, index) => (
-              <LocationItem 
-                key={index} 
-                location={location} 
-                isFinish={location.kilometer >= 42} 
-              />
-            ))}
+            {locations.map((location, index) => {
+              // Find the matching location in original prediction by kilometer
+              const originalLocation = originalPrediction.find(
+                loc => Math.abs(loc.kilometer - location.kilometer) < 0.1
+              );
+              
+              return (
+                <LocationItem 
+                  key={index} 
+                  location={location} 
+                  isFinish={location.kilometer >= 42}
+                  expectedTime={originalLocation?.estimatedTime} 
+                />
+              );
+            })}
+            
+            {/* Show pace comparison if we have both paces */}
+            {expectedPace && actualPace && (
+              <div className="mt-4 p-3 bg-neutral-50 rounded-lg border border-neutral-100">
+                <div className="text-sm text-neutral-600 mb-1">
+                  {t("timeline.title")}:
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm">
+                    <span className="font-medium">{t("timeComparison.expected")}:</span> {expectedPace} min/km
+                  </span>
+                  <span className="text-sm">
+                    <span className="font-medium">{t("timeComparison.actual")}:</span> {actualPace} min/km
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

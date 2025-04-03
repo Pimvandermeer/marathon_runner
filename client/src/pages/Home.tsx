@@ -25,6 +25,8 @@ type RunnerData = {
     estimatedFinish: string;
   };
   locations: LocationTime[];
+  originalPredictions?: LocationTime[];
+  actualPace?: string;
 };
 
 export default function Home() {
@@ -92,6 +94,9 @@ export default function Home() {
   
   const handleSubmitSuccess = (data: RunnerPredictionResult) => {
     if (data.locationTimes && data.currentLocation && data.runner) {
+      // Store original predictions when adding a new runner
+      const isNewRunner = !runners.some(r => r.id === data.runner.id);
+      
       // Create a new runner object
       const newRunner: RunnerData = {
         id: data.runner.id,
@@ -103,6 +108,18 @@ export default function Home() {
         currentLocation: data.currentLocation,
         locations: data.locationTimes
       };
+      
+      // For a new runner, store the original predictions
+      if (isNewRunner) {
+        newRunner.originalPredictions = [...data.locationTimes];
+      } else {
+        // For existing runner, keep the original predictions but store the updated pace
+        const existingRunner = runners.find(r => r.id === data.runner.id);
+        if (existingRunner?.originalPredictions) {
+          newRunner.originalPredictions = existingRunner.originalPredictions;
+          newRunner.actualPace = data.runner.pace;
+        }
+      }
       
       // Check if we already have this runner (by ID)
       const existingRunnerIndex = runners.findIndex(r => r.id === data.runner.id);
@@ -205,6 +222,12 @@ export default function Home() {
               currentLocation={selectedRunner.currentLocation}
               locations={selectedRunner.locations}
               isLoading={isLoading}
+              comparisonData={
+                selectedRunner.originalPredictions && selectedRunner.actualPace ? {
+                  originalPredictions: selectedRunner.originalPredictions,
+                  currentPace: selectedRunner.actualPace
+                } : undefined
+              }
             />
           ) : (
             <Card className="shadow-md mb-6">

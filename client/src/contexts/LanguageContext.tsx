@@ -61,6 +61,16 @@ const enTranslations: Record<string, string> = {
   "tips.transport": "Account for public transport delays on marathon day",
   "tips.supplies": "Bring water and snacks for your runner",
   "tips.signs": "Make brightly colored signs to stand out",
+  
+  // Time comparison
+  "timeComparison.ahead": "Runner ahead by",
+  "timeComparison.behind": "Runner behind by",
+  "timeComparison.onTime": "Runner on time",
+  "timeComparison.faster": "Faster than expected",
+  "timeComparison.slower": "Slower than expected",
+  "timeComparison.onPace": "On target pace",
+  "timeComparison.expected": "Expected pace",
+  "timeComparison.actual": "Actual pace",
 };
 
 // Dutch translations
@@ -111,6 +121,16 @@ const nlTranslations: Record<string, string> = {
   "tips.transport": "Houd rekening met vertragingen in het openbaar vervoer op marathondag",
   "tips.supplies": "Neem water en snacks mee voor je loper",
   "tips.signs": "Maak felgekleurde borden om op te vallen",
+  
+  // Time comparison
+  "timeComparison.ahead": "Loper voor op schema met",
+  "timeComparison.behind": "Loper achter op schema met",
+  "timeComparison.onTime": "Loper op schema",
+  "timeComparison.faster": "Sneller dan verwacht",
+  "timeComparison.slower": "Langzamer dan verwacht",
+  "timeComparison.onPace": "Op doeltempo",
+  "timeComparison.expected": "Verwacht tempo",
+  "timeComparison.actual": "Werkelijk tempo",
 };
 
 // Collection of all translations

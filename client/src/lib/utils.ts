@@ -96,3 +96,72 @@ export function formatPaceInput(input: string): string {
   
   return formatted;
 }
+
+// Convert time string (HH:MM:SS) to minutes
+export function timeStringToMinutes(timeString: string): number {
+  if (!timeString) return 0;
+  
+  const parts = timeString.split(':');
+  if (parts.length === 3) {
+    // HH:MM:SS format
+    const [hours, minutes, seconds] = parts.map(Number);
+    return (hours * 60) + minutes + (seconds / 60);
+  } else if (parts.length === 2) {
+    // MM:SS format
+    const [minutes, seconds] = parts.map(Number);
+    return minutes + (seconds / 60);
+  }
+  return 0;
+}
+
+// Determine pace trend (faster, slower, or on target)
+export function getPaceTrend(expectedPace: string, actualPace: string): 'faster' | 'slower' | 'on-target' {
+  if (!expectedPace || !actualPace) return 'on-target';
+  
+  const expectedMinutes = paceToMinutes(expectedPace);
+  const actualMinutes = paceToMinutes(actualPace);
+  
+  // Lower pace number means faster running
+  if (actualMinutes < expectedMinutes - 0.1) return 'faster';
+  if (actualMinutes > expectedMinutes + 0.1) return 'slower';
+  return 'on-target';
+}
+
+// Format time difference for display with indicator
+export function formatTimeDifference(expectedTimeStr: string, actualTimeStr: string): { 
+  difference: string, 
+  trend: 'ahead' | 'behind' | 'on-time' 
+} {
+  if (!expectedTimeStr || !actualTimeStr) {
+    return { difference: '0:00', trend: 'on-time' };
+  }
+  
+  const expectedMinutes = timeStringToMinutes(expectedTimeStr);
+  const actualMinutes = timeStringToMinutes(actualTimeStr);
+  
+  const diffMinutes = expectedMinutes - actualMinutes;
+  
+  let trend: 'ahead' | 'behind' | 'on-time';
+  if (Math.abs(diffMinutes) < 0.5) {
+    trend = 'on-time';
+  } else if (diffMinutes > 0) {
+    trend = 'ahead'; // Runner is arriving earlier than expected
+  } else {
+    trend = 'behind'; // Runner is arriving later than expected
+  }
+  
+  // Format the difference
+  const absDiffMinutes = Math.abs(diffMinutes);
+  const hours = Math.floor(absDiffMinutes / 60);
+  const minutes = Math.floor(absDiffMinutes % 60);
+  const seconds = Math.floor((absDiffMinutes * 60) % 60);
+  
+  // Format the difference string
+  let diffString = '';
+  if (hours > 0) {
+    diffString += `${hours}:`;
+  }
+  diffString += `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  
+  return { difference: diffString, trend };
+}

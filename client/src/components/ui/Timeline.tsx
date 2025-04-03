@@ -19,13 +19,18 @@ interface TimelineProps {
   };
   locations: LocationTime[];
   isLoading: boolean;
+  comparisonData?: {
+    originalPredictions: LocationTime[];
+    currentPace: string;
+  };
 }
 
 export default function Timeline({ 
   runnerInfo, 
   currentLocation, 
   locations, 
-  isLoading 
+  isLoading,
+  comparisonData 
 }: TimelineProps) {
   const hasRunnerInfo = !!runnerInfo;
 
@@ -95,12 +100,17 @@ export default function Timeline({
             currentPosition={currentLocation?.distance || 0}
             elapsedTime={currentLocation?.elapsedTime || "00:00:00"}
             estimatedFinish={currentLocation?.estimatedFinish || "00:00:00"}
+            expectedPace={runnerInfo?.pace}
+            actualPace={comparisonData?.currentPace}
           />
         )}
         
         <LocationResults 
           locations={locations} 
           isLoading={isLoading}
+          originalPrediction={comparisonData?.originalPredictions}
+          actualPace={comparisonData?.currentPace}
+          expectedPace={runnerInfo?.pace}
         />
         
         {/* Additional info for marathon supporters */}
