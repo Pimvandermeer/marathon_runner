@@ -50,7 +50,7 @@
       "description": "The starting area of the marathon near Rotterdam City Hall",
       "mapPositionX": 50,
       "mapPositionY": 50,
-      "latitude": 51.922600,
+      "latitude": 51.9226,
       "longitude": 4.476944
     },
     {
@@ -128,7 +128,7 @@
     {
       "name": "Wilhelminaplein (Metrostation)",
       "kilometer": 26.7,
-      "description": "ℹ️ Schreeuw de lopers de Erasmusbrug over!",
+      "description": "Shout to the runners across the Erasmus Bridge!",
       "mapPositionX": 42,
       "mapPositionY": 53,
       "latitude": 51.907134874685305,
@@ -154,11 +154,11 @@
     },
     {
       "name": "35 km Point",
-      "kilometer": 35, 
-      "description": "35 km timing point", 
-      "mapPositionX": 60, 
-      "mapPositionY": 35, 
-      "latitude": 51.939257, 
+      "kilometer": 35,
+      "description": "35 km timing point",
+      "mapPositionX": 60,
+      "mapPositionY": 35,
+      "latitude": 51.939257,
       "longitude": 4.529788
     },
     {
@@ -167,7 +167,7 @@
       "description": "Parking available, 5min walking to the route good spot for cheering runners near the final stretch",
       "mapPositionX": 65,
       "mapPositionY": 35,
-      "latitude": 51.927500,
+      "latitude": 51.9275,
       "longitude": 4.539444
     },
     {
@@ -185,7 +185,7 @@
       "description": "Exciting finish area with grandstands",
       "mapPositionX": 50,
       "mapPositionY": 50,
-      "latitude": 51.922600,
+      "latitude": 51.9226,
       "longitude": 4.476944
     }
   ],
