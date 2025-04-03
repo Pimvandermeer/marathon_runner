@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
-import { X } from "lucide-react";
+import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { calculateRunnerPredictions } from "@/data/staticData";
+import { useToast } from "@/hooks/use-toast";
 
 // Define a type for our runner data
 type RunnerData = {
@@ -30,9 +31,57 @@ export default function Home() {
   const [runners, setRunners] = useState<RunnerData[]>([]);
   const [selectedRunnerId, setSelectedRunnerId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [sharedLinkLoaded, setSharedLinkLoaded] = useState(false);
+  const { toast } = useToast();
   
   // Get the currently selected runner data
   const selectedRunner = runners.find(r => r.id === selectedRunnerId);
+  
+  // Parse URL parameters if available (for shared links)
+  useEffect(() => {
+    if (sharedLinkLoaded) return;
+    
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const wave = params.get('wave');
+    const pace = params.get('pace');
+    
+    // If we have all the parameters, create a runner
+    if (wave && pace) {
+      setIsLoading(true);
+      
+      const runnerInput: RunnerInput = {
+        name: name || 'Shared Runner',
+        wave,
+        pace
+      };
+      
+      calculateRunnerPredictions(runnerInput)
+        .then(result => {
+          if (result) {
+            handleSubmitSuccess(result);
+            setSharedLinkLoaded(true);
+            
+            toast({
+              title: "Shared runner loaded",
+              description: `Runner information has been loaded from a shared link`,
+              variant: "default",
+            });
+          }
+        })
+        .catch(error => {
+          console.error("Error loading shared runner:", error);
+          toast({
+            title: "Could not load shared runner",
+            description: "The shared link may be invalid",
+            variant: "destructive",
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, []);
   
   const handleSubmitSuccess = (data: RunnerPredictionResult) => {
     if (data.locationTimes && data.currentLocation && data.runner) {

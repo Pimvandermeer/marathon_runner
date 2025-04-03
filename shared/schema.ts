@@ -37,7 +37,7 @@ export const insertMarathonLocationSchema = createInsertSchema(marathonLocations
 
 // Schema for runner data input
 export const runnerInputSchema = z.object({
-  wave: z.enum(["1", "2", "3", "4"]),
+  wave: z.enum(["1", "2", "3", "4", "5"]),
   pace: z.string().regex(/^\d+:\d{2}$/, "Pace must be in format mm:ss").optional(),
   finishTime: z.string().regex(/^\d{1,2}:\d{2}$/, "Finish time must be in format hh:mm").optional(),
   runnerName: z.string().optional(),
@@ -100,7 +100,8 @@ export const waveStartTimes = {
   "1": "10:00",
   "2": "10:07",
   "3": "10:14",
-  "4": "10:21"
+  "4": "10:21",
+  "5": "10:28"
 };
 
 // Key landmarks for the timeline

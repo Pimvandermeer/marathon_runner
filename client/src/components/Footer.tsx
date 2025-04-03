@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-neutral-800 mt-8 pt-8 text-center text-sm text-neutral-400">
-          <p>&copy; 2025 Supporter of Rotterdam Marathon</p>
+          <p>&copy; 2025 Supporter of Rotterdam Marathon (<a href="https://pimvandermeer.nl" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">pimvandermeer.nl</a>)</p>
         </div>
       </div>
     </footer>
