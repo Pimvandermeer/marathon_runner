@@ -111,11 +111,24 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   };
 
   const onSubmit = (data: RunnerInput) => {
+    console.log("Form submitted with data:", data);
     setIsCalculating(true);
 
     try {
+      // Check if we have either pace or finish time
+      if (!data.pace && !data.finishTime) {
+        throw new Error("Either pace or finish time must be provided");
+      }
+
+      // Validate the wave is selected
+      if (!data.wave) {
+        throw new Error("Wave must be selected");
+      }
+
+      console.log("Calculating predictions with:", data);
       // Use the static calculation function instead of API call
       const result = calculateRunnerPredictions(data);
+      console.log("Calculation result:", result);
 
       // Pass the result to the parent component
       onSubmitSuccess(result);
@@ -125,6 +138,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         description: "Your runner's timeline has been successfully calculated.",
       });
     } catch (error: any) {
+      console.error("Error in form submission:", error);
       toast({
         title: "Error",
         description: `Failed to calculate runner timeline: ${error.message}`,

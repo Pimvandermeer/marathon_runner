@@ -38,11 +38,14 @@ export const insertMarathonLocationSchema = createInsertSchema(marathonLocations
 // Schema for runner data input
 export const runnerInputSchema = z.object({
   wave: z.enum(["1", "2", "3", "4", "5"]),
-  pace: z.string().regex(/^\d+:\d{2}$/, "Pace must be in format mm:ss").optional(),
-  finishTime: z.string().regex(/^\d{1,2}:\d{2}$/, "Finish time must be in format hh:mm").optional(),
+  pace: z.string().optional(),
+  finishTime: z.string().optional(),
   runnerName: z.string().optional(),
   id: z.string().optional(), // Add unique ID for multiple runners
-}).refine(data => data.pace || data.finishTime, {
+}).refine(data => {
+  // Either pace or finish time must be provided and not empty
+  return (data.pace && data.pace.trim() !== '') || (data.finishTime && data.finishTime.trim() !== '');
+}, {
   message: "Either pace or finish time must be provided",
   path: ["pace"] // highlight the pace field if both are missing
 });

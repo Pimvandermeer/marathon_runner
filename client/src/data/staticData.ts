@@ -2,8 +2,21 @@ import { LocationTime, RunnerInput, waveStartTimes, defaultViewingLocations } fr
 
 // Utility function to convert pace (mm:ss) to minutes
 function paceToMinutes(pace: string): number {
-  const [minutes, seconds] = pace.split(':').map(Number);
-  return minutes + seconds / 60;
+  // Handle empty input
+  if (!pace || pace.trim() === '') {
+    return 0;
+  }
+  
+  // Handle different formats
+  if (pace.includes(':')) {
+    const parts = pace.split(':');
+    const minutes = parseInt(parts[0] || '0', 10);
+    const seconds = parseInt(parts[1] || '0', 10);
+    return minutes + seconds / 60;
+  } else {
+    // Try to parse as just minutes
+    return parseInt(pace, 10) || 0;
+  }
 }
 
 // Add time to a base time
@@ -47,10 +60,29 @@ export const marathonLocations = defaultViewingLocations.map((location: any, ind
 
 // Function to calculate pace from target finish time
 function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
+  // Handle empty input
+  if (!finishTime || finishTime.trim() === '') {
+    return "0:00";
+  }
+
   const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
   
   // Parse finish and start times
-  const [finishHours, finishMinutes] = finishTime.split(':').map(Number);
+  let finishHours = 0;
+  let finishMinutes = 0;
+  
+  // Handle different formats (with or without colon)
+  if (finishTime.includes(':')) {
+    const parts = finishTime.split(':');
+    finishHours = parseInt(parts[0] || '0', 10);
+    finishMinutes = parseInt(parts[1] || '0', 10);
+  } else {
+    // Try to parse as number of minutes
+    const totalMinutes = parseInt(finishTime, 10) || 0;
+    finishHours = Math.floor(totalMinutes / 60);
+    finishMinutes = totalMinutes % 60;
+  }
+  
   const [startHours, startMinutes] = startTime.split(':').map(Number);
   
   // Calculate total minutes for run
@@ -76,9 +108,31 @@ function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
 export function calculateRunnerPredictions(runnerInput: RunnerInput) {
   const { wave, pace, finishTime, runnerName, id } = runnerInput;
   
+  // Make sure we have a wave selected
+  if (!wave) {
+    throw new Error("Wave must be selected");
+  }
+
+  console.log("Inputs:", { wave, pace, finishTime });
+
   // Determine pace - either use provided pace or calculate from finish time
-  const effectivePace = pace || (finishTime ? calculatePaceFromFinishTime(wave, finishTime) : "0:00");
+  let effectivePace = "5:30"; // Default pace as fallback (reasonable marathon pace)
+  
+  if (pace && pace.trim() !== '') {
+    effectivePace = pace;
+  } else if (finishTime && finishTime.trim() !== '') {
+    effectivePace = calculatePaceFromFinishTime(wave, finishTime);
+  }
+  
+  console.log("Effective pace:", effectivePace);
+  
   const paceInMinutes = paceToMinutes(effectivePace);
+  
+  // Catch unreasonable pace values
+  if (paceInMinutes <= 0 || paceInMinutes > 15) { // No one runs slower than 15 min/km in a marathon
+    throw new Error("Invalid pace value. Please enter a valid pace or finish time.");
+  }
+  
   const startTime = waveStartTimes[wave as keyof typeof waveStartTimes];
   
   // Create a unique ID if one wasn't provided
