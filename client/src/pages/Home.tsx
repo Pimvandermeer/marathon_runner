@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { calculateRunnerPredictions } from "@/data/staticData";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Define a type for our runner data
 type RunnerData = {
@@ -33,6 +34,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [sharedLinkLoaded, setSharedLinkLoaded] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   // Get the currently selected runner data
   const selectedRunner = runners.find(r => r.id === selectedRunnerId);
@@ -136,9 +138,9 @@ export default function Home() {
       {/* Hero */}
       <div className="bg-gradient-to-r from-blue-500 to-primary rounded-xl overflow-hidden shadow-lg mb-8">
         <div className="px-6 py-10 md:px-10 md:py-16 text-white">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Rotterdam Marathon Supporter Tool</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">{t("app.title")}</h1>
           <p className="text-lg md:text-xl opacity-90 max-w-2xl">
-            Track runners during the marathon by entering their wave and expected pace.
+            {t("app.subtitle")}
           </p>
         </div>
       </div>
@@ -148,7 +150,7 @@ export default function Home() {
       <RouteMap runnerInfo={selectedRunner?.info} />
       
       {/* Runner Information and Timeline */}
-      <h2 className="text-2xl font-bold mb-4">Runner Location Predictions</h2>
+      <h2 className="text-2xl font-bold mb-4">{t("timeline.title")}</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div>
           <RunnerForm onSubmitSuccess={handleSubmitSuccess} />

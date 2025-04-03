@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { formatPaceInput, validatePaceInput } from "@/lib/utils";
 import { calculateRunnerPredictions } from "@/data/staticData";
 import { useMutation } from '@tanstack/react-query'; // Added import
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import {
   Card,
@@ -36,6 +37,7 @@ interface RunnerFormProps {
 
 export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const form = useForm<RunnerInput>({
     resolver: zodResolver(runnerInputSchema),
@@ -162,7 +164,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 name="wave"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Wave</FormLabel>
+                    <FormLabel>{t("form.wave")}</FormLabel>
                     <Select 
                       onValueChange={field.onChange} 
                       defaultValue={field.value}
@@ -194,7 +196,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     onClick={() => handleInputMethodSwitch('pace')}
                     className="flex-1"
                   >
-                    Enter Pace
+                    {t("form.enterPace")}
                   </Button>
                   <Button
                     type="button"
@@ -203,7 +205,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     onClick={() => handleInputMethodSwitch('finish')}
                     className="flex-1"
                   >
-                    Enter Finish Time
+                    {t("form.enterFinishTime")}
                   </Button>
                 </div>
                 
@@ -213,7 +215,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     name="pace"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Expected Pace (min/km)</FormLabel>
+                        <FormLabel>{t("form.pace")}</FormLabel>
                         <div className="relative">
                           <FormControl>
                             <Input 
@@ -240,7 +242,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     name="finishTime"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Target Finish Time (h:mm)</FormLabel>
+                        <FormLabel>{t("form.finishTime")}</FormLabel>
                         <div className="relative">
                           <FormControl>
                             <Input 
@@ -269,7 +271,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 name="runnerName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Runner Name (optional)</FormLabel>
+                    <FormLabel>{t("form.runnerName")}</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter name" {...field} />
                     </FormControl>
@@ -284,7 +286,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 disabled={isCalculating}
               >
                 <Clock className="mr-2 h-4 w-4" />
-                {isCalculating ? 'Calculating...' : 'Calculate Runner Timeline'}
+                {isCalculating ? 'Calculating...' : t("form.calculate")}
               </Button>
             </form>
           </Form>
