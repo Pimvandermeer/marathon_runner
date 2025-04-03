@@ -1,14 +1,31 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import themePlugin from '@replit/vite-plugin-shadcn-theme-json';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Copy theme.json to client directory if it doesn't exist
+try {
+  if (!fs.existsSync(path.resolve(__dirname, './client/theme.json'))) {
+    fs.copyFileSync(
+      path.resolve(__dirname, './theme.json'),
+      path.resolve(__dirname, './client/theme.json')
+    )
+  }
+} catch (error) {
+  console.error('Error handling theme.json:', error)
+}
+
 export default defineConfig({
   base: './',
-  plugins: [react()],
+  plugins: [
+    react(),
+    themePlugin(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './client/src'),
