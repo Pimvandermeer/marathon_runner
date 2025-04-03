@@ -73,10 +73,25 @@ export function formatPaceInput(input: string): string {
       formatted.substring(formatted.lastIndexOf(':') + 1);
   }
   
-  // If there's no colon and the length is 2 or more, add a colon
+  // If there are at least 2 digits and no colon, add a colon after the first digit
   if (colonCount === 0 && formatted.length >= 2) {
-    formatted = formatted.substring(0, formatted.length - 2) + 
-      ':' + formatted.substring(formatted.length - 2);
+    formatted = formatted.substring(0, 1) + 
+      ':' + formatted.substring(1);
+  }
+  
+  // Ensure we have valid minutes:seconds format
+  if (colonCount === 1) {
+    const [minutes, seconds] = formatted.split(':');
+    
+    // If seconds part is more than 2 digits, truncate to 2
+    if (seconds && seconds.length > 2) {
+      formatted = `${minutes}:${seconds.substring(0, 2)}`;
+    }
+    
+    // Add leading zero to seconds if needed
+    if (seconds && seconds.length === 1) {
+      formatted = `${minutes}:${seconds.padStart(2, '0')}`;
+    }
   }
   
   return formatted;

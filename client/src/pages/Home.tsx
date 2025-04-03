@@ -50,36 +50,41 @@ export default function Home() {
     if (wave && pace) {
       setIsLoading(true);
       
-      const runnerInput: RunnerInput = {
-        name: name || 'Shared Runner',
-        wave,
-        pace
-      };
-      
-      calculateRunnerPredictions(runnerInput)
-        .then(result => {
-          if (result) {
-            handleSubmitSuccess(result);
-            setSharedLinkLoaded(true);
-            
-            toast({
-              title: "Shared runner loaded",
-              description: `Runner information has been loaded from a shared link`,
-              variant: "default",
-            });
-          }
-        })
-        .catch(error => {
-          console.error("Error loading shared runner:", error);
+      try {
+        // Validate wave number
+        if (!["1", "2", "3", "4", "5"].includes(wave)) {
+          throw new Error("Invalid wave number");
+        }
+        
+        const runnerInput: RunnerInput = {
+          runnerName: name || 'Shared Runner',
+          wave: wave as "1" | "2" | "3" | "4" | "5",
+          pace
+        };
+        
+        // Calculate predictions
+        const result = calculateRunnerPredictions(runnerInput);
+        
+        if (result) {
+          handleSubmitSuccess(result);
+          setSharedLinkLoaded(true);
+          
           toast({
-            title: "Could not load shared runner",
-            description: "The shared link may be invalid",
-            variant: "destructive",
+            title: "Shared runner loaded",
+            description: `Runner information has been loaded from a shared link`,
+            variant: "default",
           });
-        })
-        .finally(() => {
-          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error loading shared runner:", error);
+        toast({
+          title: "Could not load shared runner",
+          description: "The shared link may be invalid",
+          variant: "destructive",
         });
+      } finally {
+        setIsLoading(false);
+      }
     }
   }, []);
   

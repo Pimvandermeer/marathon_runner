@@ -122,9 +122,10 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="1">Wave 1 - 10:00</SelectItem>
-                        <SelectItem value="2">Wave 2 - 10:15</SelectItem>
-                        <SelectItem value="3">Wave 3 - 10:30</SelectItem>
-                        <SelectItem value="4">Wave 4 - 10:45</SelectItem>
+                        <SelectItem value="2">Wave 2 - 10:07</SelectItem>
+                        <SelectItem value="3">Wave 3 - 10:14</SelectItem>
+                        <SelectItem value="4">Wave 4 - 10:21</SelectItem>
+                        <SelectItem value="5">Wave 5 - 10:28</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
