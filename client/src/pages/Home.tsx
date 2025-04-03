@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
-import MarathonSelector from "@/components/MarathonSelector";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
 import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -169,10 +168,7 @@ export default function Home() {
             {t("app.subtitle")}
           </p>
           
-          {/* Marathon selector in the hero area */}
-          <div className="mt-6">
-            <MarathonSelector />
-          </div>
+          {/* Marathon selector hidden until we support multiple marathons */}
         </div>
       </div>
       
