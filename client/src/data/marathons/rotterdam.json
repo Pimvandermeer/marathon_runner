@@ -39,7 +39,6 @@
     { "distance": 31.6, "name": "Start Bosdreef" },
     { "distance": 35, "name": "35 km" },
     { "distance": 36.1, "name": "Kralingsezoom" },
-    { "distance": 37.6, "name": "Voorschoterlaan" },
     { "distance": 39, "name": "Boezembocht" },
     { "distance": 40, "name": "40 km" },
     { "distance": 42.195, "name": "Finish - Coolsingel" }
@@ -60,8 +59,8 @@
       "description": "First metro stop, easy to reach and close to the start",
       "mapPositionX": 48,
       "mapPositionY": 52,
-      "latitude": 51.906611,
-      "longitude": 4.484722
+      "latitude": 51.907134874685305,
+      "longitude": 4.49027466618363
     },
     {
       "name": "5 km Point",
@@ -87,8 +86,8 @@
       "description": "Metro station for easy access, runners pass by twice",
       "mapPositionX": 30,
       "mapPositionY": 75,
-      "latitude": 51.876737,
-      "longitude": 4.469543
+      "latitude": 51.87467533204975,
+      "longitude": 4.477616676576732
     },
     {
       "name": "Zuidplein/Ahoy (Metrostation)",
@@ -114,8 +113,8 @@
       "description": "Metro station with harbor views",
       "mapPositionX": 35,
       "mapPositionY": 60,
-      "latitude": 51.899167,
-      "longitude": 4.486111
+      "latitude": 51.89716410217264,
+      "longitude": 4.49596733150369
     },
     {
       "name": "25 km Point",
@@ -125,6 +124,15 @@
       "mapPositionY": 55,
       "latitude": 51.901463,
       "longitude": 4.509261
+    },
+    {
+      "name": "Wilhelminaplein (Metrostation)",
+      "kilometer": 26.7,
+      "description": "ℹ️ Schreeuw de lopers de Erasmusbrug over!",
+      "mapPositionX": 42,
+      "mapPositionY": 53,
+      "latitude": 51.907134874685305,
+      "longitude": 4.49027466618363
     },
     {
       "name": "Eendrachtsplein (Metrostation)",
@@ -156,7 +164,7 @@
     {
       "name": "Kralingsezoom (Park & Ride)",
       "kilometer": 36.1,
-      "description": "Parking available, good spot for cheering runners near the final stretch",
+      "description": "Parking available, 5min walking to the route good spot for cheering runners near the final stretch",
       "mapPositionX": 65,
       "mapPositionY": 35,
       "latitude": 51.927500,
