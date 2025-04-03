@@ -43,19 +43,19 @@ export default function MarathonSelector() {
   };
   
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-sm font-medium text-neutral-500">{t("marathon.select")}:</span>
+    <div className="flex items-center gap-3">
+      <span className="text-sm font-medium text-white">{t("marathon.select")}:</span>
       <Select
         value={selectedMarathon.id}
         onValueChange={handleMarathonChange}
         disabled={visibleMarathons.length <= 1}
       >
-        <SelectTrigger className="w-[200px]">
+        <SelectTrigger className="w-[220px] bg-white text-primary-700 font-medium border-none">
           <SelectValue placeholder={t("marathon.selectPlaceholder")} />
         </SelectTrigger>
         <SelectContent>
           {visibleMarathons.map(marathon => (
-            <SelectItem key={marathon.id} value={marathon.id}>
+            <SelectItem key={marathon.id} value={marathon.id} className="font-medium">
               {marathon.name} {marathon.year}
             </SelectItem>
           ))}
