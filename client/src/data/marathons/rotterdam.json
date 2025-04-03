@@ -70,8 +70,8 @@
       "description": "5 km timing point",
       "mapPositionX": 40,
       "mapPositionY": 60,
-      "latitude": 51.9091,
-      "longitude": 4.4858
+      "latitude": 51.896176,
+      "longitude": 4.544836
     },
     {
       "name": "10 km Point",
@@ -79,8 +79,8 @@
       "description": "10 km timing point",
       "mapPositionX": 35,
       "mapPositionY": 70,
-      "latitude": 51.8937,
-      "longitude": 4.5227
+      "latitude": 51.869694,
+      "longitude": 4.524243
     },
     {
       "name": "Slinge (Metrostation)",
@@ -88,8 +88,8 @@
       "description": "Metro station for easy access, runners pass by twice",
       "mapPositionX": 30,
       "mapPositionY": 75,
-      "latitude": 51.8691,
-      "longitude": 4.4851
+      "latitude": 51.876737,
+      "longitude": 4.469543
     },
     {
       "name": "Zuidplein/Ahoy (Metrostation)",
@@ -106,8 +106,8 @@
       "description": "The halfway point with timing mats and photographers",
       "mapPositionX": 25,
       "mapPositionY": 70,
-      "latitude": 51.9070,
-      "longitude": 4.4660
+      "latitude": 51.883121,
+      "longitude": 4.471002
     },
     {
       "name": "Maashaven (Metrostation)",
@@ -117,6 +117,15 @@
       "mapPositionY": 60,
       "latitude": 51.8986,
       "longitude": 4.4867
+    },
+    {
+      "name": "25 km Point",
+      "kilometer": 25,
+      "description": "25 km timing point",
+      "mapPositionX": 40,
+      "mapPositionY": 55,
+      "latitude": 51.901463,
+      "longitude": 4.509261
     },
     {
       "name": "Eendrachtsplein (Metrostation)",
@@ -133,8 +142,17 @@
       "description": "30 km timing point",
       "mapPositionX": 40,
       "mapPositionY": 45,
-      "latitude": 51.9125,
-      "longitude": 4.4719
+      "latitude": 51.925885,
+      "longitude": 4.494956
+    },
+    {
+      "name": "35 km Point",
+      "kilometer": 35, 
+      "description": "35 km timing point", 
+      "mapPositionX": 60, 
+      "mapPositionY": 35, 
+      "latitude": 51.939257, 
+      "longitude": 4.529788
     },
     {
       "name": "Kralingsezoom (Park & Ride)",
@@ -169,8 +187,8 @@
       "description": "Last timing point before the finish, runners are giving their final push",
       "mapPositionX": 55,
       "mapPositionY": 45,
-      "latitude": 51.9249,
-      "longitude": 4.4903
+      "latitude": 51.925882,
+      "longitude": 4.493712
     },
     {
       "name": "Finish (Metrostation)",
