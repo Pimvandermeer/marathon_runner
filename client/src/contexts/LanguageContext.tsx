@@ -16,7 +16,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 // English translations
 const enTranslations: Record<string, string> = {
   // Page titles and general UI
-  "app.title": "Marathon Tracker",
+  "app.title": "Marathon Supporter Tracker",
   "app.subtitle": "Help supporters track their runners",
   "app.coming_soon": "Currently configured for Rotterdam Marathon. Support for Amsterdam and other marathons coming soon!",
   "app.runner_share": "Runners: Share this tool with your supporters to help them track you during the race!",
@@ -153,7 +153,7 @@ const enTranslations: Record<string, string> = {
 // Dutch translations
 const nlTranslations: Record<string, string> = {
   // Page titles and general UI
-  "app.title": "Marathon Volger",
+  "app.title": "Marathon Supporter Tracker",
   "app.subtitle": "Help supporters hun lopers te volgen",
   "app.coming_soon": "Momenteel geconfigureerd voor Rotterdam Marathon. Ondersteuning voor Amsterdam en andere marathons komt binnenkort!",
   "app.runner_share": "Lopers: Deel deze tool met je supporters om hen te helpen je te volgen tijdens de race!",
