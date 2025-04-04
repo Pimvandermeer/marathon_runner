@@ -11,12 +11,41 @@ interface LocationItemProps {
 }
 
 export default function LocationItem({ location, isFinish = false, expectedTime }: LocationItemProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // Calculate time difference if expected time is provided
   const timeDiff = expectedTime && location.estimatedTime 
     ? formatTimeDifference(expectedTime, location.estimatedTime)
     : null;
+    
+  // Handle location description translation for Rotterdam
+  // Only needed for locations that have been manually translated
+  const getLocalizedDescription = () => {
+    if (!location.description) return "";
+    
+    // Special case for Rotterdam landmarks that have been translated
+    if (language === "en") {
+      // For English, map the Dutch descriptions back to English
+      switch (location.description) {
+        case "Het startgebied van de marathon nabij het Stadhuis Rotterdam":
+          return "The starting area of the marathon near Rotterdam City Hall";
+        case "Eerste metrohalte, makkelijk te bereiken en dicht bij de start":
+          return "First metro stop, easy to reach and close to the start";
+        case "Het halverwege punt met timing matten en fotografen":
+          return "The halfway point with timing mats and photographers";
+        case "Schreeuw de lopers de Erasmusbrug over!":
+          return "Shout to the runners across the Erasmus Bridge!";
+        case "Laatste timing punt voor de finish, lopers geven hun laatste krachten":
+          return "Last timing point before the finish, runners are giving their final push";
+        case "Spannend finishgebied met tribunes":
+          return "Exciting finish area with grandstands";
+        default:
+          return location.description;
+      }
+    }
+    
+    return location.description;
+  };
 
   return (
     <div className="location-item p-2 sm:p-3 rounded-lg border border-neutral-100 hover:border-neutral-200 hover:shadow-sm transition-all duration-200 bg-white">
@@ -39,7 +68,7 @@ export default function LocationItem({ location, isFinish = false, expectedTime 
             <span className="bg-neutral-100 px-2 py-0.5 rounded-md inline-block mr-2">
               {location.kilometer.toFixed(1)} km
             </span>
-            {location.description && location.description}
+            {location.description && getLocalizedDescription()}
           </p>
           
           {/* Time difference indicator */}

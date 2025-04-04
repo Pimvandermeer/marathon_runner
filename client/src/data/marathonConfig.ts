@@ -29,7 +29,10 @@ export interface MarathonConfig {
     latitude: number;
     longitude: number;
   }>;
-  spectatorTips: string[];
+  spectatorTips: string[] | {
+    en: string[];
+    nl: string[];
+  };
 }
 
 // Import the marathon configurations
@@ -84,7 +87,17 @@ export function getMarathonLandmarks(): Array<{ distance: number; name: string }
   return getCurrentMarathon().marathonLandmarks;
 }
 
-// Get spectator tips for current marathon
-export function getSpectatorTips(): string[] {
-  return getCurrentMarathon().spectatorTips;
+// Get spectator tips for current marathon in the specified language
+export function getSpectatorTips(language: string = 'en'): string[] {
+  const tips = getCurrentMarathon().spectatorTips;
+  
+  // Check if tips are language-specific (use type guard)
+  if (Array.isArray(tips)) {
+    // Tips are just a simple array, return as is
+    return tips;
+  } else {
+    // Tips are language-specific, return for the selected language or fallback to English
+    const languageKey = language as keyof typeof tips;
+    return tips[languageKey] || tips.en;
+  }
 }

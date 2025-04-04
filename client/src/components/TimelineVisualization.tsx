@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { formatDistance, timeStringToMinutes, getPaceTrend } from "@/lib/utils";
-import { marathonLandmarks } from "@shared/schema";
 import { Timer, Flag, Clock, MapPin, TrendingUp, TrendingDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getMarathonLandmarks } from "@/data/marathonConfig";
 
 interface TimelineVisualizationProps {
   currentPosition: number;
@@ -29,19 +29,37 @@ export default function TimelineVisualization({
     : 'on-target';
   
   useEffect(() => {
-    // Create markers based on marathon landmarks
-    const newMarkers = marathonLandmarks.map(landmark => {
+    // Get landmarks from the current marathon configuration
+    const landmarks = getMarathonLandmarks();
+    
+    // Create markers based on marathon landmarks with translations if necessary
+    const newMarkers = landmarks.map(landmark => {
       const position = (landmark.distance / 42.195) * 100;
+      
+      // Translate specific landmark names if needed
+      let translatedName = landmark.name;
+      
+      // Apply translations for special landmark names
+      if (landmark.name.toLowerCase().includes("start")) {
+        translatedName = landmark.name.replace(/start/i, t("landmarks.start"));
+      } else if (landmark.name.toLowerCase().includes("finish")) {
+        translatedName = landmark.name.replace(/finish/i, t("landmarks.finish"));
+      } else if (landmark.name.toLowerCase().includes("halve marathon")) {
+        translatedName = t("landmarks.halfMarathon");
+      } else if (landmark.distance === 21.1 && landmark.name.toLowerCase().includes("half marathon")) {
+        translatedName = t("landmarks.halfMarathon");
+      }
+      
       return {
         distance: landmark.distance,
         position,
-        name: landmark.name,
+        name: translatedName,
         active: currentPosition >= landmark.distance - 0.5 && currentPosition <= landmark.distance + 0.5
       };
     });
     
     setMarkers(newMarkers);
-  }, [currentPosition]);
+  }, [currentPosition, t]);
   
   return (
     <div className="relative mb-8 px-2">
@@ -91,7 +109,7 @@ export default function TimelineVisualization({
       
       {/* Distance labels - properly positioned under the timeline */}
       <div className="flex justify-between text-xs font-medium text-neutral-600 absolute w-full -bottom-6 left-0">
-        {marathonLandmarks.map((landmark, index) => (
+        {getMarathonLandmarks().map((landmark, index) => (
           <div 
             key={index} 
             className="absolute transform -translate-x-1/2 text-center"

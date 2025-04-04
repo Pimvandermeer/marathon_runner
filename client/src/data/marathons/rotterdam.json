@@ -47,7 +47,7 @@
     {
       "name": "Start (Metrostation)",
       "kilometer": 0,
-      "description": "The starting area of the marathon near Rotterdam City Hall",
+      "description": "Het startgebied van de marathon nabij het Stadhuis Rotterdam",
       "mapPositionX": 50,
       "mapPositionY": 50,
       "latitude": 51.9226,
@@ -56,7 +56,7 @@
     {
       "name": "Wilhelminaplein (Metrostation)",
       "kilometer": 1,
-      "description": "First metro stop, easy to reach and close to the start",
+      "description": "Eerste metrohalte, makkelijk te bereiken en dicht bij de start",
       "mapPositionX": 48,
       "mapPositionY": 52,
       "latitude": 51.907134874685305,
@@ -101,7 +101,7 @@
     {
       "name": "Halve Marathon Point",
       "kilometer": 21.1,
-      "description": "The halfway point with timing mats and photographers",
+      "description": "Het halverwege punt met timing matten en fotografen",
       "mapPositionX": 25,
       "mapPositionY": 70,
       "latitude": 51.883121,
@@ -128,7 +128,7 @@
     {
       "name": "Wilhelminaplein (Metrostation)",
       "kilometer": 26.7,
-      "description": "Shout to the runners across the Erasmus Bridge!",
+      "description": "Schreeuw de lopers de Erasmusbrug over!",
       "mapPositionX": 42,
       "mapPositionY": 53,
       "latitude": 51.907134874685305,
@@ -173,7 +173,7 @@
     {
       "name": "40 km Point",
       "kilometer": 40,
-      "description": "Last timing point before the finish, runners are giving their final push",
+      "description": "Laatste timing punt voor de finish, lopers geven hun laatste krachten",
       "mapPositionX": 55,
       "mapPositionY": 45,
       "latitude": 51.925882,
@@ -182,21 +182,33 @@
     {
       "name": "Finish (Metrostation)",
       "kilometer": 42.195,
-      "description": "Exciting finish area with grandstands",
+      "description": "Spannend finishgebied met tribunes",
       "mapPositionX": 50,
       "mapPositionY": 50,
       "latitude": 51.9226,
       "longitude": 4.476944
     }
   ],
-  "spectatorTips": [
-    "Use the metro stations (Ⓜ️) as primary viewing spots - they offer easy access and good places to watch",
-    "Purchase a RET day ticket for unlimited metro travel between viewing locations",
-    "Consider using the Park & Ride (🅿️) at Kralingsezoom if coming by car - it's near the 36km mark",
-    "Runners pass Slinge metro station twice (at 13.1km and 15.8km) - perfect for seeing your runner twice with minimal movement",
-    "Good metro strategy: Start → Wilhelminaplein (1km) → Zuidplein (18.6km) → Kralingsezoom (36.1km) → Finish",
-    "The finish area at Coolsingel gets extremely crowded - arrive at least 45 minutes early",
-    "For the fastest runners, view expected passing times in the '<' column; for average runners use the '=' column; and for slower runners use the '>' column in the timetable",
-    "Download the official NN Marathon Rotterdam app for real-time tracking"
-  ]
+  "spectatorTips": {
+    "en": [
+      "Use the metro stations (Ⓜ️) as primary viewing spots - they offer easy access and good places to watch",
+      "Purchase a RET day ticket for unlimited metro travel between viewing locations",
+      "Consider using the Park & Ride (🅿️) at Kralingsezoom if coming by car - it's near the 36km mark",
+      "Runners pass Slinge metro station twice (at 13.1km and 15.8km) - perfect for seeing your runner twice with minimal movement",
+      "Good metro strategy: Start → Wilhelminaplein (1km) → Zuidplein (18.6km) → Kralingsezoom (36.1km) → Finish",
+      "The finish area at Coolsingel gets extremely crowded - arrive at least 45 minutes early",
+      "For the fastest runners, view expected passing times in the '<' column; for average runners use the '=' column; and for slower runners use the '>' column in the timetable",
+      "Download the official NN Marathon Rotterdam app for real-time tracking"
+    ],
+    "nl": [
+      "Gebruik metrostations (Ⓜ️) als primaire kijkplekken - ze bieden gemakkelijke toegang en goede plekken om te kijken",
+      "Koop een RET-dagkaart voor onbeperkt metroreizen tussen kijklocaties",
+      "Overweeg de Park & Ride (🅿️) bij Kralingsezoom als je met de auto komt - het is vlakbij de 36km-markering",
+      "Lopers passeren metrostation Slinge twee keer (bij 13,1 km en 15,8 km) - perfect om je loper twee keer te zien met minimale verplaatsing",
+      "Goede metrostrategie: Start → Wilhelminaplein (1km) → Zuidplein (18,6km) → Kralingsezoom (36,1km) → Finish",
+      "Het finishgebied bij de Coolsingel wordt extreem druk - kom minstens 45 minuten eerder aan",
+      "Voor de snelste lopers, bekijk verwachte passeertijden in de '<' kolom; voor gemiddelde lopers gebruik de '=' kolom; en voor langzamere lopers gebruik de '>' kolom in het tijdschema",
+      "Download de officiële NN Marathon Rotterdam app voor real-time tracking"
+    ]
+  }
 }

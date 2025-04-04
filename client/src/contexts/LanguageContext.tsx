@@ -130,6 +130,12 @@ const enTranslations: Record<string, string> = {
   "marathon.info.transport": "Transport Information",
   "marathon.info.timezone": "Timezone",
   
+  // Marathon landmarks
+  "landmarks.start": "Start",
+  "landmarks.finish": "Finish",
+  "landmarks.halfMarathon": "Half Marathon",
+  "landmarks.km": "km",
+  
   // Share dialog
   "share.title": "Share Run",
   "share.button": "Share Run",
@@ -260,6 +266,12 @@ const nlTranslations: Record<string, string> = {
   "marathon.info.country": "Land",
   "marathon.info.transport": "Vervoersinformatie",
   "marathon.info.timezone": "Tijdzone",
+  
+  // Marathon landmarks
+  "landmarks.start": "Start",
+  "landmarks.finish": "Finish",
+  "landmarks.halfMarathon": "Halve Marathon",
+  "landmarks.km": "km",
   
   // Share dialog
   "share.title": "Deel Loop",

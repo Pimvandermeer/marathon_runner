@@ -109,12 +109,22 @@
       "longitude": 4.8542
     }
   ],
-  "spectatorTips": [
-    "Arrive at viewing spots 15-20 minutes before your runner is expected",
-    "Use public transport or bicycle between viewing locations",
-    "Consider using the city's bike-sharing service to navigate quickly",
-    "The area around the Olympic Stadium gets very crowded - arrive early",
-    "Bring an umbrella as Amsterdam weather can be unpredictable",
-    "Some good spots to see your runner multiple times: Vondelpark and Museumplein"
-  ]
+  "spectatorTips": {
+    "en": [
+      "Arrive at viewing spots 15-20 minutes before your runner is expected",
+      "Use public transport or bicycle between viewing locations",
+      "Consider using the city's bike-sharing service to navigate quickly",
+      "The area around the Olympic Stadium gets very crowded - arrive early",
+      "Bring an umbrella as Amsterdam weather can be unpredictable",
+      "Some good spots to see your runner multiple times: Vondelpark and Museumplein"
+    ],
+    "nl": [
+      "Kom 15-20 minuten voor de verwachte aankomst van je loper naar de kijkpunten",
+      "Gebruik het openbaar vervoer of fiets tussen de kijklocaties",
+      "Overweeg het gebruik van de deelfietsen in de stad om je snel te verplaatsen",
+      "Het gebied rond het Olympisch Stadion wordt zeer druk - kom vroeg",
+      "Neem een paraplu mee want het weer in Amsterdam kan onvoorspelbaar zijn",
+      "Goede plekken om je loper meerdere keren te zien: Vondelpark en Museumplein"
+    ]
+  }
 }

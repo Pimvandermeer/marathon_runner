@@ -3,8 +3,8 @@ import { getSpectatorTips } from "@/data/marathonConfig";
 import { LightbulbIcon } from "lucide-react";
 
 export default function SpectatorTips() {
-  const { t } = useLanguage();
-  const tips = getSpectatorTips();
+  const { t, language } = useLanguage();
+  const tips = getSpectatorTips(language);
   
   if (!tips || tips.length === 0) return null;
   
