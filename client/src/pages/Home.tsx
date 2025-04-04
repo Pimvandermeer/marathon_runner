@@ -185,8 +185,9 @@ export default function Home() {
       {/* Runner Information and Timeline */}
       <h2 className={`${runners.length > 0 ? 'text-xl' : 'text-2xl'} font-bold mb-4 transition-all duration-300`}>{t("timeline.title")}</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div>
-          <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
+        {/* This order is for desktop view - left column contains form and runners list */}
+        <div className="order-1 lg:order-1">
+          <div className={`${runners.length > 0 ? "scale-95 transform origin-top" : ""} ${runners.length > 0 ? "md:block hidden" : "block"}`}>
             <RunnerForm onSubmitSuccess={handleSubmitSuccess} />
           </div>
           
@@ -233,7 +234,8 @@ export default function Home() {
           )}
         </div>
         
-        <div className="lg:col-span-2">
+        {/* This is the main timeline section - for mobile it appears first */}
+        <div className="order-2 lg:order-2 lg:col-span-2">
           {selectedRunner ? (
             <Timeline 
               runnerInfo={selectedRunner.info}
@@ -266,6 +268,16 @@ export default function Home() {
             </Card>
           )}
         </div>
+        
+        {/* Mobile-only form section at the bottom when runners are added */}
+        {runners.length > 0 && (
+          <div className="order-3 lg:hidden mt-4">
+            <h3 className="text-lg font-medium mb-3">Add Another Runner</h3>
+            <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
+              <RunnerForm onSubmitSuccess={handleSubmitSuccess} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
