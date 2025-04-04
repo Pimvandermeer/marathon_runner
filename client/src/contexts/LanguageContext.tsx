@@ -66,6 +66,7 @@ const enTranslations: Record<string, string> = {
   "timeline.time": "Time",
   "timeline.estimated": "Estimated",
   "timeline.km": "km",
+  "timeline.toFinish": "to finish",
 
   // Current status
   "status.title": "Current Status",
@@ -196,6 +197,7 @@ const nlTranslations: Record<string, string> = {
   "timeline.time": "Tijd",
   "timeline.estimated": "Geschat",
   "timeline.km": "km",
+  "timeline.toFinish": "tot finish",
 
   // Current status
   "status.title": "Huidige Status",
