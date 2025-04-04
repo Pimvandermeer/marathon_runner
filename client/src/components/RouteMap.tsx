@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { getCurrentMarathon } from '@/data/marathonConfig';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-export default function RouteMap() {
+interface RouteMapProps {
+  hasRunners?: boolean;
+}
+
+export default function RouteMap({ hasRunners = false }: RouteMapProps) {
   const { t } = useLanguage();
   const [isMapEnlarged, setIsMapEnlarged] = useState(false);
   const marathon = getCurrentMarathon();
@@ -13,7 +17,7 @@ export default function RouteMap() {
   
   return (
     <div className="relative mt-4 mb-8">
-      <h2 className="text-xl font-semibold mb-2">{t('map.title')}</h2>
+      <h2 className={`${hasRunners ? 'text-lg' : 'text-xl'} font-semibold mb-2 transition-all duration-300`}>{t('map.title')}</h2>
       
       {/* Background overlay when map is enlarged */}
       {isMapEnlarged && (

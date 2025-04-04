@@ -162,24 +162,28 @@ export default function Home() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero */}
       <div className="bg-gradient-to-r from-blue-500 to-primary rounded-xl overflow-hidden shadow-lg mb-8">
-        <div className="px-6 py-10 md:px-10 md:py-16 text-white">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">{t("app.title")}</h1>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl mb-3">
+        <div className={`px-6 ${runners.length > 0 ? 'py-6 md:py-8' : 'py-10 md:py-16'} text-white transition-all duration-300`}>
+          <h1 className={`${runners.length > 0 ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'} font-bold ${runners.length > 0 ? 'mb-2' : 'mb-3'} transition-all duration-300`}>
+            {t("app.title")}
+          </h1>
+          <p className={`${runners.length > 0 ? 'text-md md:text-lg' : 'text-lg md:text-xl'} opacity-90 max-w-2xl ${runners.length > 0 ? 'mb-1' : 'mb-3'} transition-all duration-300`}>
             {t("app.subtitle")}
           </p>
-          <p className="text-md opacity-80 max-w-2xl mb-5">
-            Runners: Share this tool with your supporters to help them track you during the race!
-          </p>
+          {runners.length === 0 && (
+            <p className="text-md opacity-80 max-w-2xl mb-5">
+              Runners: Share this tool with your supporters to help them track you during the race!
+            </p>
+          )}
           
           {/* Marathon selector hidden until we support multiple marathons */}
         </div>
       </div>
       
       {/* Marathon Route Map */}
-      <RouteMap />
+      <RouteMap hasRunners={runners.length > 0} />
       
       {/* Runner Information and Timeline */}
-      <h2 className="text-2xl font-bold mb-4">{t("timeline.title")}</h2>
+      <h2 className={`${runners.length > 0 ? 'text-xl' : 'text-2xl'} font-bold mb-4 transition-all duration-300`}>{t("timeline.title")}</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div>
           <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
