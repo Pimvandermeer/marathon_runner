@@ -171,10 +171,14 @@ export default function Home() {
             {t("app.subtitle")}
           </p>
           {runners.length === 0 && (
-            <p className="text-md opacity-80 max-w-2xl mb-5">
+            <p className="text-md opacity-80 max-w-2xl mb-3">
               Runners: Share this tool with your supporters to help them track you during the race!
             </p>
           )}
+          
+          <p className={`text-sm opacity-70 max-w-2xl ${runners.length > 0 ? 'mb-2' : 'mb-3'}`}>
+            {t("app.coming_soon")}
+          </p>
           
           {/* Marathon selector hidden until we support multiple marathons */}
         </div>

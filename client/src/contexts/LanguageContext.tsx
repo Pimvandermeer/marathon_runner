@@ -18,6 +18,7 @@ const enTranslations: Record<string, string> = {
   // Page titles and general UI
   "app.title": "Marathon Tracker",
   "app.subtitle": "Help supporters track their runners",
+  "app.coming_soon": "Currently configured for Rotterdam Marathon. Support for Amsterdam and other marathons coming soon!",
 
   // Form labels and buttons
   "form.runnerName": "Runner name",
@@ -112,6 +113,7 @@ const nlTranslations: Record<string, string> = {
   // Page titles and general UI
   "app.title": "Marathon Volger",
   "app.subtitle": "Help supporters hun lopers te volgen",
+  "app.coming_soon": "Momenteel geconfigureerd voor Rotterdam Marathon. Ondersteuning voor Amsterdam en andere marathons komt binnenkort!",
 
   // Form labels and buttons
   "form.runnerName": "Naam loper",
