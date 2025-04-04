@@ -64,8 +64,44 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   };
 
   const handlePaceChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
-    const formattedValue = formatPaceInput(e.target.value);
-    onChange(formattedValue);
+    // First, use basic formatting to handle colons and non-numeric characters
+    let value = e.target.value.replace(/[^0-9:]/g, '');
+    
+    // Only allow one colon
+    const colonCount = (value.match(/:/g) || []).length;
+    if (colonCount > 1) {
+      value = value.substring(0, value.lastIndexOf(':')) + 
+        value.substring(value.lastIndexOf(':') + 1);
+    }
+    
+    // Add colon after first digit if there are at least 2 digits and no colon yet
+    if (colonCount === 0 && value.length >= 2) {
+      value = value.substring(0, 1) + ':' + value.substring(1);
+    }
+    
+    // Handle the seconds part
+    if (colonCount === 1) {
+      const parts = value.split(':');
+      const minutes = parts[0];
+      let seconds = parts[1] || '';
+      
+      // If seconds part is more than 2 digits, truncate to 2
+      if (seconds.length > 2) {
+        seconds = seconds.substring(0, 2);
+      }
+      
+      // Handle single-digit seconds - don't convert, just accept valid input
+      if (seconds.length === 1 && parseInt(seconds) > 5) {
+        // If it's a single digit and greater than 5, it's invalid for seconds (> 59)
+        // So we drop it and keep only the minutes
+        value = minutes + ':';
+      } else {
+        // Otherwise keep it as is, without auto-completion
+        value = minutes + ':' + seconds;
+      }
+    }
+    
+    onChange(value);
   };
   
   const handleFinishTimeChange = (e: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
@@ -84,20 +120,29 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
       value = value.substring(0, 1) + ':' + value.substring(1);
     }
     
-    // Format seconds part if needed
+    // Format minutes part if needed
     if (colonCount === 1) {
-      const [hours, minutes] = value.split(':');
+      const parts = value.split(':');
+      const hours = parts[0];
+      let minutes = parts[1] || '';
       
       // If minutes part is more than 2 digits, truncate to 2
-      if (minutes && minutes.length > 2) {
-        value = `${hours}:${minutes.substring(0, 2)}`;
+      if (minutes.length > 2) {
+        minutes = minutes.substring(0, 2);
       }
       
-      // Don't auto-pad with zeros during input
-      // We'll handle proper formatting when form is submitted
+      // Handle single-digit minutes - don't convert, just accept valid input
+      if (minutes.length === 1 && parseInt(minutes) > 5) {
+        // If it's a single digit and greater than 5, it's still valid for minutes (< 60)
+        // For consistency with pace input, we'll keep it as is
+        value = hours + ':' + minutes;
+      } else {
+        // Otherwise keep it as is, without auto-completion
+        value = hours + ':' + minutes;
+      }
     }
     
-    // Limit to max of 4 characters (h:mm or hh:m)
+    // Limit to max of 4 characters (h:mm or hh:m) for raw digits
     if (value.length > 4 && !value.includes(':')) {
       value = value.substring(0, 4);
     } else if (value.length > 5) {
@@ -128,30 +173,44 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
 
       // Ensure proper formatting for pace and finish time
       if (data.pace) {
-        // Format pace to ensure mm:ss format
-        const [minutes, seconds] = data.pace.split(':').map(Number);
-        if (!isNaN(minutes)) {
-          if (seconds === undefined || isNaN(seconds)) {
-            // If only minutes are provided, keep it as is (e.g., "5:" or just "5")
-            data.pace = data.pace;
-          } else {
-            // Format with seconds properly padded
-            data.pace = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-          }
+        // Check if the pace has the correct format (mm:ss)
+        const paceParts = data.pace.split(':');
+        if (paceParts.length < 2 || paceParts[1] === '') {
+          // If there's no seconds part or it's empty, add :00
+          data.pace = paceParts[0] + ':00';
+        } else if (paceParts[1].length === 1) {
+          // If seconds is a single digit, reject the input
+          toast({
+            title: "Input Error",
+            description: "Please enter seconds as a two-digit number (e.g., 4:30 not 4:3)",
+            variant: "destructive",
+          });
+          throw new Error("Invalid pace format. Please use mm:ss format with two digits for seconds.");
+        } else {
+          // Format with seconds properly padded
+          const [minutes, seconds] = paceParts.map(Number);
+          data.pace = `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
       }
 
       if (data.finishTime) {
-        // Format finish time to ensure h:mm format
-        const [hours, minutes] = data.finishTime.split(':').map(Number);
-        if (!isNaN(hours)) {
-          if (minutes === undefined || isNaN(minutes)) {
-            // If only hours are provided, keep it as is (e.g., "4:" or just "4")
-            data.finishTime = data.finishTime;
-          } else {
-            // Format with minutes properly padded
-            data.finishTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
-          }
+        // Check if the finish time has the correct format (h:mm)
+        const timeParts = data.finishTime.split(':');
+        if (timeParts.length < 2 || timeParts[1] === '') {
+          // If there's no minutes part or it's empty, add :00
+          data.finishTime = timeParts[0] + ':00';
+        } else if (timeParts[1].length === 1) {
+          // If minutes is a single digit, reject the input
+          toast({
+            title: "Input Error",
+            description: "Please enter minutes as a two-digit number (e.g., 4:30 not 4:3)",
+            variant: "destructive",
+          });
+          throw new Error("Invalid time format. Please use h:mm format with two digits for minutes.");
+        } else {
+          // Format with minutes properly padded
+          const [hours, minutes] = timeParts.map(Number);
+          data.finishTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
         }
       }
 
@@ -247,7 +306,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                         <div className="relative">
                           <FormControl>
                             <Input 
-                              placeholder="e.g. 5:30" 
+                              placeholder="Example: 5:30" 
                               {...field} 
                               onChange={(e) => handlePaceChange(e, field.onChange)}
                               className="font-mono"
@@ -274,7 +333,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                         <div className="relative">
                           <FormControl>
                             <Input 
-                              placeholder="e.g. 4:30" 
+                              placeholder="Example: 4:30" 
                               {...field} 
                               onChange={(e) => handleFinishTimeChange(e, field.onChange)}
                               className="font-mono"
