@@ -88,10 +88,8 @@ export function formatPaceInput(input: string): string {
       formatted = `${minutes}:${seconds.substring(0, 2)}`;
     }
     
-    // Add leading zero to seconds if needed
-    if (seconds && seconds.length === 1) {
-      formatted = `${minutes}:${seconds.padStart(2, '0')}`;
-    }
+    // Don't auto-complete with zeros unless form is being submitted
+    // This allows the user to type the full value
   }
   
   return formatted;

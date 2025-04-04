@@ -93,10 +93,8 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         value = `${hours}:${minutes.substring(0, 2)}`;
       }
       
-      // Add leading zero to minutes if needed
-      if (minutes && minutes.length === 1) {
-        value = `${hours}:${minutes.padStart(2, '0')}`;
-      }
+      // Don't auto-pad with zeros during input
+      // We'll handle proper formatting when form is submitted
     }
     
     // Limit to max of 4 characters (h:mm or hh:m)
@@ -126,6 +124,35 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
       // Validate the wave is selected
       if (!data.wave) {
         throw new Error("Wave must be selected");
+      }
+
+      // Ensure proper formatting for pace and finish time
+      if (data.pace) {
+        // Format pace to ensure mm:ss format
+        const [minutes, seconds] = data.pace.split(':').map(Number);
+        if (!isNaN(minutes)) {
+          if (seconds === undefined || isNaN(seconds)) {
+            // If only minutes are provided, keep it as is (e.g., "5:" or just "5")
+            data.pace = data.pace;
+          } else {
+            // Format with seconds properly padded
+            data.pace = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+          }
+        }
+      }
+
+      if (data.finishTime) {
+        // Format finish time to ensure h:mm format
+        const [hours, minutes] = data.finishTime.split(':').map(Number);
+        if (!isNaN(hours)) {
+          if (minutes === undefined || isNaN(minutes)) {
+            // If only hours are provided, keep it as is (e.g., "4:" or just "4")
+            data.finishTime = data.finishTime;
+          } else {
+            // Format with minutes properly padded
+            data.finishTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
+          }
+        }
       }
 
       console.log("Calculating predictions with:", data);
