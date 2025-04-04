@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getCurrentMarathon } from '@/data/marathonConfig';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ZoomableImage } from './ZoomableImage';
 
 interface RouteMapProps {
   hasRunners?: boolean;
@@ -42,12 +43,20 @@ export default function RouteMap({ hasRunners = false }: RouteMapProps) {
           </button>
         )}
         
-        <img 
-          src={marathon.routeMap} 
-          alt={`${marathon.name} route map`} 
-          className="w-full h-full object-contain p-2 cursor-pointer hover:opacity-95 transition-opacity"
-          onClick={toggleMapSize}
-        />
+        {isMapEnlarged ? (
+          <ZoomableImage 
+            src={marathon.routeMap} 
+            alt={`${marathon.name} route map`} 
+            className="w-full h-full p-2"
+          />
+        ) : (
+          <img 
+            src={marathon.routeMap} 
+            alt={`${marathon.name} route map`} 
+            className="w-full h-full object-contain p-2 cursor-pointer hover:opacity-95 transition-opacity"
+            onClick={toggleMapSize}
+          />
+        )}
       </div>
       
       <div className="flex justify-end mt-2">

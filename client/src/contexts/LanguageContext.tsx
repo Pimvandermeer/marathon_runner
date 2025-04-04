@@ -84,6 +84,10 @@ const enTranslations: Record<string, string> = {
   "map.title": "Marathon Route Map",
   "map.enlarge": "Enlarge map",
   "map.shrink": "Shrink map",
+  "map.zoom_in": "Zoom in",
+  "map.zoom_out": "Zoom out",
+  "map.reset": "Reset view",
+  "map.double_tap": "Double-tap to zoom",
   
   // Marathon info
   "marathon.info.title": "Marathon Information",
@@ -179,6 +183,10 @@ const nlTranslations: Record<string, string> = {
   "map.title": "Marathon Routekaart",
   "map.enlarge": "Vergroot kaart",
   "map.shrink": "Verklein kaart",
+  "map.zoom_in": "Inzoomen",
+  "map.zoom_out": "Uitzoomen",
+  "map.reset": "Weergave resetten",
+  "map.double_tap": "Dubbeltik om te zoomen",
   
   // Marathon info
   "marathon.info.title": "Marathon Informatie",
