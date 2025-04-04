@@ -45,9 +45,9 @@ export default function TimelineVisualization({
   
   return (
     <div className="relative mb-8 px-2">
-      <div className="mb-4 flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-neutral-800">Runner Progress</h3>
-        <div className="text-sm text-neutral-500">
+      <div className="mb-2 sm:mb-4 flex justify-between items-center">
+        <h3 className="text-base sm:text-lg font-semibold text-neutral-800">{t("timeline.title")}</h3>
+        <div className="text-xs sm:text-sm text-neutral-500">
           {formatDistance(currentPosition)} of {formatDistance(42.195)}
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function TimelineVisualization({
       
       {/* Pace trend indicator (only shown if we have pace data) */}
       {expectedPace && actualPace && (
-        <div className={`flex items-center justify-center p-3 mb-4 rounded-lg shadow-sm text-white ${
+        <div className={`flex items-center justify-center p-2 sm:p-3 mb-4 rounded-lg shadow-sm text-white ${
           paceTrend === 'faster' ? 'bg-green-500' 
           : paceTrend === 'slower' ? 'bg-orange-500' 
           : 'bg-blue-500'
@@ -115,23 +115,23 @@ export default function TimelineVisualization({
           <div className="flex items-center">
             {paceTrend === 'faster' ? (
               <>
-                <TrendingUp className="h-5 w-5 mr-2" />
-                <span className="font-medium">
-                  Runner is ahead of pace ({actualPace} min/km vs expected {expectedPace} min/km)
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="text-xs sm:text-base font-medium">
+                  {`${t("pace.aheadMessage")} (${actualPace} min/km ${t("pace.vs")} ${expectedPace} min/km)`}
                 </span>
               </>
             ) : paceTrend === 'slower' ? (
               <>
-                <TrendingDown className="h-5 w-5 mr-2" />
-                <span className="font-medium">
-                  Runner is behind pace ({actualPace} min/km vs expected {expectedPace} min/km)
+                <TrendingDown className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="text-xs sm:text-base font-medium">
+                  {`${t("pace.behindMessage")} (${actualPace} min/km ${t("pace.vs")} ${expectedPace} min/km)`}
                 </span>
               </>
             ) : (
               <>
-                <Clock className="h-5 w-5 mr-2" />
-                <span className="font-medium">
-                  Runner is on target pace ({actualPace} min/km)
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="text-xs sm:text-base font-medium">
+                  {`${t("pace.onTargetMessage")} (${actualPace} min/km)`}
                 </span>
               </>
             )}
@@ -140,36 +140,36 @@ export default function TimelineVisualization({
       )}
     
       {/* Stats cards with improved styling and icons */}
-      <div className="grid grid-cols-3 gap-4 mt-16">
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200 shadow-sm">
-          <div className="flex items-center mb-2">
-            <Flag className="h-4 w-4 text-blue-600 mr-2" />
-            <span className="text-sm font-medium text-blue-800">{t("timeline.distanceToGo")}</span>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-12 sm:mt-16">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-3 sm:p-4 border border-blue-200 shadow-sm">
+          <div className="flex items-center mb-1 sm:mb-2">
+            <Flag className="h-4 w-4 text-blue-600 mr-1 sm:mr-2" />
+            <span className="text-xs sm:text-sm font-medium text-blue-800">{t("timeline.distanceToGo")}</span>
           </div>
-          <span className="text-xl font-semibold text-neutral-900 block">
+          <span className="text-base sm:text-xl font-semibold text-neutral-900 block">
             {formatDistance(currentPosition)}
           </span>
           <span className="text-xs text-blue-700 mt-1 block">
-            {formatDistance(remainingDistance)} to finish
+            {formatDistance(remainingDistance)} {t("timeline.toFinish")}
           </span>
         </div>
         
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200 shadow-sm">
-          <div className="flex items-center mb-2">
-            <Timer className="h-4 w-4 text-green-600 mr-2" />
-            <span className="text-sm font-medium text-green-800">{t("status.elapsed")}</span>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-3 sm:p-4 border border-green-200 shadow-sm">
+          <div className="flex items-center mb-1 sm:mb-2">
+            <Timer className="h-4 w-4 text-green-600 mr-1 sm:mr-2" />
+            <span className="text-xs sm:text-sm font-medium text-green-800">{t("status.elapsed")}</span>
           </div>
-          <span className="text-xl font-mono font-semibold text-neutral-900">
+          <span className="text-base sm:text-xl font-mono font-semibold text-neutral-900">
             {elapsedTime}
           </span>
         </div>
         
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200 shadow-sm">
-          <div className="flex items-center mb-2">
-            <Clock className="h-4 w-4 text-purple-600 mr-2" />
-            <span className="text-sm font-medium text-purple-800">{t("status.finishTime")}</span>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-3 sm:p-4 border border-purple-200 shadow-sm">
+          <div className="flex items-center mb-1 sm:mb-2">
+            <Clock className="h-4 w-4 text-purple-600 mr-1 sm:mr-2" />
+            <span className="text-xs sm:text-sm font-medium text-purple-800">{t("status.finishTime")}</span>
           </div>
-          <span className="text-xl font-mono font-semibold text-neutral-900">
+          <span className="text-base sm:text-xl font-mono font-semibold text-neutral-900">
             {estimatedFinish}
           </span>
         </div>
