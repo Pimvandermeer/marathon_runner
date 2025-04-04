@@ -425,19 +425,19 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
           </h3>
           <ul className="space-y-3 text-sm text-neutral-700">
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle size={16} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
               <span>{t("tips.early")}</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle size={16} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
               <span>{t("tips.transport")}</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle size={16} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
               <span>{t("tips.supplies")}</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle size={16} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
               <span>{t("tips.signs")}</span>
             </li>
           </ul>
