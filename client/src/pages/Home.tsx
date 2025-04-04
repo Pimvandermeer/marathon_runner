@@ -80,16 +80,16 @@ export default function Home() {
           setSharedLinkLoaded(true);
           
           toast({
-            title: "Shared runner loaded",
-            description: `Runner information has been loaded from a shared link`,
+            title: t("app.shared_runner_loaded"),
+            description: t("app.shared_runner_loaded_desc"),
             variant: "default",
           });
         }
       } catch (error) {
         console.error("Error loading shared runner:", error);
         toast({
-          title: "Could not load shared runner",
-          description: "The shared link may be invalid",
+          title: t("app.shared_link_error"),
+          description: t("app.shared_link_error_desc"),
           variant: "destructive",
         });
       } finally {
@@ -172,7 +172,7 @@ export default function Home() {
           </p>
           {runners.length === 0 && (
             <p className="text-md opacity-80 max-w-2xl mb-3">
-              Runners: Share this tool with your supporters to help them track you during the race!
+              {t("app.runner_share")}
             </p>
           )}
           
@@ -200,9 +200,9 @@ export default function Home() {
           {runners.length > 0 && (
             <Card className="mt-6">
               <CardHeader>
-                <CardTitle>Tracked Runners</CardTitle>
+                <CardTitle>{t("app.tracked_runners")}</CardTitle>
                 <CardDescription>
-                  You are currently tracking {runners.length} runner{runners.length !== 1 ? 's' : ''}
+                  {t("app.currently_tracking")} {runners.length} {runners.length !== 1 ? t("app.runners") : t("app.runner")}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -221,7 +221,7 @@ export default function Home() {
                         onClick={() => setSelectedRunnerId(runner.id)}
                       >
                         <p className="font-medium">{runner.info.name}</p>
-                        <p className="text-sm text-neutral-600">Wave {runner.info.wave} - Pace {runner.info.pace}</p>
+                        <p className="text-sm text-neutral-600">{t("form.wave")} {runner.info.wave} - {t("form.pace")} {runner.info.pace}</p>
                       </div>
                       <Button 
                         variant="ghost" 
@@ -274,8 +274,8 @@ export default function Home() {
                     <path d="M2 19h6"></path>
                   </svg>
                 </div>
-                <h3 className="text-xl font-medium mb-2">No Runners Added Yet</h3>
-                <p className="text-neutral-600 mb-4">Add a runner using the form to start tracking their estimated location.</p>
+                <h3 className="text-xl font-medium mb-2">{t("app.no_runners_yet")}</h3>
+                <p className="text-neutral-600 mb-4">{t("app.add_runner_instruction")}</p>
               </CardContent>
             </Card>
           )}
@@ -289,7 +289,7 @@ export default function Home() {
               <ShareDialog runners={runners} className="w-full" />
             </div>
             
-            <h3 className="text-lg font-medium mb-3">Add Another Runner</h3>
+            <h3 className="text-lg font-medium mb-3">{t("app.add_another_runner")}</h3>
             <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
               <RunnerForm onSubmitSuccess={handleSubmitSuccess} />
             </div>
