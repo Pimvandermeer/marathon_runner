@@ -1,9 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineVisualization from "@/components/TimelineVisualization";
 import LocationResults from "@/components/LocationResults";
+import { ShareDialog } from "@/components/ShareDialog";
 import { type LocationTime } from "@shared/schema";
-import { Link, Share2, Instagram, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
 interface TimelineProps {
@@ -33,37 +32,6 @@ export default function Timeline({
   comparisonData 
 }: TimelineProps) {
   const hasRunnerInfo = !!runnerInfo;
-
-  const createShareableLink = () => {
-    if (!runnerInfo) return;
-    
-    // Create URL parameters from runner info
-    const params = new URLSearchParams();
-    params.append('name', runnerInfo.name || 'Runner');
-    params.append('wave', runnerInfo.wave);
-    params.append('pace', runnerInfo.pace);
-    
-    // Create the shareable URL with the current domain
-    const shareableUrl = `${window.location.origin}?${params.toString()}`;
-    
-    // Copy to clipboard
-    navigator.clipboard.writeText(shareableUrl)
-      .then(() => {
-        toast({
-          title: "Link copied!",
-          description: "Shareable link has been copied to clipboard",
-          variant: "default",
-        });
-      })
-      .catch(err => {
-        console.error('Could not copy link: ', err);
-        toast({
-          title: "Could not copy link",
-          description: "Please try again or copy the URL manually",
-          variant: "destructive",
-        });
-      });
-  };
   
   return (
     <Card className="bg-white shadow-md mb-6">
@@ -77,43 +45,13 @@ export default function Timeline({
                   {runnerInfo.name ? runnerInfo.name : "Runner"} - Wave {runnerInfo.wave} - Pace {runnerInfo.pace} min/km
                 </div>
                 <div className="flex gap-2">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="flex items-center gap-2 font-medium bg-green-600 text-white hover:bg-green-700"
-                    onClick={createShareableLink}
-                  >
-                    <Share2 className="h-4 w-4" />
-                    Share
-                  </Button>
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="bg-[#25D366] text-white hover:bg-[#128C7E] px-2 w-9 h-9 flex items-center justify-center"
-                    onClick={() => {
-                      const shareableUrl = `${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`;
-                      window.open(`https://wa.me/?text=${encodeURIComponent(`Track me in the marathon! ${shareableUrl}`)}`, '_blank');
-                    }}
-                    title="Share via WhatsApp"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="bg-[#E4405F] text-white hover:bg-[#C13584] px-2 w-9 h-9 flex items-center justify-center"
-                    onClick={() => {
-                      navigator.clipboard.writeText(`${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`);
-                      toast({
-                        title: "Link copied!",
-                        description: "You can now paste this link in your Instagram bio or message",
-                        variant: "default",
-                      });
-                    }}
-                    title="Copy link for Instagram"
-                  >
-                    <Instagram className="h-4 w-4" />
-                  </Button>
+                  <ShareDialog 
+                    runners={[{
+                      id: "single-runner",
+                      info: runnerInfo
+                    }]} 
+                    className="h-9" 
+                  />
                 </div>
               </>
             )}

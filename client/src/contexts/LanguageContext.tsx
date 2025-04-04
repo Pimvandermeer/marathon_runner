@@ -94,8 +94,8 @@ const enTranslations: Record<string, string> = {
   "marathon.info.timezone": "Timezone",
   
   // Share dialog
-  "share.title": "Share Runner",
-  "share.button": "Share Runner",
+  "share.title": "Share Run",
+  "share.button": "Share Run",
   "share.description": "Share this runner with friends and family to help them track the progress during the marathon.",
   "share.copied": "Link Copied",
   "share.url_copied": "The URL has been copied to your clipboard.",
@@ -188,8 +188,8 @@ const nlTranslations: Record<string, string> = {
   "marathon.info.timezone": "Tijdzone",
   
   // Share dialog
-  "share.title": "Deel Loper",
-  "share.button": "Deel Loper",
+  "share.title": "Deel Loop",
+  "share.button": "Deel Loop",
   "share.description": "Deel deze loper met vrienden en familie om hen te helpen de voortgang tijdens de marathon te volgen.",
   "share.copied": "Link Gekopieerd",
   "share.url_copied": "De URL is naar je klembord gekopieerd.",
