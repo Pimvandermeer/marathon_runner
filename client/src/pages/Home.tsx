@@ -182,7 +182,9 @@ export default function Home() {
       <h2 className="text-2xl font-bold mb-4">{t("timeline.title")}</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div>
-          <RunnerForm onSubmitSuccess={handleSubmitSuccess} />
+          <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
+            <RunnerForm onSubmitSuccess={handleSubmitSuccess} />
+          </div>
           
           {/* Tracked Runners List */}
           {runners.length > 0 && (

@@ -144,7 +144,7 @@ export default function TimelineVisualization({
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200 shadow-sm">
           <div className="flex items-center mb-2">
             <Flag className="h-4 w-4 text-blue-600 mr-2" />
-            <span className="text-sm font-medium text-blue-800">{t("timeline.distance")}</span>
+            <span className="text-sm font-medium text-blue-800">{t("timeline.distanceToGo")}</span>
           </div>
           <span className="text-xl font-semibold text-neutral-900 block">
             {formatDistance(currentPosition)}

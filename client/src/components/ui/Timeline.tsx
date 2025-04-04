@@ -79,28 +79,29 @@ export default function Timeline({
                 <div className="flex gap-2">
                   <Button 
                     variant="default" 
-                    size="default" 
+                    size="sm" 
                     className="flex items-center gap-2 font-medium bg-green-600 text-white hover:bg-green-700"
                     onClick={createShareableLink}
                   >
-                    <Share2 className="h-5 w-5" />
+                    <Share2 className="h-4 w-4" />
                     Share
                   </Button>
                   <Button
                     variant="default"
-                    size="icon"
-                    className="bg-[#25D366] text-white hover:bg-[#128C7E]"
+                    size="sm"
+                    className="bg-[#25D366] text-white hover:bg-[#128C7E] px-2 w-9 h-9 flex items-center justify-center"
                     onClick={() => {
                       const shareableUrl = `${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`;
                       window.open(`https://wa.me/?text=${encodeURIComponent(`Track me in the marathon! ${shareableUrl}`)}`, '_blank');
                     }}
+                    title="Share via WhatsApp"
                   >
-                    <MessageCircle className="h-5 w-5" />
+                    <MessageCircle className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="default"
-                    size="icon"
-                    className="bg-[#E4405F] text-white hover:bg-[#C13584]"
+                    size="sm"
+                    className="bg-[#E4405F] text-white hover:bg-[#C13584] px-2 w-9 h-9 flex items-center justify-center"
                     onClick={() => {
                       navigator.clipboard.writeText(`${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`);
                       toast({
@@ -109,8 +110,9 @@ export default function Timeline({
                         variant: "default",
                       });
                     }}
+                    title="Copy link for Instagram"
                   >
-                    <Instagram className="h-5 w-5" />
+                    <Instagram className="h-4 w-4" />
                   </Button>
                 </div>
               </>

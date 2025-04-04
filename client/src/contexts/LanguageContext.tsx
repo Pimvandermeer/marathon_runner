@@ -35,6 +35,7 @@ const enTranslations: Record<string, string> = {
   // Timeline visualization
   "timeline.title": "Timeline",
   "timeline.distance": "Distance",
+  "timeline.distanceToGo": "Distance to go",
   "timeline.time": "Time",
   "timeline.estimated": "Estimated",
   "timeline.km": "km",
@@ -115,6 +116,7 @@ const nlTranslations: Record<string, string> = {
   // Timeline visualization
   "timeline.title": "Tijdlijn",
   "timeline.distance": "Afstand",
+  "timeline.distanceToGo": "Afstand te gaan",
   "timeline.time": "Tijd",
   "timeline.estimated": "Geschat",
   "timeline.km": "km",
