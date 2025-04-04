@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RunnerForm from "@/components/RunnerForm";
 import Timeline from "@/components/ui/Timeline";
 import RouteMap from "@/components/RouteMap";
+import { ShareDialog } from "@/components/ShareDialog";
 import { type LocationTime, type RunnerPredictionResult, type RunnerInput } from "@shared/schema";
 import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -229,6 +230,13 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+                
+                {/* Share Dialog Button */}
+                {runners.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-gray-100">
+                    <ShareDialog runners={runners} className="w-full" />
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}
@@ -269,9 +277,14 @@ export default function Home() {
           )}
         </div>
         
-        {/* Mobile-only form section at the bottom when runners are added */}
+        {/* Mobile-only share button and form section at the bottom when runners are added */}
         {runners.length > 0 && (
           <div className="order-3 lg:hidden mt-4">
+            {/* Mobile share button */}
+            <div className="mb-6">
+              <ShareDialog runners={runners} className="w-full" />
+            </div>
+            
             <h3 className="text-lg font-medium mb-3">Add Another Runner</h3>
             <div className={runners.length > 0 ? "scale-95 transform origin-top" : ""}>
               <RunnerForm onSubmitSuccess={handleSubmitSuccess} />

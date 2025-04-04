@@ -91,7 +91,20 @@ const enTranslations: Record<string, string> = {
   "marathon.info.visitWebsite": "Visit Website",
   "marathon.info.country": "Country",
   "marathon.info.transport": "Transport Information",
-  "marathon.info.timezone": "Timezone"
+  "marathon.info.timezone": "Timezone",
+  
+  // Share dialog
+  "share.title": "Share Runner",
+  "share.button": "Share Runner",
+  "share.description": "Share this runner with friends and family to help them track the progress during the marathon.",
+  "share.copied": "Link Copied",
+  "share.url_copied": "The URL has been copied to your clipboard.",
+  "share.error": "Error",
+  "share.copy_failed": "Failed to copy URL to clipboard.",
+  "share.whatsapp_text": "Check out this marathon runner timeline",
+  "share.instagram_copy": "Instagram Story",
+  "share.instagram_instructions": "URL copied to clipboard. Paste it in your Instagram story or bio.",
+  "share.note": "Only the selected runner will be shared."
 };
 
 // Dutch translations
@@ -172,7 +185,20 @@ const nlTranslations: Record<string, string> = {
   "marathon.info.visitWebsite": "Bezoek Website",
   "marathon.info.country": "Land",
   "marathon.info.transport": "Vervoersinformatie",
-  "marathon.info.timezone": "Tijdzone"
+  "marathon.info.timezone": "Tijdzone",
+  
+  // Share dialog
+  "share.title": "Deel Loper",
+  "share.button": "Deel Loper",
+  "share.description": "Deel deze loper met vrienden en familie om hen te helpen de voortgang tijdens de marathon te volgen.",
+  "share.copied": "Link Gekopieerd",
+  "share.url_copied": "De URL is naar je klembord gekopieerd.",
+  "share.error": "Fout",
+  "share.copy_failed": "Kopiëren naar klembord mislukt.",
+  "share.whatsapp_text": "Bekijk deze marathon loper tijdlijn",
+  "share.instagram_copy": "Instagram Story",
+  "share.instagram_instructions": "URL naar klembord gekopieerd. Plak het in je Instagram story of bio.",
+  "share.note": "Alleen de geselecteerde loper wordt gedeeld."
 };
 
 // Collection of all translations
