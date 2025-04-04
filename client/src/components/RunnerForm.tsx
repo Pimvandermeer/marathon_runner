@@ -278,7 +278,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
     <div className="lg:col-span-1">
       <Card className="bg-white shadow-md">
         <CardContent className="p-6">
-          <h2 className="text-xl font-semibold text-neutral-900 mb-4">Runner Information</h2>
+          <h2 className="text-xl font-semibold text-neutral-900 mb-4">{t("app.runner_information")}</h2>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -294,7 +294,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select wave" />
+                          <SelectValue placeholder={t("form.select_wave_placeholder")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -342,7 +342,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                         <div className="relative">
                           <FormControl>
                             <Input 
-                              placeholder="Example: 5:30" 
+                              placeholder={t("form.example_pace")} 
                               {...field} 
                               onChange={(e) => handlePaceChange(e, field.onChange)}
                               className="font-mono"
@@ -353,7 +353,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                           </div>
                         </div>
                         <p className="text-xs text-gray-500 mt-1">
-                          The pace you expect to maintain throughout the marathon
+                          {t("form.pace_description")}
                         </p>
                         <FormMessage />
                       </FormItem>
@@ -369,7 +369,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                         <div className="relative">
                           <FormControl>
                             <Input 
-                              placeholder="Example: 4:30" 
+                              placeholder={t("form.example_finish")} 
                               {...field} 
                               onChange={(e) => handleFinishTimeChange(e, field.onChange)}
                               className="font-mono"
@@ -380,7 +380,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                           </div>
                         </div>
                         <p className="text-xs text-gray-500 mt-1">
-                          Your target total marathon time
+                          {t("form.finish_description")}
                         </p>
                         <FormMessage />
                       </FormItem>
@@ -396,7 +396,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                   <FormItem>
                     <FormLabel>{t("form.runnerName")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter name" {...field} />
+                      <Input placeholder={t("form.enter_name")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -409,7 +409,7 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
                 disabled={isCalculating}
               >
                 <Clock className="mr-2 h-4 w-4" />
-                {isCalculating ? 'Calculating...' : t("form.calculate")}
+                {isCalculating ? t("app.calculating") : t("form.calculate")}
               </Button>
             </form>
           </Form>

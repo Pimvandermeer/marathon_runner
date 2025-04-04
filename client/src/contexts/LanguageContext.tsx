@@ -52,6 +52,12 @@ const enTranslations: Record<string, string> = {
   "form.share": "Share",
   "form.shareSuccess": "Link copied to clipboard!",
   "form.shareError": "Failed to copy link",
+  "form.select_wave_placeholder": "Select wave",
+  "form.example_pace": "Example: 5:30",
+  "form.example_finish": "Example: 4:30",
+  "form.pace_description": "The pace you expect to maintain throughout the marathon",
+  "form.finish_description": "Your target total marathon time",
+  "form.enter_name": "Enter name",
 
   // Timeline visualization
   "timeline.title": "Timeline",
@@ -176,6 +182,12 @@ const nlTranslations: Record<string, string> = {
   "form.share": "Delen",
   "form.shareSuccess": "Link gekopieerd naar klembord!",
   "form.shareError": "Kopiëren van link mislukt",
+  "form.select_wave_placeholder": "Selecteer startgolf",
+  "form.example_pace": "Voorbeeld: 5:30",
+  "form.example_finish": "Voorbeeld: 4:30",
+  "form.pace_description": "Het tempo dat je verwacht te handhaven tijdens de marathon",
+  "form.finish_description": "Je streeftijd voor de volledige marathon",
+  "form.enter_name": "Voer naam in",
 
   // Timeline visualization
   "timeline.title": "Tijdlijn",
