@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import TimelineVisualization from "@/components/TimelineVisualization";
 import LocationResults from "@/components/LocationResults";
 import { type LocationTime } from "@shared/schema";
-import { Link, Share2 } from "lucide-react";
+import { Link, Share2, Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
@@ -67,24 +67,52 @@ export default function Timeline({
   
   return (
     <Card className="bg-white shadow-md mb-6">
-      <CardContent className="p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-neutral-900">Runner Timeline</h2>
+      <CardContent className={`${hasRunnerInfo ? 'p-4' : 'p-6'}`}>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className={`${hasRunnerInfo ? 'text-lg' : 'text-xl'} font-semibold text-neutral-900`}>Runner Timeline</h2>
           <div className="flex items-center gap-3">
             {hasRunnerInfo && (
               <>
                 <div className="text-sm font-medium text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full">
                   {runnerInfo.name ? runnerInfo.name : "Runner"} - Wave {runnerInfo.wave} - Pace {runnerInfo.pace} min/km
                 </div>
-                <Button 
-                  variant="default" 
-                  size="default" 
-                  className="flex items-center gap-2 font-medium bg-primary text-white hover:bg-primary/90"
-                  onClick={createShareableLink}
-                >
-                  <Share2 className="h-5 w-5" />
-                  Share
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="default" 
+                    size="default" 
+                    className="flex items-center gap-2 font-medium bg-green-600 text-white hover:bg-green-700"
+                    onClick={createShareableLink}
+                  >
+                    <Share2 className="h-5 w-5" />
+                    Share
+                  </Button>
+                  <Button
+                    variant="default"
+                    size="icon"
+                    className="bg-[#25D366] text-white hover:bg-[#128C7E]"
+                    onClick={() => {
+                      const shareableUrl = `${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`;
+                      window.open(`https://wa.me/?text=${encodeURIComponent(`Track me in the marathon! ${shareableUrl}`)}`, '_blank');
+                    }}
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="default"
+                    size="icon"
+                    className="bg-[#E4405F] text-white hover:bg-[#C13584]"
+                    onClick={() => {
+                      navigator.clipboard.writeText(`${window.location.origin}?name=${encodeURIComponent(runnerInfo?.name || 'Runner')}&wave=${runnerInfo?.wave}&pace=${runnerInfo?.pace}`);
+                      toast({
+                        title: "Link copied!",
+                        description: "You can now paste this link in your Instagram bio or message",
+                        variant: "default",
+                      });
+                    }}
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </Button>
+                </div>
               </>
             )}
           </div>
