@@ -71,7 +71,7 @@ export default function TimelineVisualization({
       </div>
       
       {/* Timeline track with gradient progress */}
-      <div className="h-2.5 bg-neutral-200 rounded-full relative mb-10 overflow-hidden">
+      <div className="h-2.5 bg-neutral-200 rounded-full relative mb-14 overflow-hidden">
         <div 
           className="absolute h-full bg-gradient-to-r from-blue-500 to-primary rounded-full"
           style={{ width: `${(currentPosition / 42.195) * 100}%` }}
@@ -107,18 +107,36 @@ export default function TimelineVisualization({
         ))}
       </div>
       
-      {/* Distance labels - properly positioned under the timeline */}
-      <div className="flex justify-between text-xs font-medium text-neutral-600 absolute w-full -bottom-6 left-0">
-        {getMarathonLandmarks().map((landmark, index) => (
+      {/* Distance labels - show only key distance markers to avoid overcrowding */}
+      <div className="flex justify-between text-xs font-medium text-neutral-600 absolute w-full -bottom-9 left-0">
+        {getMarathonLandmarks().filter(landmark => {
+          // Only show key distances: 0, 5, 10, 15, 20, 21.1 (half), 25, 30, 35, 40, 42.195 (finish)
+          const dist = landmark.distance;
+          return (
+            dist === 0 || 
+            dist === 5 || 
+            dist === 10 || 
+            dist === 15 || 
+            dist === 20 ||
+            dist === 21.1 || 
+            dist === 25 || 
+            dist === 30 || 
+            dist === 35 ||
+            dist === 40 || 
+            dist === 42.195
+          );
+        }).map((landmark, index) => (
           <div 
             key={index} 
-            className="absolute transform -translate-x-1/2 text-center"
+            className="absolute transform -translate-x-1/2 text-center whitespace-nowrap"
             style={{ 
               left: `${(landmark.distance / 42.195) * 100}%`,
-              width: "40px"
             }}
           >
-            {landmark.distance === 21.1 ? "21.1" : Math.round(landmark.distance)}
+            {landmark.distance === 0 ? "0" :
+             landmark.distance === 21.1 ? "21.1" : 
+             landmark.distance === 42.195 ? "42" :
+             Math.round(landmark.distance)}
           </div>
         ))}
       </div>
