@@ -35,7 +35,7 @@ export default function Timeline({
   
   return (
     <Card className="bg-white shadow-md mb-6">
-      <CardContent className={`${hasRunnerInfo ? 'p-4' : 'p-6'}`}>
+      <CardContent className={`${hasRunnerInfo ? 'p-2 sm:p-4' : 'p-3 sm:p-6'}`}>
         <div className="flex justify-between items-center mb-4">
           <h2 className={`${hasRunnerInfo ? 'text-lg' : 'text-xl'} font-semibold text-neutral-900`}>Runner Timeline</h2>
           <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export default function Timeline({
         
         {/* Additional info for marathon supporters */}
         {hasRunnerInfo && (
-          <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
+          <div className="mt-4 sm:mt-6 bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-100">
             <h3 className="text-md font-semibold text-blue-800 mb-2">Supporter Tips</h3>
             <ul className="text-sm text-blue-700 space-y-1">
               <li className="flex gap-2 items-start">

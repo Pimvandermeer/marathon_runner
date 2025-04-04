@@ -19,7 +19,7 @@ export default function LocationItem({ location, isFinish = false, expectedTime 
     : null;
 
   return (
-    <div className="location-item p-3 rounded-lg border border-neutral-100 hover:border-neutral-200 hover:shadow-sm transition-all duration-200 bg-white">
+    <div className="location-item p-2 sm:p-3 rounded-lg border border-neutral-100 hover:border-neutral-200 hover:shadow-sm transition-all duration-200 bg-white">
       <div className="flex items-start">
         <div className={`${isFinish ? 'bg-primary' : 'bg-secondary'} text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 shadow-sm`}>
           {isFinish ? (
@@ -28,7 +28,7 @@ export default function LocationItem({ location, isFinish = false, expectedTime 
             <MapPin className="h-5 w-5" />
           )}
         </div>
-        <div className="ml-4 flex-grow">
+        <div className="ml-2 sm:ml-4 flex-grow">
           <div className="flex flex-col sm:flex-row sm:justify-between">
             <span className="font-semibold text-neutral-900 text-lg">{location.name}</span>
             <span className="font-mono text-primary font-medium sm:text-right mt-1 sm:mt-0">

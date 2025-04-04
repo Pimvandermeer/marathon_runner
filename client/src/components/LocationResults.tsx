@@ -25,11 +25,11 @@ export default function LocationResults({
   
   return (
     <div className="mt-8 pt-6 border-t border-neutral-200">
-      <div className="mb-5">
+      <div className="mb-3 sm:mb-5">
         <h3 className="text-lg font-semibold text-neutral-900">Where to Watch</h3>
       </div>
       
-      <div className="bg-white rounded-lg p-5 mb-4 border border-neutral-100 shadow-sm">
+      <div className="bg-white rounded-lg p-3 sm:p-5 mb-4 border border-neutral-100 shadow-sm">
         {isLoading ? (
           <div className="flex justify-center py-6">
             <div className="animate-pulse flex space-x-4">
