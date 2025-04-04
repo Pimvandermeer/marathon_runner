@@ -90,8 +90,14 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         seconds = seconds.substring(0, 2);
       }
       
-      // Handle single-digit seconds - don't convert, just accept valid input
-      if (seconds.length === 1 && parseInt(seconds) > 5) {
+      // Validate seconds are between 0-59
+      if (seconds.length === 2) {
+        const secondsNum = parseInt(seconds);
+        if (secondsNum > 59) {
+          // If seconds > 59, set to 59 (max valid seconds)
+          seconds = '59';
+        }
+      } else if (seconds.length === 1 && parseInt(seconds) > 5) {
         // If it's a single digit and greater than 5, it's invalid for seconds (> 59)
         // So we drop it and keep only the minutes
         value = minutes + ':';
@@ -99,6 +105,9 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         // Otherwise keep it as is, without auto-completion
         value = minutes + ':' + seconds;
       }
+      
+      // Update value with corrected seconds
+      value = minutes + ':' + seconds;
     }
     
     onChange(value);
@@ -131,15 +140,24 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         minutes = minutes.substring(0, 2);
       }
       
-      // Handle single-digit minutes - don't convert, just accept valid input
-      if (minutes.length === 1 && parseInt(minutes) > 5) {
-        // If it's a single digit and greater than 5, it's still valid for minutes (< 60)
-        // For consistency with pace input, we'll keep it as is
+      // Validate minutes are between 0-59
+      if (minutes.length === 2) {
+        const minutesNum = parseInt(minutes);
+        if (minutesNum > 59) {
+          // If minutes > 59, set to 59 (max valid minutes)
+          minutes = '59';
+        }
+      } else if (minutes.length === 1 && parseInt(minutes) > 5) {
+        // For a single digit, only allow 0-5 (since second digit can only make 0-59)
+        // For consistency with pace input
         value = hours + ':' + minutes;
       } else {
         // Otherwise keep it as is, without auto-completion
         value = hours + ':' + minutes;
       }
+      
+      // Update value with corrected minutes
+      value = hours + ':' + minutes;
     }
     
     // Limit to max of 4 characters (h:mm or hh:m) for raw digits
@@ -187,8 +205,17 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
           });
           throw new Error("Invalid pace format. Please use mm:ss format with two digits for seconds.");
         } else {
-          // Format with seconds properly padded
+          // Validate that seconds are between 0-59
           const [minutes, seconds] = paceParts.map(Number);
+          if (seconds > 59) {
+            toast({
+              title: "Input Error",
+              description: "Seconds must be between 0 and 59",
+              variant: "destructive",
+            });
+            throw new Error("Invalid pace format. Seconds must be between 0 and 59.");
+          }
+          // Format with seconds properly padded
           data.pace = `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
       }
@@ -208,8 +235,17 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
           });
           throw new Error("Invalid time format. Please use h:mm format with two digits for minutes.");
         } else {
-          // Format with minutes properly padded
+          // Validate minutes are between 0-59
           const [hours, minutes] = timeParts.map(Number);
+          if (minutes > 59) {
+            toast({
+              title: "Input Error",
+              description: "Minutes must be between 0 and 59",
+              variant: "destructive",
+            });
+            throw new Error("Invalid time format. Minutes must be between 0 and 59.");
+          }
+          // Format with minutes properly padded
           data.finishTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
         }
       }
