@@ -1,9 +1,8 @@
-import { ExternalLink, Map, TramFront, Lightbulb } from "lucide-react";
+import { ExternalLink, TramFront, Lightbulb } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarathonPack } from "@/data/packSchema";
 import { getSpectatorTips, localize } from "@/data/marathonConfig";
 import { formatRaceDate, padTime } from "@/lib/format";
-import { ZoomableImage } from "./ZoomableImage";
 
 export default function RaceInfo({ pack }: { pack: MarathonPack }) {
   const { t, language } = useLanguage();
@@ -24,19 +23,6 @@ export default function RaceInfo({ pack }: { pack: MarathonPack }) {
           <dd className="mt-0.5 font-mono font-medium tabular-nums text-slate-900">{padTime(times[0])}–{padTime(times[times.length - 1])}</dd>
         </div>
       </dl>
-
-      <div>
-        <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900"><Map className="h-4 w-4 text-slate-400" aria-hidden />{t("race.courseMap")}</h3>
-        {pack.routeMap ? (
-          <div className="mt-2 h-64 overflow-hidden rounded-lg border border-slate-200">
-            <ZoomableImage src={pack.routeMap} alt={t("race.courseMap")} className="h-full w-full" />
-          </div>
-        ) : (
-          <a href={pack.courseMapUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline">
-            {t("race.courseMapLink")} <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-          </a>
-        )}
-      </div>
 
       <div>
         <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900"><TramFront className="h-4 w-4 text-slate-400" aria-hidden />{t("race.transport")}</h3>

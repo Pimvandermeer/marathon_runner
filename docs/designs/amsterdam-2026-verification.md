@@ -211,6 +211,16 @@ Counts: `stopsVerified: 7`, `stopsOmitted: 5` (stops, not entries). The omitted 
 - (2026-10-14, later) The tip link moved out of the pack into the site-wide setting `client/src/config.ts` (`TIP_URL`); it is not race data. Original note: `tipUrl` is null: not supplied by the owner as of 2026-10-14 (due 2026-10-16 per the Working plan).
 - `transportType: "walk"` is used for the Start and Finish course points (the stadium is not a transit stop); the product lane's packSchema must allow it alongside tram, metro, train and bus.
 
+## Course map image (added 2026-10-14, owner decision reversing D9)
+
+| Value | Source URL | Checked | Value |
+|---|---|---|---|
+| routeMap.source | https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf | 2026-10-14 | organiser course map PDF "zondag 2026 v2", 1 page, 1800 x 2367 pt, vector |
+| routeMap.preview | rendered from the PDF above | 2026-10-14 | /marathons/amsterdam-2026/course-map-1000.webp, 1000 x 1315 px |
+| routeMap.full | rendered from the PDF above | 2026-10-14 | /marathons/amsterdam-2026/course-map-2400.webp, 2400 x 3156 px |
+
+If the organiser publishes a newer version (v3), re-render both images from it and update the source URL.
+
 ## Daily re-read (Data Verification rule: organiser page re-read daily until race day; any change triggers a pack update and redeploy)
 
 Each day, one agent re-reads the pages below and records URL, timestamp and value in this file under a dated heading. A changed value blocks until the pack is updated; the wave-data cutoff is the go/no-go on 2026-10-16 18:00.

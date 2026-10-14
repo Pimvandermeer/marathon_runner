@@ -96,6 +96,9 @@ export const enTranslations = {
   "map.zoom_out": "Zoom out",
   "map.double_tap": "Double-tap or pinch to zoom",
   "map.reset": "Reset zoom",
+  "map.enlarge": "Tap to enlarge",
+  "map.credit": "Course map: {org}",
+  "map.original": "Original (PDF)",
 
   "none.title": "No upcoming marathon right now",
   "none.body": "The planner covers races whose start waves and course have been checked against the organiser. The next race appears here once it is verified.",
@@ -202,6 +205,9 @@ export const nlTranslations: Record<TranslationKey, string> = {
   "map.zoom_out": "Uitzoomen",
   "map.double_tap": "Dubbeltik of knijp om te zoomen",
   "map.reset": "Zoom herstellen",
+  "map.enlarge": "Tik om te vergroten",
+  "map.credit": "Parcourskaart: {org}",
+  "map.original": "Origineel (pdf)",
 
   "none.title": "Er staat nu geen marathon gepland",
   "none.body": "De planner toont races waarvan de startgolven en het parcours zijn gecontroleerd bij de organisatie. De volgende race verschijnt hier zodra die is gecontroleerd.",

@@ -1107,6 +1107,8 @@ _No new tasks from Performance review beyond T3._
 - PR3 (UX pass, R13) was folded into PR2. Wiring the new pack shape into the old components and then redesigning them would have rebuilt the same screens twice, so the UI was rebuilt once on the new data model with the design pass applied: mobile-first stop list, organiser wave colours, brand red deepened to 5.2:1 contrast for white text, system fonts (no third-party font request), Dutch and English with compile-time key parity. The no-data/no-computation/no-link-format boundary of R13 is respected: packs, staticData math and the link format are pinned by tests.
 - The second stop pass (km 12-26 and 28-37 gaps, four re-issued candidates) was stopped before it wrote anything; it is a P1 item in TODOS.md.
 - calculateRunnerPredictions now takes the pack as input; the R11 regression test passes the Rotterdam 2025 pack as a fixture with every expected value unchanged.
+- D9 reversed by the owner (2026-10-14): the organiser's 2026 course map is embedded as an image, the same way the Rotterdam page did, rendered from the organiser PDF to a 1000 px preview and a 2400 px zoom image. It is credited to the organiser with a link to the original PDF. The trade-off accepted: organiser artwork on the page without a written agreement (see TODOS "Organiser contact").
+- The tip link moved from the race pack to the site-wide setting TIP_URL (bunq.me), pinned in a test.
 
 ## GSTACK REVIEW REPORT
 
