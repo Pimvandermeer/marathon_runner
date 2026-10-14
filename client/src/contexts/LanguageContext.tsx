@@ -1,328 +1,263 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import { safeStorage } from "@/lib/safeStorage";
 
-// Define the available languages
 export type Language = "en" | "nl";
 
-// Define the language context type
+export const enTranslations = {
+  "brand.name": "Marathon Supporter",
+  "brand.tagline": "Plan where to cheer",
+  "brand.unofficial": "Unofficial supporter planner",
+  "lang.switch": "Nederlands",
+  "lang.short": "NL",
+
+  "hero.title": "See your runner more than once",
+  "hero.body": "Enter the runner's start wave and target pace. You get the time they pass every metro, tram and train stop along the course, and a link to share with the people cheering.",
+  "hero.step1": "Pick the start wave",
+  "hero.step2": "Enter pace or finish time",
+  "hero.step3": "Share the plan",
+
+  "form.title": "Runner",
+  "form.titleAnother": "Add another runner",
+  "form.wave": "Start wave",
+  "form.wavePlaceholder": "Choose a wave",
+  "form.waveHelp": "Printed on the bib and in the organiser's start e-mail.",
+  "form.waveWord": "Wave",
+  "form.mode": "Plan by",
+  "form.byPace": "Pace",
+  "form.byFinish": "Finish time",
+  "form.pace": "Target pace",
+  "form.paceUnit": "min/km",
+  "form.paceHelp": "Average pace for the whole race, e.g. 5:30.",
+  "form.finish": "Target finish time",
+  "form.finishUnit": "h:mm",
+  "form.finishHelp": "Net time from crossing the start line, e.g. 3:45.",
+  "form.name": "Name",
+  "form.namePlaceholder": "Optional, e.g. Sanne",
+  "form.submit": "Show where to stand",
+  "form.errWave": "Choose a start wave.",
+  "form.errPace": "Enter a pace as m:ss, e.g. 5:30.",
+  "form.errFinish": "Enter a finish time as h:mm, e.g. 3:45.",
+  "form.errRange": "That pace is outside 2:30 to 15:00 per km. Check the numbers.",
+
+  "plan.runnerFallback": "Runner",
+  "plan.sharedBadge": "Shared plan",
+  "plan.start": "Start",
+  "plan.pace": "Pace",
+  "plan.finish": "Est. finish",
+  "plan.share": "Share plan",
+  "plan.remove": "Remove",
+  "plan.stopsTitle": "Where and when to stand",
+  "plan.stopsBody": "Times assume an even pace from the wave start. Arrive 15 minutes early: runners spread out and the crowd is deep.",
+  "plan.runners": "Runners",
+  "plan.empty.title": "Your plan appears here",
+  "plan.empty.body": "Fill in the runner's wave and pace to see every viewing spot with a passing time.",
+
+  "stop.km": "km",
+  "stop.passes": "Runners pass this stop {n} times",
+  "stop.walk": "{m} m walk to the course",
+  "stop.cross": "Cross the course before road closures start",
+  "stop.directions": "Directions",
+  "stop.side": "Which side of the road",
+  "stop.startFinish": "Start and finish",
+  "transport.metro": "Metro",
+  "transport.tram": "Tram",
+  "transport.train": "Train",
+  "transport.bus": "Bus",
+  "transport.parking": "P+R",
+  "transport.walk": "On foot",
+
+  "share.title": "Share this plan",
+  "share.body": "Supporters open the link and see the same stops and times. Nothing is stored about you or the runner.",
+  "share.copy": "Copy link",
+  "share.copied": "Link copied",
+  "share.copyFailed": "Could not copy. Select the link and copy it by hand.",
+  "share.whatsapp": "WhatsApp",
+  "share.more": "More apps",
+  "share.message": "Where to cheer for {name} at the {race}:",
+
+  "notice.previous.title": "This link is from a previous edition",
+  "notice.previous.body": "Links made before this marathon was added cannot be opened. Ask the runner for a new link, or make a plan below.",
+  "notice.unknown.title": "This marathon is not available",
+  "notice.unknown.body": "The link points to a marathon that is not published here. Check the link, or make a plan for the race shown below.",
+  "notice.wave.title": "The wave in this link does not exist",
+  "notice.wave.body": "This marathon has no wave {wave}. Ask the runner for a new link, or enter the wave below.",
+  "notice.pace.title": "The pace in this link is not readable",
+  "notice.pace.body": "Ask the runner for a new link, or enter the pace below.",
+
+  "race.title": "Race day",
+  "race.date": "Date",
+  "race.startWindow": "Wave starts",
+  "race.courseMap": "Official course map",
+  "race.courseMapLink": "Open on the organiser's site",
+  "race.transport": "Getting around",
+  "race.tips": "Supporter tips",
+  "race.website": "Official race website",
+  "map.zoom_in": "Zoom in",
+  "map.zoom_out": "Zoom out",
+  "map.double_tap": "Double-tap or pinch to zoom",
+  "map.reset": "Reset zoom",
+
+  "none.title": "No upcoming marathon right now",
+  "none.body": "The planner covers races whose start waves and course have been checked against the organiser. The next race appears here once it is verified.",
+
+  "footer.unofficial": "Unofficial planner, not affiliated with the race organiser. Always check the organiser's site for changes on race day.",
+  "footer.osm": "Stop locations © OpenStreetMap contributors",
+  "footer.contact": "Contact",
+  "footer.tip": "Did this help? Buy the maker a coffee",
+  "footer.made": "Made by",
+} as const;
+
+export type TranslationKey = keyof typeof enTranslations;
+
+export const nlTranslations: Record<TranslationKey, string> = {
+  "brand.name": "Marathon Supporter",
+  "brand.tagline": "Plan waar je aanmoedigt",
+  "brand.unofficial": "Onofficiële supportersplanner",
+  "lang.switch": "English",
+  "lang.short": "EN",
+
+  "hero.title": "Zie je loper vaker dan één keer",
+  "hero.body": "Vul de startgolf en het streeftempo van je loper in. Je ziet hoe laat de loper langs elke metro-, tram- en treinhalte op het parcours komt, en krijgt een link om te delen met wie komt aanmoedigen.",
+  "hero.step1": "Kies de startgolf",
+  "hero.step2": "Vul tempo of eindtijd in",
+  "hero.step3": "Deel het plan",
+
+  "form.title": "Loper",
+  "form.titleAnother": "Nog een loper toevoegen",
+  "form.wave": "Startgolf",
+  "form.wavePlaceholder": "Kies een golf",
+  "form.waveHelp": "Staat op het startnummer en in de startmail van de organisatie.",
+  "form.waveWord": "Golf",
+  "form.mode": "Plannen op",
+  "form.byPace": "Tempo",
+  "form.byFinish": "Eindtijd",
+  "form.pace": "Streeftempo",
+  "form.paceUnit": "min/km",
+  "form.paceHelp": "Gemiddeld tempo over de hele race, bijv. 5:30.",
+  "form.finish": "Streefeindtijd",
+  "form.finishUnit": "u:mm",
+  "form.finishHelp": "Netto tijd vanaf de startlijn, bijv. 3:45.",
+  "form.name": "Naam",
+  "form.namePlaceholder": "Optioneel, bijv. Sanne",
+  "form.submit": "Laat zien waar je moet staan",
+  "form.errWave": "Kies een startgolf.",
+  "form.errPace": "Vul een tempo in als m:ss, bijv. 5:30.",
+  "form.errFinish": "Vul een eindtijd in als u:mm, bijv. 3:45.",
+  "form.errRange": "Dat tempo ligt buiten 2:30 tot 15:00 per km. Controleer de getallen.",
+
+  "plan.runnerFallback": "Loper",
+  "plan.sharedBadge": "Gedeeld plan",
+  "plan.start": "Start",
+  "plan.pace": "Tempo",
+  "plan.finish": "Verw. finish",
+  "plan.share": "Plan delen",
+  "plan.remove": "Verwijderen",
+  "plan.stopsTitle": "Waar en wanneer je moet staan",
+  "plan.stopsBody": "Tijden gaan uit van een gelijkmatig tempo vanaf de golfstart. Wees er 15 minuten eerder: lopers waaieren uit en het is druk langs de kant.",
+  "plan.runners": "Lopers",
+  "plan.empty.title": "Hier verschijnt je plan",
+  "plan.empty.body": "Vul de startgolf en het tempo van je loper in om elke kijkplek met doorkomsttijd te zien.",
+
+  "stop.km": "km",
+  "stop.passes": "Lopers komen hier {n} keer langs",
+  "stop.walk": "{m} m lopen naar het parcours",
+  "stop.cross": "Steek het parcours over voordat de afsluitingen ingaan",
+  "stop.directions": "Route",
+  "stop.side": "Aan welke kant van de weg",
+  "stop.startFinish": "Start en finish",
+  "transport.metro": "Metro",
+  "transport.tram": "Tram",
+  "transport.train": "Trein",
+  "transport.bus": "Bus",
+  "transport.parking": "P+R",
+  "transport.walk": "Te voet",
+
+  "share.title": "Deel dit plan",
+  "share.body": "Supporters openen de link en zien dezelfde haltes en tijden. Er wordt niets over jou of de loper opgeslagen.",
+  "share.copy": "Link kopiëren",
+  "share.copied": "Link gekopieerd",
+  "share.copyFailed": "Kopiëren lukte niet. Selecteer de link en kopieer hem zelf.",
+  "share.whatsapp": "WhatsApp",
+  "share.more": "Andere apps",
+  "share.message": "Waar je {name} kunt aanmoedigen tijdens de {race}:",
+
+  "notice.previous.title": "Deze link is van een vorige editie",
+  "notice.previous.body": "Links van vóór deze marathon kunnen niet meer worden geopend. Vraag de loper om een nieuwe link, of maak hieronder een plan.",
+  "notice.unknown.title": "Deze marathon is niet beschikbaar",
+  "notice.unknown.body": "De link verwijst naar een marathon die hier niet staat. Controleer de link, of maak een plan voor de race hieronder.",
+  "notice.wave.title": "De golf in deze link bestaat niet",
+  "notice.wave.body": "Deze marathon heeft geen golf {wave}. Vraag de loper om een nieuwe link, of vul de golf hieronder in.",
+  "notice.pace.title": "Het tempo in deze link is onleesbaar",
+  "notice.pace.body": "Vraag de loper om een nieuwe link, of vul het tempo hieronder in.",
+
+  "race.title": "Racedag",
+  "race.date": "Datum",
+  "race.startWindow": "Golfstarts",
+  "race.courseMap": "Officiële parcourskaart",
+  "race.courseMapLink": "Openen op de site van de organisatie",
+  "race.transport": "Onderweg",
+  "race.tips": "Tips voor supporters",
+  "race.website": "Officiële racewebsite",
+  "map.zoom_in": "Inzoomen",
+  "map.zoom_out": "Uitzoomen",
+  "map.double_tap": "Dubbeltik of knijp om te zoomen",
+  "map.reset": "Zoom herstellen",
+
+  "none.title": "Er staat nu geen marathon gepland",
+  "none.body": "De planner toont races waarvan de startgolven en het parcours zijn gecontroleerd bij de organisatie. De volgende race verschijnt hier zodra die is gecontroleerd.",
+
+  "footer.unofficial": "Onofficiële planner, niet verbonden aan de organisatie van de race. Kijk op de racedag altijd op de site van de organisatie voor wijzigingen.",
+  "footer.osm": "Haltelocaties © OpenStreetMap-bijdragers",
+  "footer.contact": "Contact",
+  "footer.tip": "Heb je hier iets aan gehad? Trakteer de maker op koffie",
+  "footer.made": "Gemaakt door",
+};
+
+const dictionaries: Record<Language, Record<TranslationKey, string>> = { en: enTranslations, nl: nlTranslations };
+
 type LanguageContextType = {
   language: Language;
   setLanguage: (language: Language) => void;
-  t: (key: string) => string;
+  /** Translate a key; `{name}` placeholders are filled from vars. */
+  t: (key: TranslationKey, vars?: Record<string, string | number>) => string;
 };
 
-// Create the context with a default value
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// English translations
-const enTranslations: Record<string, string> = {
-  // Page titles and general UI
-  "app.title": "Marathon Supporter Tracker",
-  "app.subtitle": "Help supporters track their runners",
-  "app.coming_soon": "Currently configured for Rotterdam Marathon. Support for Amsterdam and other marathons coming soon!",
-  "app.runner_share": "Runners: Share this tool with your supporters to help them track you during the race!",
-  "app.no_runners_yet": "No Runners Added Yet",
-  "app.add_runner_instruction": "Add a runner using the form to start tracking their estimated location.",
-  "app.add_another_runner": "Add Another Runner",
-  "app.runner_information": "Runner Information",
-  "app.placeholder_name": "Enter name",
-  "app.select_wave": "Select wave",
-  "app.calculating": "Calculating...",
-  "app.shared_runner_loaded": "Shared runner loaded",
-  "app.shared_runner_loaded_desc": "Runner information has been loaded from a shared link",
-  "app.shared_link_error": "Could not load shared runner",
-  "app.shared_link_error_desc": "The shared link may be invalid",
-  "app.timeline_calculated": "Runner timeline calculated",
-  "app.timeline_calculated_desc": "Your runner's timeline has been successfully calculated.",
-  "app.timeline_error": "Error",
-  "app.timeline_error_desc": "Failed to calculate runner timeline: ",
-  "app.tracked_runners": "Tracked Runners",
-  "app.currently_tracking": "You are currently tracking",
-  "app.runner": "runner",
-  "app.runners": "runners",
+function initialLanguage(): Language {
+  const stored = safeStorage.getItem("language");
+  if (stored === "en" || stored === "nl") return stored;
+  try {
+    return navigator.language?.toLowerCase().startsWith("nl") ? "nl" : "en";
+  } catch {
+    return "en";
+  }
+}
 
-  // Form labels and buttons
-  "form.runnerName": "Runner name",
-  "form.wave": "Starting wave",
-  "form.pace": "Pace (min/km)",
-  "form.finishTime": "Finish time (hours:minutes)",
-  "form.calculate": "Calculate",
-  "form.enterPace": "Enter Pace",
-  "form.enterFinishTime": "Enter Finish Time",
-  "form.shareable": "Shareable Link",
-  "form.share": "Share",
-  "form.shareSuccess": "Link copied to clipboard!",
-  "form.shareError": "Failed to copy link",
-  "form.select_wave_placeholder": "Select wave",
-  "form.example_pace": "Example: 5:30",
-  "form.example_finish": "Example: 4:30",
-  "form.pace_description": "The pace you expect to maintain throughout the marathon",
-  "form.finish_description": "Your target total marathon time",
-  "form.enter_name": "Enter name",
+export function translate(language: Language, key: TranslationKey, vars?: Record<string, string | number>): string {
+  const template = dictionaries[language][key] ?? key;
+  return vars ? template.replace(/\{(\w+)\}/g, (_, v) => String(vars[v] ?? `{${v}}`)) : template;
+}
 
-  // Timeline visualization
-  "timeline.title": "Timeline",
-  "timeline.distance": "Distance",
-  "timeline.distanceToGo": "Distance to go",
-  "timeline.time": "Time",
-  "timeline.estimated": "Estimated",
-  "timeline.km": "km",
-  "timeline.toFinish": "to finish",
+export const LanguageProvider: React.FC<{ children: ReactNode; initial?: Language }> = ({ children, initial }) => {
+  const [language, setLanguageState] = useState<Language>(() => initial ?? initialLanguage());
 
-  // Current status
-  "status.title": "Current Status",
-  "status.elapsed": "Elapsed Time",
-  "status.distance": "Distance",
-  "status.finishTime": "Est. Finish Time",
+  const setLanguage = useCallback((next: Language) => {
+    setLanguageState(next);
+    safeStorage.setItem("language", next);
+    document.documentElement.lang = next;
+  }, []);
 
-  // Error messages
-  "error.waveRequired": "Wave must be selected",
-  "error.invalidPace": "Invalid pace value. Please enter a valid pace or finish time.",
-  "error.invalid_seconds": "Seconds must be between 0 and 59",
-  "error.invalid_minutes": "Minutes must be between 0 and 59",
-  "error.provide_pace_or_finish": "Either pace or finish time must be provided",
-  "error.two_digit_seconds": "Please enter seconds as a two-digit number (e.g., 4:30 not 4:3)",
-  "error.two_digit_minutes": "Please enter minutes as a two-digit number (e.g., 4:30 not 4:3)",
-
-  // Footer
-  "footer.developed": "Developed by",
-  "footer.rights": "All rights reserved.",
-  "footer.language": "Language",
-  "footer.description": "A supporter tool for marathon runners. Track runners and plan where to support them throughout the race.",
-  
-  // Tips for supporters
-  "tips.title": "Tips for Supporters",
-  "tips.early": "Arrive at viewing spots 15 minutes early",
-  "tips.transport": "Account for public transport delays on marathon day",
-  "tips.supplies": "Bring water and snacks for your runner",
-  "tips.signs": "Make brightly colored signs to stand out",
-  
-  // Time comparison
-  "timeComparison.ahead": "Runner ahead by",
-  "timeComparison.behind": "Runner behind by",
-  "timeComparison.onTime": "Runner on time",
-  "timeComparison.faster": "Faster than expected",
-  "timeComparison.slower": "Slower than expected",
-  "timeComparison.onPace": "On target pace",
-  "timeComparison.expected": "Expected pace",
-  "timeComparison.actual": "Actual pace",
-  
-  // Marathon selection
-  "marathon.select": "Select Marathon",
-  "marathon.selectPlaceholder": "Choose a marathon",
-  "marathon.changed": "Marathon Changed",
-  "marathon.changedDescription": "Switched to {marathon}. Runner information will be reset.",
-  
-  // Route map
-  "map.title": "Marathon Route Map",
-  "map.enlarge": "Enlarge map",
-  "map.shrink": "Shrink map",
-  "map.zoom_in": "Zoom in",
-  "map.zoom_out": "Zoom out",
-  "map.reset": "Reset view",
-  "map.double_tap": "Double-tap to zoom",
-  
-  // Marathon info
-  "marathon.info.title": "Marathon Information",
-  "marathon.info.date": "Date",
-  "marathon.info.website": "Official Website",
-  "marathon.info.visitWebsite": "Visit Website",
-  "marathon.info.country": "Country",
-  "marathon.info.transport": "Transport Information",
-  "marathon.info.timezone": "Timezone",
-  
-  // Marathon landmarks
-  "landmarks.start": "Start",
-  "landmarks.finish": "Finish",
-  "landmarks.halfMarathon": "Half Marathon",
-  "landmarks.km": "km",
-  
-  // Share dialog
-  "share.title": "Share Run",
-  "share.button": "Share Run",
-  "share.description": "Share this runner with friends and family to help them track the progress during the marathon.",
-  "share.copied": "Link Copied",
-  "share.url_copied": "The URL has been copied to your clipboard.",
-  "share.error": "Error",
-  "share.copy_failed": "Failed to copy URL to clipboard.",
-  "share.whatsapp_text": "Check out this marathon runner timeline",
-  "share.instagram_copy": "Instagram Story",
-  "share.instagram_instructions": "URL copied to clipboard. Paste it in your Instagram story or bio.",
-  "share.note": "Only the selected runner will be shared."
-};
-
-// Dutch translations
-const nlTranslations: Record<string, string> = {
-  // Page titles and general UI
-  "app.title": "Marathon Supporter Tracker",
-  "app.subtitle": "Help supporters hun lopers te volgen",
-  "app.coming_soon": "Momenteel geconfigureerd voor Rotterdam Marathon. Ondersteuning voor Amsterdam en andere marathons komt binnenkort!",
-  "app.runner_share": "Lopers: Deel deze tool met je supporters om hen te helpen je te volgen tijdens de race!",
-  "app.no_runners_yet": "Nog Geen Lopers Toegevoegd",
-  "app.add_runner_instruction": "Voeg een loper toe via het formulier om hun geschatte locatie te volgen.",
-  "app.add_another_runner": "Voeg Nog Een Loper Toe",
-  "app.runner_information": "Loper Informatie",
-  "app.placeholder_name": "Voer naam in",
-  "app.select_wave": "Selecteer startgolf",
-  "app.calculating": "Berekenen...",
-  "app.shared_runner_loaded": "Gedeelde loper geladen",
-  "app.shared_runner_loaded_desc": "Lopersinformatie is geladen via een gedeelde link",
-  "app.shared_link_error": "Kon gedeelde loper niet laden",
-  "app.shared_link_error_desc": "De gedeelde link kan ongeldig zijn",
-  "app.timeline_calculated": "Loper tijdlijn berekend",
-  "app.timeline_calculated_desc": "De tijdlijn van je loper is succesvol berekend.",
-  "app.timeline_error": "Fout",
-  "app.timeline_error_desc": "Tijdlijn berekening mislukt: ",
-  "app.tracked_runners": "Gevolgde Lopers",
-  "app.currently_tracking": "Je volgt momenteel",
-  "app.runner": "loper",
-  "app.runners": "lopers",
-
-  // Form labels and buttons
-  "form.runnerName": "Naam loper",
-  "form.wave": "Startgolf",
-  "form.pace": "Tempo (min/km)",
-  "form.finishTime": "Finishtijd (uren:minuten)",
-  "form.calculate": "Bereken",
-  "form.enterPace": "Voer Tempo in",
-  "form.enterFinishTime": "Voer Finishtijd in",
-  "form.shareable": "Deelbare Link",
-  "form.share": "Delen",
-  "form.shareSuccess": "Link gekopieerd naar klembord!",
-  "form.shareError": "Kopiëren van link mislukt",
-  "form.select_wave_placeholder": "Selecteer startgolf",
-  "form.example_pace": "Voorbeeld: 5:30",
-  "form.example_finish": "Voorbeeld: 4:30",
-  "form.pace_description": "Het tempo dat je verwacht te handhaven tijdens de marathon",
-  "form.finish_description": "Je streeftijd voor de volledige marathon",
-  "form.enter_name": "Voer naam in",
-
-  // Timeline visualization
-  "timeline.title": "Tijdlijn",
-  "timeline.distance": "Afstand",
-  "timeline.distanceToGo": "Afstand te gaan",
-  "timeline.time": "Tijd",
-  "timeline.estimated": "Geschat",
-  "timeline.km": "km",
-  "timeline.toFinish": "tot finish",
-
-  // Current status
-  "status.title": "Huidige Status",
-  "status.elapsed": "Verstreken Tijd",
-  "status.distance": "Afstand",
-  "status.finishTime": "Geschatte Finishtijd",
-
-  // Error messages
-  "error.waveRequired": "Startgolf moet geselecteerd zijn",
-  "error.invalidPace": "Ongeldige tempo waarde. Voer een geldig tempo of finishtijd in.",
-  "error.invalid_seconds": "Seconden moeten tussen 0 en 59 zijn",
-  "error.invalid_minutes": "Minuten moeten tussen 0 en 59 zijn",
-  "error.provide_pace_or_finish": "Voer een tempo of finishtijd in",
-  "error.two_digit_seconds": "Voer seconden in als een getal van twee cijfers (bijv. 4:30 niet 4:3)",
-  "error.two_digit_minutes": "Voer minuten in als een getal van twee cijfers (bijv. 4:30 niet 4:3)",
-
-  // Footer
-  "footer.developed": "Ontwikkeld door",
-  "footer.rights": "Alle rechten voorbehouden.",
-  "footer.language": "Taal",
-  "footer.description": "Een hulpmiddel voor marathon supporters. Volg lopers en plan waar je ze kunt aanmoedigen tijdens de wedstrijd.",
-  
-  // Tips for supporters
-  "tips.title": "Tips voor Supporters",
-  "tips.early": "Kom 15 minuten eerder aan bij kijkpunten",
-  "tips.transport": "Houd rekening met vertragingen in het openbaar vervoer op marathondag",
-  "tips.supplies": "Neem water en snacks mee voor je loper",
-  "tips.signs": "Maak felgekleurde borden om op te vallen",
-  
-  // Time comparison
-  "timeComparison.ahead": "Loper voor op schema met",
-  "timeComparison.behind": "Loper achter op schema met",
-  "timeComparison.onTime": "Loper op schema",
-  "timeComparison.faster": "Sneller dan verwacht",
-  "timeComparison.slower": "Langzamer dan verwacht",
-  "timeComparison.onPace": "Op doeltempo",
-  "timeComparison.expected": "Verwacht tempo",
-  "timeComparison.actual": "Werkelijk tempo",
-  
-  // Marathon selection
-  "marathon.select": "Selecteer Marathon",
-  "marathon.selectPlaceholder": "Kies een marathon",
-  "marathon.changed": "Marathon Gewijzigd",
-  "marathon.changedDescription": "Gewisseld naar {marathon}. Lopersinformatie wordt gereset.",
-  
-  // Route map
-  "map.title": "Marathon Routekaart",
-  "map.enlarge": "Vergroot kaart",
-  "map.shrink": "Verklein kaart",
-  "map.zoom_in": "Inzoomen",
-  "map.zoom_out": "Uitzoomen",
-  "map.reset": "Weergave resetten",
-  "map.double_tap": "Dubbeltik om te zoomen",
-  
-  // Marathon info
-  "marathon.info.title": "Marathon Informatie",
-  "marathon.info.date": "Datum",
-  "marathon.info.website": "Officiële Website",
-  "marathon.info.visitWebsite": "Bezoek Website",
-  "marathon.info.country": "Land",
-  "marathon.info.transport": "Vervoersinformatie",
-  "marathon.info.timezone": "Tijdzone",
-  
-  // Marathon landmarks
-  "landmarks.start": "Start",
-  "landmarks.finish": "Finish",
-  "landmarks.halfMarathon": "Halve Marathon",
-  "landmarks.km": "km",
-  
-  // Share dialog
-  "share.title": "Deel Loop",
-  "share.button": "Deel Loop",
-  "share.description": "Deel deze loper met vrienden en familie om hen te helpen de voortgang tijdens de marathon te volgen.",
-  "share.copied": "Link Gekopieerd",
-  "share.url_copied": "De URL is naar je klembord gekopieerd.",
-  "share.error": "Fout",
-  "share.copy_failed": "Kopiëren naar klembord mislukt.",
-  "share.whatsapp_text": "Bekijk deze marathon loper tijdlijn",
-  "share.instagram_copy": "Instagram Story",
-  "share.instagram_instructions": "URL naar klembord gekopieerd. Plak het in je Instagram story of bio.",
-  "share.note": "Alleen de geselecteerde loper wordt gedeeld."
-};
-
-// Collection of all translations
-const translations: Record<Language, Record<string, string>> = {
-  en: enTranslations,
-  nl: nlTranslations,
-};
-
-// Provider component
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Get initial language from localStorage or default to English
-  const [language, setLanguage] = useState<Language>(
-    () => (localStorage.getItem("language") as Language) || "en"
+  const value = useMemo<LanguageContextType>(
+    () => ({ language, setLanguage, t: (key, vars) => translate(language, key, vars) }),
+    [language, setLanguage],
   );
 
-  // Update localStorage when language changes
-  const changeLanguage = (newLanguage: Language) => {
-    setLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
-  };
-
-  // Translation function
-  const t = (key: string) => {
-    return translations[language][key] || key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
-// Hook for using the language context
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
+  if (!context) throw new Error("useLanguage must be used within a LanguageProvider");
   return context;
 };

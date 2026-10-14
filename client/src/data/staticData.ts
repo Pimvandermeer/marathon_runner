@@ -1,209 +1,107 @@
-import { LocationTime, RunnerInput } from '@shared/schema';
-import { getWaveStartTimes, getViewingLocations } from '@/data/marathonConfig';
+import type { RunnerInput } from "@shared/schema";
 
-// Utility function to convert pace (mm:ss) to minutes
-function paceToMinutes(pace: string): number {
-  // Handle empty input
-  if (!pace || pace.trim() === '') {
-    return 0;
-  }
-  
-  // Handle different formats
-  if (pace.includes(':')) {
-    const parts = pace.split(':');
-    const minutes = parseInt(parts[0] || '0', 10);
-    const seconds = parseInt(parts[1] || '0', 10);
-    return minutes + seconds / 60;
-  } else {
-    // Try to parse as just minutes
-    return parseInt(pace, 10) || 0;
-  }
+/**
+ * Pace and passing-time math. Pure: the caller passes the marathon pack, so
+ * every number a supporter sees is reproducible from (input, pack).
+ * Pinned by staticData.test.ts (R11 regression contract): do not change the
+ * arithmetic or the output format without updating that contract on purpose.
+ *
+ * There is deliberately no "current position" here (decision D8): race-day
+ * tracking belongs to the organiser's app.
+ */
+
+/** The minimum a pack must provide for predictions. */
+export interface PredictionPack<L extends { kilometer: number }> {
+  waveStartTimes: Record<string, string>;
+  viewingLocations: readonly L[];
 }
 
-// Add time to a base time
+export type Timed<L> = L & { estimatedTime: string };
+
+export interface RunnerPrediction<L> {
+  locationTimes: Timed<L>[];
+  estimatedFinish: string;
+  runner: { id: string; name: string; wave: string; pace: string };
+}
+
+const MARATHON_KM = 42.195;
+
+// Convert pace (m:ss, or bare minutes) to minutes per km; unparsable input gives 0.
+function paceToMinutes(pace: string): number {
+  if (!pace || pace.trim() === "") return 0;
+  if (pace.includes(":")) {
+    const parts = pace.split(":");
+    const minutes = parseInt(parts[0] || "0", 10);
+    const seconds = parseInt(parts[1] || "0", 10);
+    return minutes + seconds / 60;
+  }
+  return parseInt(pace, 10) || 0;
+}
+
+// Add minutes to an HH:MM base time. Output is H:MM (hours unpadded, minutes
+// floored and zero-padded); this format is part of the regression contract.
 function addTime(baseTime: string, minutesToAdd: number): string {
-  const [hours, minutes] = baseTime.split(':').map(Number);
-  
+  const [hours, minutes] = baseTime.split(":").map(Number);
   const totalMinutes = hours * 60 + minutes + minutesToAdd;
   const newHours = Math.floor(totalMinutes / 60);
-  const newMinutes = Math.floor(totalMinutes % 60).toString().padStart(2, '0');
-  
+  const newMinutes = Math.floor(totalMinutes % 60).toString().padStart(2, "0");
   return `${newHours}:${newMinutes}`;
 }
 
-// Format elapsed time in a natural format (Xh Ym Zs)
-function formatElapsedTime(minutes: number): string {
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = Math.floor(minutes % 60);
-  const seconds = Math.floor((minutes * 60) % 60);
-  
-  // For display in timeline, use a more readable format
-  if (hours > 0) {
-    return `${hours}h ${remainingMinutes}m ${seconds}s`;
-  } else if (remainingMinutes > 0) {
-    return `${remainingMinutes}m ${seconds}s`;
-  } else {
-    return `${seconds}s`;
-  }
-}
-
-// Get marathon locations from the configuration
-export function getMarathonLocations() {
-  return getViewingLocations().map((location, index) => ({
-    id: index + 1,
-    name: location.name,
-    kilometer: location.kilometer,
-    description: location.description || null,
-    mapPositionX: location.mapPositionX,
-    mapPositionY: location.mapPositionY,
-    latitude: location.latitude,
-    longitude: location.longitude
-  }));
-}
-
-// Function to calculate pace from target finish time
-function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
-  // Handle empty input
-  if (!finishTime || finishTime.trim() === '') {
-    return "0:00";
-  }
-
-  
-  const waveStartTimes = getWaveStartTimes();
-  const startTime = waveStartTimes[wave];
-  
-  // Parse finish and start times
+// Target finish time (h:mm, or bare total minutes) to an even pace (m:ss).
+function calculatePaceFromFinishTime(finishTime: string): string {
+  if (!finishTime || finishTime.trim() === "") return "0:00";
   let totalFinishMinutes = 0;
-  
-  // Handle different formats (with or without colon)
-  if (finishTime.includes(':')) {
-    const parts = finishTime.split(':');
-    const hours = parseInt(parts[0] || '0', 10);
-    const minutes = parseInt(parts[1] || '0', 10);
-    totalFinishMinutes = hours * 60 + minutes;
+  if (finishTime.includes(":")) {
+    const parts = finishTime.split(":");
+    totalFinishMinutes = parseInt(parts[0] || "0", 10) * 60 + parseInt(parts[1] || "0", 10);
   } else {
-    // Try to parse as number of minutes
     totalFinishMinutes = parseInt(finishTime, 10) || 0;
   }
-  
-  // For finish time input, we're not calculating from start time, but total race time
-  // A marathon is 42.195 km, so we need to divide the total minutes by that distance
-  
-  
-  // Calculate pace (minutes per km)
-  const paceMinutes = totalFinishMinutes / 42.195;
-  
-  
-  // Format to mm:ss
+  const paceMinutes = totalFinishMinutes / MARATHON_KM;
   const mins = Math.floor(paceMinutes);
   const secs = Math.round((paceMinutes - mins) * 60);
-  
-  const result = `${mins}:${secs.toString().padStart(2, '0')}`;
-  
-  return result;
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
-// Function to calculate runner predictions (static version of the backend function)
-export function calculateRunnerPredictions(runnerInput: RunnerInput) {
+export function getMarathonLocations<L extends { kilometer: number }>(pack: PredictionPack<L>): L[] {
+  return [...pack.viewingLocations];
+}
+
+export function calculateRunnerPredictions<L extends { kilometer: number }>(
+  runnerInput: RunnerInput,
+  pack: PredictionPack<L>,
+): RunnerPrediction<L> {
   const { wave, pace, finishTime, runnerName, id } = runnerInput;
-  
-  // Make sure we have a wave selected
-  if (!wave) {
-    throw new Error("Wave must be selected");
-  }
 
+  if (!wave) throw new Error("Wave must be selected");
+  const startTime = pack.waveStartTimes[wave];
+  if (!startTime) throw new Error(`Unknown wave "${wave}" for this marathon`);
 
-  // Determine pace - either use provided pace or calculate from finish time
-  let effectivePace = "5:30"; // Default pace as fallback (reasonable marathon pace)
-  
-  if (pace && pace.trim() !== '') {
+  // A pace wins over a finish time; with neither, the 5:30 fallback applies
+  // (form validation rejects that case before it gets here).
+  let effectivePace = "5:30";
+  if (pace && pace.trim() !== "") {
     effectivePace = pace;
-  } else if (finishTime && finishTime.trim() !== '') {
-    effectivePace = calculatePaceFromFinishTime(wave, finishTime);
+  } else if (finishTime && finishTime.trim() !== "") {
+    effectivePace = calculatePaceFromFinishTime(finishTime);
   }
-  
-  
+
   const paceInMinutes = paceToMinutes(effectivePace);
-  
-  // Catch unreasonable pace values
-  if (paceInMinutes <= 0 || paceInMinutes > 15) { // No one runs slower than 15 min/km in a marathon
+  if (paceInMinutes <= 0 || paceInMinutes > 15) {
     throw new Error("Invalid pace value. Please enter a valid pace or finish time.");
   }
-  
-  const waveStartTimes = getWaveStartTimes();
-  const startTime = waveStartTimes[wave];
-  
-  // Create a unique ID if one wasn't provided
+
   const runnerId = id || `runner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-  
-  // Calculate location times
-  const locations = getMarathonLocations();
-  const locationTimes: LocationTime[] = locations.map((location: any) => {
-    const timeToReachInMinutes = location.kilometer * paceInMinutes;
-    const estimatedTime = addTime(startTime, timeToReachInMinutes);
-    
-    return {
-      name: location.name,
-      kilometer: location.kilometer,
-      description: location.description,
-      estimatedTime,
-      mapPositionX: location.mapPositionX,
-      mapPositionY: location.mapPositionY,
-      latitude: location.latitude,
-      longitude: location.longitude
-    };
-  });
-  
-  // Simulate race day scenario based on marathon configuration
-  // Get the current marathon configuration
-  const currentDate = new Date();
-  
-  // Extract hours and minutes from the current date
-  const currentHour = currentDate.getHours();
-  const currentMinute = currentDate.getMinutes();
-  
-  // Parse the user's start time
-  const [startHour, startMinute] = startTime.split(":").map(Number);
-  
-  // Determine a position in the race based on elapsed time since wave start (simulated)
-  let currentDistance;
-  
-  // Calculate minutes elapsed since the wave start time
-  const currentTotalMinutes = currentHour * 60 + currentMinute;
-  const startTotalMinutes = startHour * 60 + startMinute;
-  const elapsedMinutesSinceStart = Math.max(0, currentTotalMinutes - startTotalMinutes);
-  
-  // If the race hasn't started yet for this wave, set distance to 0
-  if (elapsedMinutesSinceStart <= 0) {
-    currentDistance = 0;
-  } else {
-    // Calculate how far they would have run based on their pace
-    currentDistance = Math.min(42.195, (elapsedMinutesSinceStart / paceInMinutes));
-  }
-  
-  // Calculate times based on the current position
-  const elapsedTimeMinutes = currentDistance * paceInMinutes;
-  const elapsedTime = formatElapsedTime(elapsedTimeMinutes);
-  const estimatedFinishMinutes = 42.195 * paceInMinutes;
-  const estimatedFinish = addTime(startTime, estimatedFinishMinutes);
-  
+
+  const locationTimes = pack.viewingLocations.map((location) => ({
+    ...location,
+    estimatedTime: addTime(startTime, location.kilometer * paceInMinutes),
+  }));
+
   return {
     locationTimes,
-    currentLocation: {
-      distance: currentDistance,
-      elapsedTime,
-      estimatedFinish
-    },
-    runner: {
-      id: runnerId,
-      name: runnerName || "Runner",
-      wave,
-      pace: effectivePace
-    }
+    estimatedFinish: addTime(startTime, MARATHON_KM * paceInMinutes),
+    runner: { id: runnerId, name: runnerName || "Runner", wave, pace: effectivePace },
   };
-}
-
-// Function to get all marathon locations
-export function getAllMarathonLocations() {
-  return getViewingLocations();
 }

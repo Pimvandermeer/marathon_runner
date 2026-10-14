@@ -12,13 +12,20 @@
  * `calculatePaceFromFinishTime` and `addTime` are module-internal, so each
  * is pinned through the public `calculateRunnerPredictions` output.
  *
- * Fixture: the currently registered Rotterdam pack
- * (client/src/data/marathons/rotterdam.json): wave 1 starts 10:00,
- * wave 3 starts 10:14, 16 viewing locations from 0 km to 42.195 km.
+ * Fixture: the Rotterdam 2025 pack (client/src/data/marathons/rotterdam.json),
+ * passed explicitly since calculateRunnerPredictions takes the pack as input:
+ * wave 1 starts 10:00, wave 3 starts 10:14, 16 viewing locations from 0 km to
+ * 42.195 km. It is no longer a published pack; it is only a fixture here.
+ *
+ * D8 removed currentLocation; the one deterministic value it carried,
+ * estimatedFinish, is now a top-level field and stays pinned below.
  */
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { calculateRunnerPredictions, getMarathonLocations } from "@/data/staticData";
 import { runnerInputSchema } from "@shared/schema";
+import rotterdam from "@/data/marathons/rotterdam.json";
+
+const FIXTURE = rotterdam;
 
 const ROTTERDAM_KMS = [0, 1, 5, 10, 13.1, 18.6, 21.1, 23.7, 25, 26.7, 28.2, 30, 35, 36.1, 40, 42.195];
 
@@ -29,22 +36,16 @@ function run(input: { wave: string; pace: string; finishTime: string; runnerName
     wave: input.wave,
     pace: input.pace,
     finishTime: input.finishTime,
-  });
+  }, FIXTURE);
 }
 
 function timesByKm(result: ReturnType<typeof calculateRunnerPredictions>): Record<string, string> {
   return Object.fromEntries(result.locationTimes.map((l) => [String(l.kilometer), l.estimatedTime]));
 }
 
-beforeEach(() => {
-  // marathonConfig reads localStorage("selectedMarathon"); jsdom provides a
-  // real localStorage. Clear it so the default (Rotterdam) pack is used.
-  localStorage.clear();
-});
-
-describe("fixture: registered Rotterdam pack", () => {
+describe("fixture: Rotterdam pack", () => {
   it("exposes the 16 viewing locations in course order", () => {
-    expect(getMarathonLocations().map((l) => l.kilometer)).toEqual(ROTTERDAM_KMS);
+    expect(getMarathonLocations(FIXTURE).map((l) => l.kilometer)).toEqual(ROTTERDAM_KMS);
   });
 });
 
@@ -79,7 +80,7 @@ describe("calculateRunnerPredictions: locationTimes (addTime + paceToMinutes via
   });
 
   it("carries name, kilometer, description and coordinates from the pack onto each entry", () => {
-    const locations = getMarathonLocations();
+    const locations = getMarathonLocations(FIXTURE);
     const result = run({ wave: "1", pace: "5:00", finishTime: "" });
     expect(result.locationTimes).toHaveLength(locations.length);
     result.locationTimes.forEach((entry, i) => {
@@ -201,21 +202,24 @@ describe("calculateRunnerPredictions: runner block", () => {
     const named = run({ wave: "1", pace: "5:00", finishTime: "", runnerName: "Pim" });
     expect(named.runner).toEqual({ id: "test-runner", name: "Pim", wave: "1", pace: "5:00" });
 
-    const anonymous = calculateRunnerPredictions({ id: "x", runnerName: "", wave: "1", pace: "5:00", finishTime: "" });
+    const anonymous = calculateRunnerPredictions({ id: "x", runnerName: "", wave: "1", pace: "5:00", finishTime: "" }, FIXTURE);
     expect(anonymous.runner.name).toBe("Runner");
   });
 
   it("generates an id when none is provided", () => {
-    const result = calculateRunnerPredictions({ runnerName: "A", wave: "1", pace: "5:00", finishTime: "" });
+    const result = calculateRunnerPredictions({ runnerName: "A", wave: "1", pace: "5:00", finishTime: "" }, FIXTURE);
     expect(result.runner.id).toMatch(/^runner-\d+-[a-z0-9]+$/);
   });
 });
 
-describe("currentLocation (scheduled for removal by D8; only the deterministic part is pinned)", () => {
+describe("estimatedFinish (moved out of currentLocation by D8)", () => {
   it("estimatedFinish equals the 42.195 km location time", () => {
     const result = run({ wave: "1", pace: "5:00", finishTime: "" });
-    expect(result.currentLocation.estimatedFinish).toBe("13:30");
-    expect(result.currentLocation.estimatedFinish).toBe(timesByKm(result)["42.195"]);
-    // distance / elapsedTime depend on the wall clock and are deliberately not asserted.
+    expect(result.estimatedFinish).toBe("13:30");
+    expect(result.estimatedFinish).toBe(timesByKm(result)["42.195"]);
+  });
+
+  it("no wall-clock position is computed any more", () => {
+    expect("currentLocation" in run({ wave: "1", pace: "5:00", finishTime: "" })).toBe(false);
   });
 });
