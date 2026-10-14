@@ -39,6 +39,13 @@ export function padTime(time: string): string {
   return /^\d:\d\d$/.test(time) ? `0${time}` : time;
 }
 
+/** "09:11" + 13 -> "09:24" (same day). */
+export function addMinutes(hhmm: string, minutes: number): string {
+  const [h, m] = hhmm.split(":").map(Number);
+  const total = h * 60 + m + minutes;
+  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+}
+
 export function directionsUrl(latitude: number, longitude: number): string {
   return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=transit`;
 }

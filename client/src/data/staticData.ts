@@ -14,13 +14,19 @@ import type { RunnerInput } from "@shared/schema";
 export interface PredictionPack<L extends { kilometer: number }> {
   waveStartTimes: Record<string, string>;
   viewingLocations: readonly L[];
+  /** Latest start-line crossing for the last wave, from the organiser (HH:MM). */
+  startWindowEnd?: string;
 }
 
-export type Timed<L> = L & { estimatedTime: string };
+/** estimatedTime: crossing the line as the wave starts. latestTime: crossing at the end of the wave's window. */
+export type Timed<L> = L & { estimatedTime: string; latestTime: string };
 
 export interface RunnerPrediction<L> {
   locationTimes: Timed<L>[];
   estimatedFinish: string;
+  latestFinish: string;
+  /** Minutes a runner in this wave may cross the start line after the wave starts. */
+  crossingMinutes: number;
   runner: { id: string; name: string; wave: string; pace: string };
 }
 
@@ -64,6 +70,28 @@ function calculatePaceFromFinishTime(finishTime: string): string {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
+function toMinutes(hhmm: string): number {
+  const [h, m] = hhmm.split(":").map(Number);
+  return h * 60 + m;
+}
+
+/**
+ * How long after its start a wave may still be crossing the start line:
+ * until the next wave starts, and for the last wave until the organiser's
+ * start window ends. 0 when neither is known. An estimate, not an organiser
+ * figure per wave; the UI says so.
+ */
+export function crossingMinutes(
+  pack: { waveStartTimes: Record<string, string>; startWindowEnd?: string },
+  wave: string,
+): number {
+  const waves = Object.keys(pack.waveStartTimes);
+  const i = waves.indexOf(wave);
+  if (i === -1) return 0;
+  const end = i + 1 < waves.length ? pack.waveStartTimes[waves[i + 1]] : pack.startWindowEnd;
+  return end ? Math.max(0, toMinutes(end) - toMinutes(pack.waveStartTimes[wave])) : 0;
+}
+
 export function getMarathonLocations<L extends { kilometer: number }>(pack: PredictionPack<L>): L[] {
   return [...pack.viewingLocations];
 }
@@ -94,14 +122,18 @@ export function calculateRunnerPredictions<L extends { kilometer: number }>(
 
   const runnerId = id || `runner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
+  const crossing = crossingMinutes(pack, wave);
   const locationTimes = pack.viewingLocations.map((location) => ({
     ...location,
     estimatedTime: addTime(startTime, location.kilometer * paceInMinutes),
+    latestTime: addTime(startTime, crossing + location.kilometer * paceInMinutes),
   }));
 
   return {
     locationTimes,
     estimatedFinish: addTime(startTime, MARATHON_KM * paceInMinutes),
+    latestFinish: addTime(startTime, crossing + MARATHON_KM * paceInMinutes),
+    crossingMinutes: crossing,
     runner: { id: runnerId, name: runnerName || "Runner", wave, pace: effectivePace },
   };
 }
