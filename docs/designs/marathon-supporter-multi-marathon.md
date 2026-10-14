@@ -1102,6 +1102,12 @@ _No new tasks from Performance review beyond T3._
 - Parallelization: 4 lanes, 2 parallel / 2 sequential
 - Lake Score: 10/12 = answers picking a 10/10 option / answers scored for Completeness (D1 kind-note, D2 A=8, D4 B=10, D5 A=10, D6 A=10, D7 kind-note, D8 B=8, D9 A=10, D10 A=10, D11 A=10, D12 A=10; scored: D2, D4, D5, D6, D8, D9, D10, D11, D12 = 9 scored, 7 at 10/10) → Lake Score: 7/9
 
+## Implementation notes (2026-10-14, after the eng review)
+
+- PR3 (UX pass, R13) was folded into PR2. Wiring the new pack shape into the old components and then redesigning them would have rebuilt the same screens twice, so the UI was rebuilt once on the new data model with the design pass applied: mobile-first stop list, organiser wave colours, brand red deepened to 5.2:1 contrast for white text, system fonts (no third-party font request), Dutch and English with compile-time key parity. The no-data/no-computation/no-link-format boundary of R13 is respected: packs, staticData math and the link format are pinned by tests.
+- The second stop pass (km 12-26 and 28-37 gaps, four re-issued candidates) was stopped before it wrote anything; it is a P1 item in TODOS.md.
+- calculateRunnerPredictions now takes the pack as input; the R11 regression test passes the Rotterdam 2025 pack as a fixture with every expected value unchanged.
+
 ## GSTACK REVIEW REPORT
 
 Target: docs/designs/marathon-supporter-multi-marathon.md (Approach A, Amsterdam by hand). Commit 941f5be, branch main.

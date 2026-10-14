@@ -1,34 +1,36 @@
+import { useEffect } from "react";
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Layout from "@/components/Layout";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import LanguageToggle from "@/components/LanguageToggle";
+import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
+import { MarathonProvider, useMarathon } from "@/contexts/MarathonContext";
+import { localize } from "@/data/marathonConfig";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route component={NotFound} />
-    </Switch>
-  );
+function DocumentTitle() {
+  const { language, t } = useLanguage();
+  const { pack } = useMarathon();
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.title = pack ? `${localize(pack.displayName, language)} | ${t("brand.name")}` : t("brand.name");
+  }, [pack, language, t]);
+  return null;
 }
 
-function App() {
+export default function App() {
   return (
     <LanguageProvider>
-      <QueryClientProvider client={queryClient}>
+      <MarathonProvider>
+        <DocumentTitle />
         <Layout>
-          <LanguageToggle />
-          <Router />
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route component={NotFound} />
+          </Switch>
         </Layout>
         <Toaster />
-      </QueryClientProvider>
+      </MarathonProvider>
     </LanguageProvider>
   );
 }
-
-export default App;

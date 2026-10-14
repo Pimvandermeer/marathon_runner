@@ -1,31 +1,29 @@
+import { Coffee } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
+import { useMarathon } from "@/contexts/MarathonContext";
 
 export default function Footer() {
   const { t } = useLanguage();
-  
+  const { pack } = useMarathon();
+
   return (
-    <footer className="bg-neutral-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Rotterdam '25</h3>
-            <p className="text-neutral-300 text-sm mb-4">
-              {t("footer.description")}
-            </p>
-            <Button 
-              variant="outline" 
-              className="bg-neutral-800 border-neutral-700 text-white hover:bg-neutral-700 flex items-center gap-2"
-              onClick={() => window.location.href = 'mailto:mail@pimvandermeer.nl'}
-            >
-              <Mail className="h-4 w-4" />
-              Contact Us
-            </Button>
-          </div>
-        </div>
-        <div className="border-t border-neutral-800 mt-8 pt-8 text-center text-sm text-neutral-400">
-          <p>&copy; 2025 {t("footer.developed")} (<a href="https://pimvandermeer.nl" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">pimvandermeer.nl</a>) - {t("footer.rights")}</p>
+    <footer className="mt-16 border-t border-slate-200 bg-slate-50">
+      <div className="mx-auto max-w-6xl space-y-4 px-4 py-8 text-sm text-slate-600 sm:px-6">
+        <p className="max-w-prose">{t("footer.unofficial")}</p>
+        {pack?.tipUrl && (
+          <a href={pack.tipUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-slate-800 hover:underline">
+            <Coffee className="h-4 w-4" aria-hidden />
+            {t("footer.tip")}
+          </a>
+        )}
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-500">
+          <span>
+            <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="hover:underline">{t("footer.osm")}</a>
+          </span>
+          <a href="mailto:mail@pimvandermeer.nl" className="hover:underline">{t("footer.contact")}</a>
+          <span>
+            {t("footer.made")} <a href="https://pimvandermeer.nl" target="_blank" rel="noopener noreferrer" className="hover:underline">pimvandermeer.nl</a>
+          </span>
         </div>
       </div>
     </footer>

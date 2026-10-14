@@ -8,6 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // client/; merging would make the include glob resolve under client/client/).
 // Aliases mirror vite.config.ts exactly.
 export default defineConfig({
+  // Same JSX transform as @vitejs/plugin-react in vite.config.ts
+  esbuild: { jsx: "automatic" },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),

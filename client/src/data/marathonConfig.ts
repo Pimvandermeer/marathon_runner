@@ -1,103 +1,94 @@
-import { LocationTime } from '@shared/schema';
+import { packSchema, type MarathonPack, type Localized } from "@/data/packSchema";
+import { safeStorage, type KeyValueStorage } from "@/lib/safeStorage";
+import amsterdam2026 from "./marathons/amsterdam-2026.json";
 
-// Define the Marathon Configuration type
-export interface MarathonConfig {
-  id: string;
-  name: string;
-  year: string;
-  date: string;
-  logo: string;
-  routeMap: string;
-  description: string;
-  websiteUrl: string;
-  cityInfo: {
-    country: string;
-    transportInfo: string;
-    timezone: string;
-  };
-  waveStartTimes: Record<string, string>;
-  marathonLandmarks: Array<{
-    distance: number;
-    name: string;
-  }>;
-  viewingLocations: Array<{
-    name: string;
-    kilometer: number;
-    description: string;
-    mapPositionX: number;
-    mapPositionY: number;
-    latitude: number;
-    longitude: number;
-  }>;
-  spectatorTips: string[] | {
-    en: string[];
-    nl: string[];
-  };
-}
-
-// Import the marathon configurations
-import rotterdamConfig from './marathons/rotterdam.json';
-// Amsterdam marathon will be added in the future
-// import amsterdamConfig from './marathons/amsterdam.json';
-
-// List of available marathons (only Rotterdam for now)
-export const availableMarathons: MarathonConfig[] = [
-  rotterdamConfig as MarathonConfig
-];
-
-// Default marathon
-const defaultMarathonId = 'rotterdam';
-
-// Get the currently selected marathon from localStorage or use default
-export function getCurrentMarathon(): MarathonConfig {
-  const savedMarathonId = localStorage.getItem('selectedMarathon') || defaultMarathonId;
-  
-  const marathon = availableMarathons.find(m => m.id === savedMarathonId);
-  return marathon || availableMarathons[0];
-}
-
-// Save the selected marathon to localStorage
-export function setCurrentMarathon(marathonId: string): void {
-  localStorage.setItem('selectedMarathon', marathonId);
-}
-
-// Get viewing locations for current marathon
-export function getViewingLocations(): LocationTime[] {
-  const marathon = getCurrentMarathon();
-  
-  return marathon.viewingLocations.map(location => ({
-    name: location.name,
-    kilometer: location.kilometer,
-    description: location.description,
-    estimatedTime: '', // This will be calculated based on runner data
-    mapPositionX: location.mapPositionX,
-    mapPositionY: location.mapPositionY,
-    latitude: location.latitude,
-    longitude: location.longitude
-  }));
-}
-
-// Get wave start times for current marathon
-export function getWaveStartTimes(): Record<string, string> {
-  return getCurrentMarathon().waveStartTimes;
-}
-
-// Get landmarks for current marathon
-export function getMarathonLandmarks(): Array<{ distance: number; name: string }> {
-  return getCurrentMarathon().marathonLandmarks;
-}
-
-// Get spectator tips for current marathon in the specified language
-export function getSpectatorTips(language: string = 'en'): string[] {
-  const tips = getCurrentMarathon().spectatorTips;
-  
-  // Check if tips are language-specific (use type guard)
-  if (Array.isArray(tips)) {
-    // Tips are just a simple array, return as is
-    return tips;
-  } else {
-    // Tips are language-specific, return for the selected language or fallback to English
-    const languageKey = language as keyof typeof tips;
-    return tips[languageKey] || tips.en;
+/**
+ * Registry of PUBLISHED packs only. A pack is published when its values have
+ * been verified against the organiser (see docs/designs, Data Verification).
+ * rotterdam.json and amsterdam.json stay on disk for Approach B but are not
+ * imported: their values are a past edition.
+ */
+function load(raw: unknown, file: string): MarathonPack {
+  const parsed = packSchema.safeParse(raw);
+  if (!parsed.success) {
+    throw new Error(`Invalid marathon pack ${file}: ${parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
   }
+  return parsed.data;
+}
+
+export const packs: readonly MarathonPack[] = [load(amsterdam2026, "amsterdam-2026.json")];
+
+export const STORAGE_KEY = "selectedMarathon";
+
+/** Today's date as YYYY-MM-DD in the given time zone. */
+export function todayIn(timeZone: string, now: Date = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+}
+
+/** Published packs whose race day has not passed yet (race day itself counts). */
+export function getPublishedPacks(today?: string, all: readonly MarathonPack[] = packs): MarathonPack[] {
+  return all.filter((p) => p.date >= (today ?? todayIn(p.timezone)));
+}
+
+export type Resolution =
+  | { kind: "ok"; pack: MarathonPack; source: "link" | "storage" | "default" }
+  | { kind: "unknown"; id: string; fallback: MarathonPack | null }
+  | { kind: "none" };
+
+/**
+ * Decide which marathon the page shows.
+ * Precedence: marathon id in the link > stored choice > the first published pack.
+ * An id that is not published is never used: a link with one is reported as
+ * unknown (the caller shows a notice), a stored one is discarded.
+ */
+export function resolveMarathon(opts: {
+  linkId?: string | null;
+  storage?: KeyValueStorage;
+  today?: string;
+  all?: readonly MarathonPack[];
+}): Resolution {
+  const storage = opts.storage ?? safeStorage;
+  const published = getPublishedPacks(opts.today, opts.all ?? packs);
+  const fallback = published[0] ?? null;
+
+  if (opts.linkId) {
+    const fromLink = published.find((p) => p.id === opts.linkId);
+    if (fromLink) {
+      storage.setItem(STORAGE_KEY, fromLink.id);
+      return { kind: "ok", pack: fromLink, source: "link" };
+    }
+    return { kind: "unknown", id: opts.linkId, fallback };
+  }
+
+  const storedId = storage.getItem(STORAGE_KEY);
+  if (storedId) {
+    const stored = published.find((p) => p.id === storedId);
+    if (stored) return { kind: "ok", pack: stored, source: "storage" };
+    storage.removeItem(STORAGE_KEY);
+  }
+
+  return fallback ? { kind: "ok", pack: fallback, source: "default" } : { kind: "none" };
+}
+
+export function setCurrentMarathon(id: string, storage: KeyValueStorage = safeStorage): void {
+  storage.setItem(STORAGE_KEY, id);
+}
+
+export function findPublishedPack(id: string, today?: string): MarathonPack | undefined {
+  return getPublishedPacks(today).find((p) => p.id === id);
+}
+
+export function localize(value: Localized, language: string): string {
+  return language === "nl" ? value.nl : value.en;
+}
+
+/** "Wave 3 (pink) 09:11" when the pack labels waves, else "Wave 3 - 09:11". */
+export function waveOptionLabel(pack: MarathonPack, wave: string, language: string, waveWord: string): string {
+  const time = pack.waveStartTimes[wave];
+  const label = pack.waveLabels?.[wave];
+  return label ? `${waveWord} ${wave} (${localize(label, language)}) ${time}` : `${waveWord} ${wave} - ${time}`;
+}
+
+export function getSpectatorTips(pack: MarathonPack, language: string): string[] {
+  return language === "nl" ? pack.spectatorTips.nl : pack.spectatorTips.en;
 }
