@@ -208,7 +208,7 @@ Counts: `stopsVerified: 7`, `stopsOmitted: 5` (stops, not entries). The omitted 
 - Marathon Area A and Area B have identical wave start times on every organiser page; no separate B times exist.
 - The race-day accessibility PDF (bereikbaarheid-race-day-tcs-amsterdam-marathon-2026-v3.pdf) has no reliably extractable text (one verifier extracted "Amstelveenseweg (closed between 12 am - 6 pm)", another could not extract anything); nothing from the PDF is published.
 - Tram diversions on race day (lines 2, 4, 12, 24, 29, 5, 6, 25, 1, 7, 19) are not published by the organiser per line (no GVB 2026 notice found on 2026-10-14); stop descriptions use the organiser's hedged wording ("may be diverted, check gvb.nl").
-- `tipUrl` is null: not supplied by the owner as of 2026-10-14 (due 2026-10-16 per the Working plan).
+- (2026-10-14, later) The tip link moved out of the pack into the site-wide setting `client/src/config.ts` (`TIP_URL`); it is not race data. Original note: `tipUrl` is null: not supplied by the owner as of 2026-10-14 (due 2026-10-16 per the Working plan).
 - `transportType: "walk"` is used for the Start and Finish course points (the stadium is not a transit stop); the product lane's packSchema must allow it alongside tram, metro, train and bus.
 
 ## Daily re-read (Data Verification rule: organiser page re-read daily until race day; any change triggers a pack update and redeploy)
@@ -226,7 +226,7 @@ Each day, one agent re-reads the pages below and records URL, timestamp and valu
 
 ### 2026-10-16 (go/no-go 18:00)
 - [ ] Same six checks as 2026-10-15.
-- [ ] Owner: tipUrl supplied? If yes, add to the pack (`tipUrl`) and record here; if not, the tip link stays absent.
+- [ ] Owner: tip link supplied? If yes, set `TIP_URL` in `client/src/config.ts` (site-wide, not part of the pack) and record here; if not, the tip link stays absent.
 - [ ] Go/no-go at 18:00: all values unchanged and the pack deployed → go.
 
 ### 2026-10-17 (day before race)

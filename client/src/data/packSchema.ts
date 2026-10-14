@@ -75,7 +75,6 @@ export const packSchema = z
     websiteUrl: httpsUrl,
     courseMapUrl: httpsUrl,
     routeMap: z.string().nullable(),
-    tipUrl: httpsUrl.nullable(),
     description: localizedSchema,
     cityInfo: z.object({
       country: z.string(),
