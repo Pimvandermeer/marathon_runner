@@ -211,6 +211,18 @@ Counts: `stopsVerified: 7`, `stopsOmitted: 5` (stops, not entries). The omitted 
 - (2026-10-14, later) The tip link moved out of the pack into the site-wide setting `client/src/config.ts` (`TIP_URL`); it is not race data. Original note: `tipUrl` is null: not supplied by the owner as of 2026-10-14 (due 2026-10-16 per the Working plan).
 - `transportType: "walk"` is used for the Start and Finish course points (the stadium is not a transit stop); the product lane's packSchema must allow it alongside tram, metro, train and bus.
 
+## Start window and passing-time ranges (added 2026-10-14)
+
+| Value | Source URL | Checked | Value | Verdict |
+|---|---|---|---|---|
+| startWindowEnd | https://www.tcsamsterdammarathon.eu/tcs-marathon ; https://www.tcsamsterdammarathon.nl/tcs-marathon | 2026-10-14 | "Start time: 09.00 - 09.50 hours" / "Het kan tot 09.50 uur duren voordat je daadwerkelijk van start gaat" | same organiser value as the "Start window" row above (both readers agreed); published `startWindowEnd: 09:50` |
+
+Method, not an organiser figure: the site shows each passing time as a range. The earliest time assumes the runner crosses the start line when the wave starts. The latest assumes crossing until the next wave starts, and for wave 6 until 09:50. The organiser publishes no per-wave crossing time; the "until the next wave starts" rule is an assumption, and the page text says the later time "allows for crossing later, until the next wave starts".
+
+## Stop descriptions shortened (2026-10-14)
+
+The `description` texts were shortened for supporters (average 275 to 156 characters). No new facts were added; every remaining statement comes from the verified text above. Dropped details stay recorded in this log: start pen opening times, the 08:50 field deadline for waves 1 and 2, the Q-Park Mahler car park, the 1.3 km walk from Zuid to the stadium, the half-marathon passing points, and the finish "busiest spot" remark (which was never verified).
+
 ## Course map image (added 2026-10-14, owner decision reversing D9)
 
 | Value | Source URL | Checked | Value |

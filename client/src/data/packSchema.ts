@@ -92,6 +92,8 @@ export const packSchema = z
     }),
     waveStartTimes: z.record(hhmm),
     waveLabels: z.record(localizedSchema).optional(),
+    // Organiser's latest start-line crossing time for the last wave (e.g. "09:50").
+    startWindowEnd: hhmm.optional(),
     marathonLandmarks: z.array(landmarkSchema).min(2),
     viewingLocations: z.array(viewingLocationSchema).min(2),
     spectatorTips: z.object({ en: z.array(z.string().min(1)), nl: z.array(z.string().min(1)) }),
@@ -110,6 +112,9 @@ export const packSchema = z
     const times = Object.values(pack.waveStartTimes);
     for (let i = 1; i < times.length; i++) {
       if (times[i] <= times[i - 1]) ctx.addIssue({ code: "custom", path: ["waveStartTimes"], message: "wave start times must be strictly ascending" });
+    }
+    if (pack.startWindowEnd && times.length && pack.startWindowEnd < times[times.length - 1]) {
+      ctx.addIssue({ code: "custom", path: ["startWindowEnd"], message: "start window must end at or after the last wave start" });
     }
     if (pack.waveLabels) {
       for (const k of Object.keys(pack.waveLabels)) {

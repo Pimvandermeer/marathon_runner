@@ -20,7 +20,7 @@ export default function RaceInfo({ pack }: { pack: MarathonPack }) {
         </div>
         <div>
           <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{t("race.startWindow")}</dt>
-          <dd className="mt-0.5 font-mono font-medium tabular-nums text-slate-900">{padTime(times[0])}–{padTime(times[times.length - 1])}</dd>
+          <dd className="mt-0.5 font-mono font-medium tabular-nums text-slate-900">{padTime(times[0])}–{padTime(pack.startWindowEnd ?? times[times.length - 1])}</dd>
         </div>
       </dl>
 

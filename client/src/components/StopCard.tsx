@@ -10,7 +10,7 @@ const ICONS: Record<TransportType, typeof Train> = {
 };
 
 interface StopCardProps {
-  stop: ViewingLocation & { estimatedTime: string };
+  stop: ViewingLocation & { estimatedTime: string; latestTime: string };
   isLast: boolean;
 }
 
@@ -19,13 +19,15 @@ export default function StopCard({ stop, isLast }: StopCardProps) {
   const Icon = ICONS[stop.transportType] ?? MapPin;
   const isEndpoint = stop.transportType === "walk";
   const passCount = new Set(stop.passes).size;
+  const hasWindow = stop.latestTime !== stop.estimatedTime;
 
   return (
     <li className="relative grid grid-cols-1 sm:grid-cols-[5.5rem_1fr] sm:gap-x-4">
       {/* time rail (tablet and up; on phones the time sits in the card header) */}
       <div className="relative hidden flex-col items-end pt-1 text-right sm:flex">
         <span className="font-mono text-xl font-semibold tabular-nums text-slate-900 sm:text-2xl">{padTime(stop.estimatedTime)}</span>
-        <span className="text-xs font-medium tabular-nums text-slate-500">{formatKm(stop.kilometer, language)} {t("stop.km")}</span>
+        {hasWindow && <span className="font-mono text-sm font-medium tabular-nums text-slate-500">–{padTime(stop.latestTime)}</span>}
+        <span className="mt-0.5 text-xs font-medium tabular-nums text-slate-500">{formatKm(stop.kilometer, language)} {t("stop.km")}</span>
       </div>
 
       <div className={cn("relative ml-2 border-l-2 pb-5 pl-5 sm:ml-0 sm:pb-6", isLast ? "border-transparent" : "border-slate-200")}>
@@ -39,6 +41,7 @@ export default function StopCard({ stop, isLast }: StopCardProps) {
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <p className="mb-1 flex items-baseline gap-2 sm:hidden">
             <span className="font-mono text-xl font-semibold tabular-nums text-slate-900">{padTime(stop.estimatedTime)}</span>
+            {hasWindow && <span className="font-mono text-sm font-medium tabular-nums text-slate-500">–{padTime(stop.latestTime)}</span>}
             <span className="text-xs font-medium tabular-nums text-slate-500">{formatKm(stop.kilometer, language)} {t("stop.km")}</span>
           </p>
           <div className="flex flex-wrap items-start justify-between gap-2">

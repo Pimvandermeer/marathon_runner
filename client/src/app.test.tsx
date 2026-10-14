@@ -66,7 +66,7 @@ describe("shared links", () => {
     expect(screen.getByRole("heading", { name: "Sanne" })).toBeTruthy();
     expect(screen.getByText("Shared plan")).toBeTruthy();
     // 09:11 + 42.195 km at 5:00/km, in the summary and on the finish stop
-    expect(screen.getByText("Est. finish").nextElementSibling?.textContent).toBe("12:41");
+    expect(screen.getByText("Est. finish").nextElementSibling?.textContent).toBe("12:41–12:54");
     const stops = document.querySelectorAll('section[aria-labelledby="plan-heading"] ol > li');
     expect(stops).toHaveLength(ams.viewingLocations.length);
     expect(stops[stops.length - 1].textContent).toContain("12:41");

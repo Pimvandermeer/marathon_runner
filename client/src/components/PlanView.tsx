@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarathonPack, ViewingLocation } from "@/data/packSchema";
 import { localize } from "@/data/marathonConfig";
 import type { RunnerPrediction } from "@/data/staticData";
-import { padTime, waveSwatch } from "@/lib/format";
+import { addMinutes, padTime, waveSwatch } from "@/lib/format";
 import StopCard from "./StopCard";
 import { TIP_URL } from "@/config";
 
@@ -58,6 +58,11 @@ export default function PlanView({ pack, runner, onShare, onRemove }: PlanViewPr
           <div>
             <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{t("plan.start")}</dt>
             <dd className="mt-0.5 font-mono text-lg font-semibold tabular-nums text-slate-900">{padTime(pack.waveStartTimes[wave])}</dd>
+            {prediction.crossingMinutes > 0 && (
+              <dd className="px-1 text-[11px] leading-tight text-slate-500">
+                {t("plan.crossing", { time: padTime(addMinutes(pack.waveStartTimes[wave], prediction.crossingMinutes)) })}
+              </dd>
+            )}
           </div>
           <div>
             <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{t("plan.pace")}</dt>
@@ -65,7 +70,12 @@ export default function PlanView({ pack, runner, onShare, onRemove }: PlanViewPr
           </div>
           <div>
             <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{t("plan.finish")}</dt>
-            <dd className="mt-0.5 font-mono text-lg font-semibold tabular-nums text-slate-900">{padTime(prediction.estimatedFinish)}</dd>
+            <dd className="mt-0.5 font-mono text-lg font-semibold tabular-nums text-slate-900">
+              {padTime(prediction.estimatedFinish)}
+              {prediction.latestFinish !== prediction.estimatedFinish && (
+                <span className="block font-mono text-sm font-medium text-slate-500">–{padTime(prediction.latestFinish)}</span>
+              )}
+            </dd>
           </div>
         </dl>
       </div>
