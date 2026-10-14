@@ -74,7 +74,17 @@ export const packSchema = z
     timezone: z.string().refine(isValidTimeZone, "must be an IANA time zone"),
     websiteUrl: httpsUrl,
     courseMapUrl: httpsUrl,
-    routeMap: z.string().nullable(),
+    // Organiser course map rendered to images in client/public (preview for the
+    // page, full size for zooming), with the original as the cited source.
+    routeMap: z
+      .object({
+        preview: z.string().regex(/^\/marathons\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|jpg|png)$/),
+        full: z.string().regex(/^\/marathons\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|jpg|png)$/),
+        width: z.number().int().positive(),
+        height: z.number().int().positive(),
+        source: httpsUrl,
+      })
+      .nullable(),
     description: localizedSchema,
     cityInfo: z.object({
       country: z.string(),

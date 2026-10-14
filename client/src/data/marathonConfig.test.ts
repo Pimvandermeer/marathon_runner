@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { packSchema } from "@/data/packSchema";
 import { getPublishedPacks, packs, resolveMarathon, STORAGE_KEY, todayIn, waveOptionLabel } from "@/data/marathonConfig";
 import { createSafeStorage, type KeyValueStorage } from "@/lib/safeStorage";
@@ -31,6 +33,15 @@ describe("published packs", () => {
     expect(ams.timezone).toBe("Europe/Amsterdam");
     expect(ams.waveStartTimes).toEqual({ "1": "09:00", "2": "09:02", "3": "09:11", "4": "09:24", "5": "09:34", "6": "09:43" });
     expect(Object.values(ams.waveLabels ?? {}).map((l) => l.en)).toEqual(["white", "yellow", "pink", "orange", "green", "blue"]);
+  });
+
+  it("every course map image a pack references exists in client/public", () => {
+    for (const pack of packs) {
+      if (!pack.routeMap) continue;
+      for (const file of [pack.routeMap.preview, pack.routeMap.full]) {
+        expect(existsSync(path.join(process.cwd(), "client", "public", file)), file).toBe(true);
+      }
+    }
   });
 
   it("a pack is published up to and including race day, then drops out", () => {

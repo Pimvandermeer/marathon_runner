@@ -4,6 +4,7 @@ import RunnerForm, { type RunnerFormValues } from "@/components/RunnerForm";
 import PlanView, { type PlannedRunner } from "@/components/PlanView";
 import ShareDialog from "@/components/ShareDialog";
 import RaceInfo from "@/components/RaceInfo";
+import CourseMap from "@/components/CourseMap";
 import { useLanguage, type TranslationKey } from "@/contexts/LanguageContext";
 import { useMarathon } from "@/contexts/MarathonContext";
 import type { MarathonPack } from "@/data/packSchema";
@@ -155,13 +156,16 @@ export default function Home() {
               <p className="mt-6 text-xs text-slate-400">{t("brand.unofficial")}</p>
             </section>
           )}
+          {!selected && <CourseMap pack={pack} className="hidden lg:block" />}
         </div>
 
-        <div className="space-y-6 lg:sticky lg:top-20">
+        <div className="space-y-6">
           <section aria-labelledby="form-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
             <h2 id="form-heading" className="mb-4 text-lg font-semibold text-slate-900">{t(runners.length ? "form.titleAnother" : "form.title")}</h2>
             <RunnerForm pack={pack} onSubmit={addRunner} />
           </section>
+          {/* On the desktop intro the map sits in the main column instead */}
+          <CourseMap pack={pack} className={selected ? undefined : "lg:hidden"} />
           <RaceInfo pack={pack} />
         </div>
       </div>
