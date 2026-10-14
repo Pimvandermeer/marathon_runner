@@ -1,136 +1,91 @@
 import { useState } from "react";
+import { Check, Copy, Coffee, Share } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Check, Copy, Share2 } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-import { FaWhatsapp, FaInstagram } from "react-icons/fa";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { MarathonPack } from "@/data/packSchema";
+import { localize } from "@/data/marathonConfig";
+import { buildShareUrl, type SharedPlan } from "@/lib/shareLink";
 
 interface ShareDialogProps {
-  runners: any[];
-  className?: string;
+  pack: MarathonPack;
+  plan: SharedPlan | null;
+  onOpenChange: (open: boolean) => void;
 }
 
-export function ShareDialog({ runners, className }: ShareDialogProps) {
-  const [copied, setCopied] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { t } = useLanguage();
-  
-  // Generate share URL for the first selected runner
-  const generateShareUrl = () => {
-    if (!runners || runners.length === 0) return "";
-    
-    // Just share the first runner for simplicity
-    const runner = runners[0];
-    const params = new URLSearchParams();
-    
-    params.set("name", runner.info.name);
-    params.set("wave", runner.info.wave);
-    params.set("pace", runner.info.pace);
-    
-    return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
-  };
-  
-  const shareUrl = generateShareUrl();
-  
-  const copyToClipboard = async () => {
+export default function ShareDialog({ pack, plan, onOpenChange }: ShareDialogProps) {
+  const { t, language } = useLanguage();
+  const [copied, setCopied] = useState<"idle" | "ok" | "failed">("idle");
+
+  if (!plan) return null;
+  const url = buildShareUrl(window.location.origin, window.location.pathname, plan);
+  const raceName = localize(pack.name, language);
+  const message = `${t("share.message", { name: plan.name || t("plan.runnerFallback"), race: raceName })} ${url}`;
+  const canNativeShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
+
+  async function copy() {
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      toast({
-        title: t("share.copied"),
-        description: t("share.url_copied"),
-      });
-      
-      setTimeout(() => {
-        setCopied(false);
-      }, 3000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-      toast({
-        title: t("share.error"),
-        description: t("share.copy_failed"),
-        variant: "destructive",
-      });
+      await navigator.clipboard.writeText(url);
+      setCopied("ok");
+      setTimeout(() => setCopied("idle"), 2500);
+    } catch {
+      setCopied("failed");
     }
-  };
-  
-  const shareOnWhatsApp = () => {
-    const text = encodeURIComponent(`${t("share.whatsapp_text")}: ${shareUrl}`);
-    window.open(`https://wa.me/?text=${text}`, "_blank");
-    setOpen(false);
-  };
-  
-  const shareOnInstagram = () => {
-    // Instagram doesn't have a direct sharing URL, so we just copy to clipboard
-    copyToClipboard();
-    toast({
-      title: t("share.instagram_copy"),
-      description: t("share.instagram_instructions"),
-    });
-    setOpen(false);
-  };
-  
+  }
+
+  async function nativeShare() {
+    try {
+      await navigator.share({ title: raceName, text: message, url });
+    } catch {
+      // user cancelled
+    }
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          className={cn("bg-green-600 hover:bg-green-700 text-white w-full", className)}
-          disabled={!runners || runners.length === 0}
-        >
-          <Share2 className="mr-2 h-4 w-4" />
-          {t("share.button")}
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open onOpenChange={(open) => { if (!open) setCopied("idle"); onOpenChange(open); }}>
+      <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>{t("share.title")}</DialogTitle>
-          <DialogDescription>
-            {t("share.description")}
-          </DialogDescription>
+          <DialogDescription>{t("share.body")}</DialogDescription>
         </DialogHeader>
-        
-        <div className="flex items-center space-x-2 mt-4">
-          <Input
-            value={shareUrl}
-            readOnly
-            className="flex-1"
-          />
-          <Button onClick={copyToClipboard} size="icon" variant="outline">
-            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+
+        <div className="flex gap-2">
+          <Input readOnly value={url} onFocus={(e) => e.currentTarget.select()} className="h-10 font-mono text-xs" aria-label="URL" />
+          <Button type="button" variant="outline" onClick={copy} className="h-10 shrink-0">
+            {copied === "ok" ? <Check className="mr-1.5 h-4 w-4 text-green-700" aria-hidden /> : <Copy className="mr-1.5 h-4 w-4" aria-hidden />}
+            {copied === "ok" ? t("share.copied") : t("share.copy")}
           </Button>
         </div>
-        
-        <div className="grid grid-cols-2 gap-4 mt-6">
-          <Button 
-            onClick={shareOnWhatsApp}
-            className="flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white"
+        <p className="min-h-[1.25rem] text-sm text-red-700" role="status">{copied === "failed" ? t("share.copyFailed") : ""}</p>
+
+        <div className="grid grid-cols-2 gap-2">
+          <Button asChild className="h-11 bg-[#1f8f4e] text-white hover:bg-[#187a41]">
+            <a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="mr-2 h-4 w-4" aria-hidden />
+              {t("share.whatsapp")}
+            </a>
+          </Button>
+          {canNativeShare ? (
+            <Button type="button" variant="outline" onClick={nativeShare} className="h-11">
+              <Share className="mr-2 h-4 w-4" aria-hidden />
+              {t("share.more")}
+            </Button>
+          ) : <span />}
+        </div>
+
+        {pack.tipUrl && (
+          <a
+            href={pack.tipUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 flex items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50"
           >
-            <FaWhatsapp className="mr-2 h-5 w-5" />
-            WhatsApp
-          </Button>
-          
-          <Button 
-            onClick={shareOnInstagram}
-            className="flex items-center justify-center bg-gradient-to-r from-[#833AB4] via-[#E1306C] to-[#F77737] hover:opacity-90 text-white"
-          >
-            <FaInstagram className="mr-2 h-5 w-5" />
-            Instagram
-          </Button>
-        </div>
-        
-        <div className="text-center text-sm text-muted-foreground mt-4">
-          {t("share.note")}
-        </div>
+            <Coffee className="h-4 w-4" aria-hidden />
+            {t("footer.tip")}
+          </a>
+        )}
       </DialogContent>
     </Dialog>
   );

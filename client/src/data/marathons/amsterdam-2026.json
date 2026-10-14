@@ -1,0 +1,1047 @@
+{
+  "id": "amsterdam-2026",
+  "name": {
+    "en": "TCS Amsterdam Marathon",
+    "nl": "TCS Amsterdam Marathon"
+  },
+  "displayName": {
+    "en": "TCS Amsterdam Marathon 2026 (unofficial supporter planner)",
+    "nl": "TCS Amsterdam Marathon 2026 (onofficiële supportersplanner)"
+  },
+  "year": 2026,
+  "date": "2026-10-18",
+  "timezone": "Europe/Amsterdam",
+  "websiteUrl": "https://www.tcsamsterdammarathon.eu/",
+  "courseMapUrl": "https://www.tcsamsterdammarathon.eu/tcs-marathon",
+  "routeMap": null,
+  "tipUrl": null,
+  "description": {
+    "en": "Flat, fast course that starts and finishes at the Olympic Stadium, follows part of the 1928 Olympic marathon route along the Amstel and passes the Vondelpark and the Rijksmuseum twice. Sunday 18 October 2026, waves from 09:00, finish closes 17:00.",
+    "nl": "Vlak en snel parcours dat start en finisht in het Olympisch Stadion, deels de olympische marathonroute van 1928 langs de Amstel volgt en twee keer door het Vondelpark en langs het Rijksmuseum komt. Zondag 18 oktober 2026, waves vanaf 09:00, finish sluit om 17:00."
+  },
+  "cityInfo": {
+    "country": "Netherlands",
+    "transportInfo": {
+      "en": "Amsterdam metro, tram and bus services are run by GVB; a GVB day ticket covers all three. On race day road closures affect tram and bus routes and services in the centre are limited, so check gvb.nl and 9292.nl before you travel; the metro is the most reliable way between viewing spots. Metro station Amstelveenseweg is completely closed on Sunday from 13:00 to 18:00; the organiser names Amsterdam Zuid as the station for the stadium.",
+      "nl": "Metro, tram en bus in Amsterdam worden gereden door GVB; een GVB-dagkaart geldt voor alle drie. Op de wedstrijddag beïnvloeden wegafsluitingen de tram- en busroutes en rijdt er in het centrum beperkt tram en bus, controleer dus gvb.nl en 9292.nl voor je vertrekt; de metro is de betrouwbaarste manier om tussen kijkpunten te reizen. Metrostation Amstelveenseweg is zondag van 13:00 tot 18:00 volledig gesloten; de organisator noemt Amsterdam Zuid als station voor het stadion."
+    }
+  },
+  "waveStartTimes": {
+    "1": "09:00",
+    "2": "09:02",
+    "3": "09:11",
+    "4": "09:24",
+    "5": "09:34",
+    "6": "09:43"
+  },
+  "waveLabels": {
+    "1": {
+      "en": "white",
+      "nl": "wit"
+    },
+    "2": {
+      "en": "yellow",
+      "nl": "geel"
+    },
+    "3": {
+      "en": "pink",
+      "nl": "roze"
+    },
+    "4": {
+      "en": "orange",
+      "nl": "oranje"
+    },
+    "5": {
+      "en": "green",
+      "nl": "groen"
+    },
+    "6": {
+      "en": "blue",
+      "nl": "blauw"
+    }
+  },
+  "marathonLandmarks": [
+    {
+      "distance": 0,
+      "name": {
+        "en": "Start - Olympisch Stadion",
+        "nl": "Start - Olympisch Stadion"
+      }
+    },
+    {
+      "distance": 2,
+      "name": {
+        "en": "Vondelpark",
+        "nl": "Vondelpark"
+      }
+    },
+    {
+      "distance": 4,
+      "name": {
+        "en": "Rijksmuseum / Stadhouderskade",
+        "nl": "Rijksmuseum / Stadhouderskade"
+      }
+    },
+    {
+      "distance": 5,
+      "name": {
+        "en": "5 km",
+        "nl": "5 km"
+      }
+    },
+    {
+      "distance": 6,
+      "name": {
+        "en": "Zuidas (6-9 km)",
+        "nl": "Zuidas (6-9 km)"
+      }
+    },
+    {
+      "distance": 10,
+      "name": {
+        "en": "10 km",
+        "nl": "10 km"
+      }
+    },
+    {
+      "distance": 14,
+      "name": {
+        "en": "Amstel (14-26 km)",
+        "nl": "Amstel (14-26 km)"
+      }
+    },
+    {
+      "distance": 15,
+      "name": {
+        "en": "15 km",
+        "nl": "15 km"
+      }
+    },
+    {
+      "distance": 20,
+      "name": {
+        "en": "20 km - Ouderkerk aan de Amstel turn",
+        "nl": "20 km - keerpunt Ouderkerk aan de Amstel"
+      }
+    },
+    {
+      "distance": 21.1,
+      "name": {
+        "en": "Half marathon",
+        "nl": "Halve marathon"
+      }
+    },
+    {
+      "distance": 25,
+      "name": {
+        "en": "25 km",
+        "nl": "25 km"
+      }
+    },
+    {
+      "distance": 26,
+      "name": {
+        "en": "Amstel Business Park (26-31 km)",
+        "nl": "Amstel Business Park (26-31 km)"
+      }
+    },
+    {
+      "distance": 30,
+      "name": {
+        "en": "30 km",
+        "nl": "30 km"
+      }
+    },
+    {
+      "distance": 33,
+      "name": {
+        "en": "Galileiplantsoen",
+        "nl": "Galileiplantsoen"
+      }
+    },
+    {
+      "distance": 35,
+      "name": {
+        "en": "35 km",
+        "nl": "35 km"
+      }
+    },
+    {
+      "distance": 37,
+      "name": {
+        "en": "Wibautstraat / Torontobrug",
+        "nl": "Wibautstraat / Torontobrug"
+      }
+    },
+    {
+      "distance": 38,
+      "name": {
+        "en": "Rijksmuseum / Stadhouderskade",
+        "nl": "Rijksmuseum / Stadhouderskade"
+      }
+    },
+    {
+      "distance": 40,
+      "name": {
+        "en": "Vondelpark",
+        "nl": "Vondelpark"
+      }
+    },
+    {
+      "distance": 42.195,
+      "name": {
+        "en": "Finish - Olympisch Stadion",
+        "nl": "Finish - Olympisch Stadion"
+      }
+    }
+  ],
+  "viewingLocations": [
+    {
+      "id": "ams-start-olympisch-stadion",
+      "name": {
+        "en": "Start - Olympisch Stadion (Area A) and Stadionweg (Area B)",
+        "nl": "Start - Olympisch Stadion (Area A) en Stadionweg (Area B)"
+      },
+      "kilometer": 0,
+      "passes": [
+        0
+      ],
+      "transportType": "walk",
+      "lines": [],
+      "osmId": "way/57855651",
+      "latitude": 52.34345,
+      "longitude": 4.85416,
+      "description": {
+        "en": "The marathon starts from two areas with the same wave times. Start Area A is on the field inside the Olympic Stadium (Athletes Only Zone opens 07:00, start pens open 07:45, waves 1 and 2 must be on the field by 08:50). Start Area B is on the Stadionweg, directly outside the Olympic Stadium (access to the start waves from 08:00). The organiser e-mails each runner their start area in the week before the race, so ask your runner which start area they have. Runners cross the start line between 09:00 and 09:50. Travel via Amsterdam Zuid and follow the signed pedestrian route to the stadium.",
+        "nl": "De marathon start vanuit twee gebieden met dezelfde wave-tijden. Start Area A is op het veld in het Olympisch Stadion (Athletes Only Zone open om 07:00, startvakken open om 07:45, waves 1 en 2 moeten om 08:50 op het veld zijn). Start Area B is op de Stadionweg, direct naast het Olympisch Stadion (toegang tot de startvakken vanaf 08:00). De organisator mailt elke loper in de week voor de wedstrijd welk startgebied hij of zij heeft, dus vraag je loper welk startgebied dat is. Lopers passeren de startlijn tussen 09:00 en 09:50. Reis via station Amsterdam Zuid en volg de bewegwijzerde looproute naar het stadion."
+      },
+      "courseSide": {
+        "en": "Not a street-side stop. Area A runners start on the stadium field, where the organiser start map marks a Fan Zone for supporters next to the Athletes Only Zone; Area B runners start on Stadionweg, directly outside the stadium.",
+        "nl": "Geen halte aan de straat. Lopers uit Area A starten op het stadionveld, waar de startkaart van de organisator een Fan Zone voor supporters naast de Athletes Only Zone aangeeft; lopers uit Area B starten op de Stadionweg, direct naast het stadion."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 1700,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/tcs-marathon",
+          "checked": "2026-10-14",
+          "value": "Reader 1 and reader 2 (independent reads): 'Start Area A is located on the field inside the Olympic Stadium' (Athletes Only Zone opens 07:00, start pens open 07:45, waves 1 and 2 on the field by 08:50); 'Start Area B is at the Stadionweg, right outside the Olympic Stadium' (access to the start waves from 08:00); 'Start time: 09.00 - 09.50 hours'; finish 'in front of the grandstand'; 'The finish in the Olympic Stadium closes at 17.00 hours'; time limit 6 hours"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.nl/tcs-marathon",
+          "checked": "2026-10-14",
+          "value": "Dutch mirror (both readers): 'Start Area A is op het veld in het Olympisch Stadion'; 'Start Area B is op de Stadionweg, direct naast het Olympisch Stadion'; 'Starttijd: 09.00 - 09.50 uur'; 'daarna sluit de finish in het Olympisch Stadion' (17.00)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/frequently-asked-questions",
+          "checked": "2026-10-14",
+          "value": "'The start of the full marathon is split between the Olympic Stadium (Area A) and Stadionweg (Area B).' Start area is communicated by e-mail in the week before the race; a later start area is allowed, an earlier one is not (reader 1)"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/start-tcs-amsterdam-marathon-2026-sunday-v7-web-1.png",
+          "checked": "2026-10-14",
+          "value": "Organiser start map (reader 2 and the Amstelveenseweg verifier, read visually): Area A on the stadium field split into Athletes Only Zone and Fan Zone, bib check at the entrance; Area B start line on Stadionweg at Stadionplein, pens along Amstelveenseweg/Stadionplein, run direction east"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "'The nearest metro station is Station Zuid'; 'metro station Amstelveenseweg will be completely closed on Sunday from 13.00 to 18.00 hours'"
+        },
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/57855651/full.json",
+          "checked": "2026-10-14",
+          "value": "leisure=stadium 'Olympisch Stadion', way version 20 (2026-05-03); mean of 235 outline nodes 52.34345, 4.85416; bbox lat 52.34241-52.34460, lon 4.85267-4.85545 (this lane, 2026-10-14); same way and lat range cited independently by the Amstelveenseweg verifier (bbox read 2026-10-14)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5252944882",
+          "checked": "2026-10-14",
+          "value": "Amsterdam Zuid station node 52.33881, 4.87319 (agreed Zuid stop); straight-line to the stadium's east edge 1313 m, x1.3 rounded to 50 m = 1700 m (this lane, haversine 2026-10-14)"
+        }
+      ]
+    },
+    {
+      "id": "ams-tram-museumplein-km3",
+      "name": {
+        "en": "Museumplein (tram)",
+        "nl": "Museumplein (tram)"
+      },
+      "kilometer": 3,
+      "passes": [
+        3,
+        4,
+        38,
+        39
+      ],
+      "transportType": "tram",
+      "lines": [
+        "Tram 2",
+        "Tram 5",
+        "Tram 24"
+      ],
+      "osmId": "node/291660551",
+      "latitude": 52.35885,
+      "longitude": 4.88124,
+      "description": {
+        "en": "From Museumplein you can walk to the Rijksmuseum passage (km 4 and 38) in a few minutes and to the Vondelpark bridge on Van Baerlestraat (km 3 and 39) without crossing the course; tram service on Van Baerlestraat may be limited on race day.",
+        "nl": "Vanaf Museumplein loop je in een paar minuten naar de Rijksmuseumpassage (km 4 en 38) en naar de Vondelparkbrug in de Van Baerlestraat (km 3 en 39) zonder het parcours over te steken; de tramdienst op de Van Baerlestraat kan op de wedstrijddag beperkt zijn."
+      },
+      "courseSide": {
+        "en": "The stop is inside the block enclosed by the course: at km 4.3 on Hobbemastraat it is runners' right (southbound); at km 38 on Stadhouderskade it is runners' left (westbound); the Van Baerlestraat bridge over the Vondelpark path needs no crossing.",
+        "nl": "De halte ligt binnen het blok dat het parcours omsluit: bij km 4,3 op de Hobbemastraat rechts van de lopers (richting zuid); bij km 38 op de Stadhouderskade links (richting west); de Van Baerlestraatbrug over het Vondelparkpad vereist geen oversteek."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 200,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km)', 'Stadhouderskade (4 km and 38 km): Runners pass through the Rijksmuseum at 4 km and come back this way at 38 km'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '3 km' in Vondelpark at Van Baerlestraat, '4 km' at Rijksmuseum/Museumplein, '38 km' on Stadhouderskade, '39 km' at the Vondelpark entrance near Leidseplein; after 4 km the route runs south along the canal east of Museumplein (read visually)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'Limited tram and bus services operate in the centre of Amsterdam'"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/291660551",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/291660551 (Overpass 2026-10-14T18:04Z): railway=tram_stop 'Museumplein'; member of GVB tram route relations 2, 5 and 24 (Overpass 2026-10-14); 172 m from OSM 'Hobbemastraat', 319 m from 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-metro-vijzelgracht-km4",
+      "name": {
+        "en": "Vijzelgracht (metro)",
+        "nl": "Vijzelgracht (metro)"
+      },
+      "kilometer": 4,
+      "passes": [
+        4,
+        38
+      ],
+      "transportType": "metro",
+      "lines": [
+        "Metro 52"
+      ],
+      "osmId": "node/5737467958",
+      "latitude": 52.36082,
+      "longitude": 4.89116,
+      "description": {
+        "en": "Organiser-recommended metro stop for the Vondelpark and Rijksmuseum sections; the 38 km point is on Stadhouderskade a short walk south of the exit, and the organiser map shows a pedestrian crossing here.",
+        "nl": "Door de organisator aanbevolen metrohalte voor het Vondelpark en het Rijksmuseum; het 38 km-punt ligt op de Stadhouderskade op loopafstand van de uitgang, en de parcourskaart toont hier een voetgangersoversteek."
+      },
+      "courseSide": {
+        "en": "Station exits are on the north side of Stadhouderskade, which is runners' right at km 38 (westbound); for km 4 walk west along the north side to the Rijksmuseum.",
+        "nl": "De uitgangen liggen aan de noordzijde van de Stadhouderskade, rechts van de lopers bij km 38 (richting west); voor km 4 loop je over de noordzijde naar het westen tot het Rijksmuseum."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 350,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km) ... Metro: Vijzelgracht'; 'Stadhouderskade (4 km and 38 km) ... Metro: Vijzelgracht and de Pijp'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '38 km' and a pedestrian-crossing symbol on Stadhouderskade at Vijzelgracht, metro symbol 'Vijzelgracht' just north; '4 km' at the Rijksmuseum (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5737467958",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/5737467958 (Overpass 2026-10-14T18:04Z): station=subway 'Vijzelgracht', operator GVB; metro route 52 relations include this station (Overpass 2026-10-14); 270 m from OSM 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-tram-museumplein-km4",
+      "name": {
+        "en": "Museumplein (tram)",
+        "nl": "Museumplein (tram)"
+      },
+      "kilometer": 4,
+      "passes": [
+        3,
+        4,
+        38,
+        39
+      ],
+      "transportType": "tram",
+      "lines": [
+        "Tram 2",
+        "Tram 5",
+        "Tram 24"
+      ],
+      "osmId": "node/291660551",
+      "latitude": 52.35885,
+      "longitude": 4.88124,
+      "description": {
+        "en": "From Museumplein you can walk to the Rijksmuseum passage (km 4 and 38) in a few minutes and to the Vondelpark bridge on Van Baerlestraat (km 3 and 39) without crossing the course; tram service on Van Baerlestraat may be limited on race day.",
+        "nl": "Vanaf Museumplein loop je in een paar minuten naar de Rijksmuseumpassage (km 4 en 38) en naar de Vondelparkbrug in de Van Baerlestraat (km 3 en 39) zonder het parcours over te steken; de tramdienst op de Van Baerlestraat kan op de wedstrijddag beperkt zijn."
+      },
+      "courseSide": {
+        "en": "The stop is inside the block enclosed by the course: at km 4.3 on Hobbemastraat it is runners' right (southbound); at km 38 on Stadhouderskade it is runners' left (westbound); the Van Baerlestraat bridge over the Vondelpark path needs no crossing.",
+        "nl": "De halte ligt binnen het blok dat het parcours omsluit: bij km 4,3 op de Hobbemastraat rechts van de lopers (richting zuid); bij km 38 op de Stadhouderskade links (richting west); de Van Baerlestraatbrug over het Vondelparkpad vereist geen oversteek."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 200,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km)', 'Stadhouderskade (4 km and 38 km): Runners pass through the Rijksmuseum at 4 km and come back this way at 38 km'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '3 km' in Vondelpark at Van Baerlestraat, '4 km' at Rijksmuseum/Museumplein, '38 km' on Stadhouderskade, '39 km' at the Vondelpark entrance near Leidseplein; after 4 km the route runs south along the canal east of Museumplein (read visually)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'Limited tram and bus services operate in the centre of Amsterdam'"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/291660551",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/291660551 (Overpass 2026-10-14T18:04Z): railway=tram_stop 'Museumplein'; member of GVB tram route relations 2, 5 and 24 (Overpass 2026-10-14); 172 m from OSM 'Hobbemastraat', 319 m from 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-station-zuid-km6-6",
+      "name": {
+        "en": "Amsterdam Zuid (train, metro, tram)",
+        "nl": "Amsterdam Zuid (trein, metro, tram)"
+      },
+      "kilometer": 6.6,
+      "passes": [
+        6.6,
+        7.2,
+        9.4
+      ],
+      "transportType": "train",
+      "lines": [
+        "NS (Intercity/Sprinter)",
+        "Metro 50",
+        "Metro 51",
+        "Metro 52",
+        "Tram 5",
+        "Tram 6",
+        "Tram 25"
+      ],
+      "osmId": "node/5252944882",
+      "latitude": 52.33881,
+      "longitude": 4.87319,
+      "description": {
+        "en": "The organiser's recommended rail and metro hub: the Zuidas loop passes Beethovenstraat twice and Gustav Mahlerlaan once within a few minutes' walk, and the Olympic Stadium is about 1.3 km away along a signed pedestrian route; Q-Park Mahler (organiser car park) is next to the station.",
+        "nl": "Het door de organisator aanbevolen trein- en metroknooppunt: de Zuidas-lus passeert de Beethovenstraat twee keer en de Gustav Mahlerlaan een keer op enkele minuten lopen, en het Olympisch Stadion ligt circa 1,3 km verderop via een bewegwijzerde looproute; parkeergarage Mahler (door de organisator genoemd) ligt naast het station."
+      },
+      "courseSide": {
+        "en": "The station lies west of Beethovenstraat: runners' right at km 6.6 (southbound) and left at km 9.4 (northbound); the Mahlerplein exit is on the north side of Gustav Mahlerlaan, runners' right at km 7.2 (westbound).",
+        "nl": "Het station ligt ten westen van de Beethovenstraat: rechts van de lopers bij km 6,6 (richting zuid) en links bij km 9,4 (richting noord); de uitgang Mahlerplein ligt aan de noordzijde van de Gustav Mahlerlaan, rechts van de lopers bij km 7,2 (richting west)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 250,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '6 to 9 km, Zuidas and Beethovenstraat: Runners cross the Zuidas and pass Beethovenstraat twice. Metro: Zuid. Car park: Mahler'; stadium 'Metro: Amstelveenseweg or Zuid'"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'The nearest metro station is Station Zuid', 'Take the train to Amsterdam Zuid station'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '6 km' at Stadionweg/Beethovenstraat, Fietstunnel under Ring A10 on Beethovenstraat next to 'ZUID' NS/metro symbol, '7 km' Gustav Mahlerlaan westbound, '8 km' De Boelelaan eastbound, '9 km' Beethovenstraat northbound, '10 km' Stadionweg (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5252944882",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/5252944882 (Overpass 2026-10-14T18:04Z): railway=station 'Amsterdam Zuid', operator Nederlandse Spoorwegen; https://www.openstreetmap.org/node/5267675295 metro 'Zuid' in route relations 50, 51, 52; tram stop 'Station Zuid' nodes 303720945/5162821556 in GVB tram route relations 5, 6, 25 (Overpass 2026-10-14); 126 m to OSM 'Beethovenstraat', 271 m to 'Gustav Mahlerlaan' geometry"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/564721632",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/564721632 'Q-Park Mahler' (Overpass 2026-10-14)"
+        }
+      ]
+    },
+    {
+      "id": "ams-station-zuid-km7-2",
+      "name": {
+        "en": "Amsterdam Zuid (train, metro, tram)",
+        "nl": "Amsterdam Zuid (trein, metro, tram)"
+      },
+      "kilometer": 7.2,
+      "passes": [
+        6.6,
+        7.2,
+        9.4
+      ],
+      "transportType": "train",
+      "lines": [
+        "NS (Intercity/Sprinter)",
+        "Metro 50",
+        "Metro 51",
+        "Metro 52",
+        "Tram 5",
+        "Tram 6",
+        "Tram 25"
+      ],
+      "osmId": "node/5252944882",
+      "latitude": 52.33881,
+      "longitude": 4.87319,
+      "description": {
+        "en": "The organiser's recommended rail and metro hub: the Zuidas loop passes Beethovenstraat twice and Gustav Mahlerlaan once within a few minutes' walk, and the Olympic Stadium is about 1.3 km away along a signed pedestrian route; Q-Park Mahler (organiser car park) is next to the station.",
+        "nl": "Het door de organisator aanbevolen trein- en metroknooppunt: de Zuidas-lus passeert de Beethovenstraat twee keer en de Gustav Mahlerlaan een keer op enkele minuten lopen, en het Olympisch Stadion ligt circa 1,3 km verderop via een bewegwijzerde looproute; parkeergarage Mahler (door de organisator genoemd) ligt naast het station."
+      },
+      "courseSide": {
+        "en": "The station lies west of Beethovenstraat: runners' right at km 6.6 (southbound) and left at km 9.4 (northbound); the Mahlerplein exit is on the north side of Gustav Mahlerlaan, runners' right at km 7.2 (westbound).",
+        "nl": "Het station ligt ten westen van de Beethovenstraat: rechts van de lopers bij km 6,6 (richting zuid) en links bij km 9,4 (richting noord); de uitgang Mahlerplein ligt aan de noordzijde van de Gustav Mahlerlaan, rechts van de lopers bij km 7,2 (richting west)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 250,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '6 to 9 km, Zuidas and Beethovenstraat: Runners cross the Zuidas and pass Beethovenstraat twice. Metro: Zuid. Car park: Mahler'; stadium 'Metro: Amstelveenseweg or Zuid'"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'The nearest metro station is Station Zuid', 'Take the train to Amsterdam Zuid station'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '6 km' at Stadionweg/Beethovenstraat, Fietstunnel under Ring A10 on Beethovenstraat next to 'ZUID' NS/metro symbol, '7 km' Gustav Mahlerlaan westbound, '8 km' De Boelelaan eastbound, '9 km' Beethovenstraat northbound, '10 km' Stadionweg (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5252944882",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/5252944882 (Overpass 2026-10-14T18:04Z): railway=station 'Amsterdam Zuid', operator Nederlandse Spoorwegen; https://www.openstreetmap.org/node/5267675295 metro 'Zuid' in route relations 50, 51, 52; tram stop 'Station Zuid' nodes 303720945/5162821556 in GVB tram route relations 5, 6, 25 (Overpass 2026-10-14); 126 m to OSM 'Beethovenstraat', 271 m to 'Gustav Mahlerlaan' geometry"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/564721632",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/564721632 'Q-Park Mahler' (Overpass 2026-10-14)"
+        }
+      ]
+    },
+    {
+      "id": "ams-station-zuid-km9-4",
+      "name": {
+        "en": "Amsterdam Zuid (train, metro, tram)",
+        "nl": "Amsterdam Zuid (trein, metro, tram)"
+      },
+      "kilometer": 9.4,
+      "passes": [
+        6.6,
+        7.2,
+        9.4
+      ],
+      "transportType": "train",
+      "lines": [
+        "NS (Intercity/Sprinter)",
+        "Metro 50",
+        "Metro 51",
+        "Metro 52",
+        "Tram 5",
+        "Tram 6",
+        "Tram 25"
+      ],
+      "osmId": "node/5252944882",
+      "latitude": 52.33881,
+      "longitude": 4.87319,
+      "description": {
+        "en": "The organiser's recommended rail and metro hub: the Zuidas loop passes Beethovenstraat twice and Gustav Mahlerlaan once within a few minutes' walk, and the Olympic Stadium is about 1.3 km away along a signed pedestrian route; Q-Park Mahler (organiser car park) is next to the station.",
+        "nl": "Het door de organisator aanbevolen trein- en metroknooppunt: de Zuidas-lus passeert de Beethovenstraat twee keer en de Gustav Mahlerlaan een keer op enkele minuten lopen, en het Olympisch Stadion ligt circa 1,3 km verderop via een bewegwijzerde looproute; parkeergarage Mahler (door de organisator genoemd) ligt naast het station."
+      },
+      "courseSide": {
+        "en": "The station lies west of Beethovenstraat: runners' right at km 6.6 (southbound) and left at km 9.4 (northbound); the Mahlerplein exit is on the north side of Gustav Mahlerlaan, runners' right at km 7.2 (westbound).",
+        "nl": "Het station ligt ten westen van de Beethovenstraat: rechts van de lopers bij km 6,6 (richting zuid) en links bij km 9,4 (richting noord); de uitgang Mahlerplein ligt aan de noordzijde van de Gustav Mahlerlaan, rechts van de lopers bij km 7,2 (richting west)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 250,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '6 to 9 km, Zuidas and Beethovenstraat: Runners cross the Zuidas and pass Beethovenstraat twice. Metro: Zuid. Car park: Mahler'; stadium 'Metro: Amstelveenseweg or Zuid'"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'The nearest metro station is Station Zuid', 'Take the train to Amsterdam Zuid station'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '6 km' at Stadionweg/Beethovenstraat, Fietstunnel under Ring A10 on Beethovenstraat next to 'ZUID' NS/metro symbol, '7 km' Gustav Mahlerlaan westbound, '8 km' De Boelelaan eastbound, '9 km' Beethovenstraat northbound, '10 km' Stadionweg (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5252944882",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/5252944882 (Overpass 2026-10-14T18:04Z): railway=station 'Amsterdam Zuid', operator Nederlandse Spoorwegen; https://www.openstreetmap.org/node/5267675295 metro 'Zuid' in route relations 50, 51, 52; tram stop 'Station Zuid' nodes 303720945/5162821556 in GVB tram route relations 5, 6, 25 (Overpass 2026-10-14); 126 m to OSM 'Beethovenstraat', 271 m to 'Gustav Mahlerlaan' geometry"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/564721632",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/564721632 'Q-Park Mahler' (Overpass 2026-10-14)"
+        }
+      ]
+    },
+    {
+      "id": "ams-tram-victorieplein-km11-6",
+      "name": {
+        "en": "Victorieplein (tram)",
+        "nl": "Victorieplein (tram)"
+      },
+      "kilometer": 11.6,
+      "passes": [
+        11.6
+      ],
+      "transportType": "tram",
+      "lines": [
+        "Tram 4",
+        "Tram 12"
+      ],
+      "osmId": "node/2673092648",
+      "latitude": 52.34659,
+      "longitude": 4.9051,
+      "description": {
+        "en": "Runners turn from Churchilllaan onto Rijnstraat at this square between the 11 km and 12 km points, and the half marathon passes here too; both tram lines run on closed streets, so expect diversions and check gvb.nl.",
+        "nl": "Lopers draaien hier tussen het 11 km- en 12 km-punt van de Churchilllaan de Rijnstraat in, en ook de halve marathon komt hier langs; beide tramlijnen rijden over afgesloten straten, dus houd rekening met omleidingen en controleer gvb.nl."
+      },
+      "courseSide": {
+        "en": "The tram 4 platform is in the median of Rijnstraat at Victorieplein; the tram 12 platform (node 3295383119) is on the east side, runners' left (southbound).",
+        "nl": "Het perron van tram 4 ligt in de middenberm van de Rijnstraat bij het Victorieplein; het perron van tram 12 (node 3295383119) ligt aan de oostzijde, links van de lopers (richting zuid)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 50,
+      "sources": [
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '11 km' on Churchilllaan eastbound, '12 km' on Rijnstraat southbound just south of Victorieplein, half-marathon '3 km' at Vrijheidslaan/Victorieplein (read visually)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'Road closures for the event will affect tram and bus routes', 'Limited tram and bus services operate in the centre of Amsterdam'"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/2673092648",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/2673092648 (Overpass 2026-10-14T18:04Z): tram_stop 'Victorieplein', GVB tram route 4 relations; https://www.openstreetmap.org/node/3295383119 tram_stop 'Victorieplein', GVB tram route 12 relations (Overpass 2026-10-14); 6 m / 67 m from OSM 'Rijnstraat' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-metro-overamstel-km26-7",
+      "name": {
+        "en": "Overamstel (metro)",
+        "nl": "Overamstel (metro)"
+      },
+      "kilometer": 26.7,
+      "passes": [
+        26.7
+      ],
+      "transportType": "metro",
+      "lines": [
+        "Metro 50",
+        "Metro 51"
+      ],
+      "osmId": "node/427565080",
+      "latitude": 52.33173,
+      "longitude": 4.91763,
+      "description": {
+        "en": "Organiser-named metro stop for the Amstel Business Park section; the course runs past the station on the A2-side road about 700 m after the Utrechtsebrug, and the half marathon passes here at its 5-6 km.",
+        "nl": "Door de organisator genoemde metrohalte voor het Amstel Business Park; het parcours loopt langs het station over de parallelweg van de A2, ongeveer 700 m na de Utrechtsebrug, en de halve marathon passeert hier bij km 5-6."
+      },
+      "courseSide": {
+        "en": "Station is on the east side of Joan Muyskenweg, runners' left (southbound).",
+        "nl": "Station ligt aan de oostzijde van de Joan Muyskenweg, links van de lopers (richting zuid)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 200,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '26 to 31 km, Amstel Business Park ... Metro: Overamstel and Van der Madeweg'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '26 km' at Utrechtsebrug, course along Rijksweg A2 past metro symbol 'Overamstel' with a closed-street symbol, '27 km' at Joan Muyskenweg (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/427565080",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/427565080 (Overpass 2026-10-14T18:04Z): station=subway 'Overamstel', operator GVB; metro route relations 50 and 51 include this station (Overpass 2026-10-14); 165 m from OSM 'Joan Muyskenweg' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-metro-van-der-madeweg-km28-4",
+      "name": {
+        "en": "Van der Madeweg (metro)",
+        "nl": "Van der Madeweg (metro)"
+      },
+      "kilometer": 28.4,
+      "passes": [
+        28.4
+      ],
+      "transportType": "metro",
+      "lines": [
+        "Metro 50",
+        "Metro 53",
+        "Metro 54"
+      ],
+      "osmId": "node/289445435",
+      "latitude": 52.32945,
+      "longitude": 4.93052,
+      "description": {
+        "en": "The course passes directly under this metro station in the Amstel Business Park, which the organiser describes as a 5 km stretch with music and entertainment; an entertainment point is marked on the map just west of the station.",
+        "nl": "Het parcours loopt direct onder dit metrostation door in het Amstel Business Park, dat de organisator beschrijft als een stuk van 5 km met muziek en entertainment; op de kaart staat een entertainmentpunt vlak ten westen van het station."
+      },
+      "courseSide": {
+        "en": "Station building is on the north side of Van der Madeweg, runners' left (eastbound); exits serve both sides of the street.",
+        "nl": "Het stationsgebouw ligt aan de noordzijde van de Van der Madeweg, links van de lopers (richting oost); er zijn uitgangen aan beide zijden."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 50,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '26 to 31 km, Amstel Business Park: Music, entertainment, and crowds along a 5 km stretch. Metro: Overamstel and Van der Madeweg'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '28 km' and '29 km' on Van der Madeweg with eastbound arrows, metro symbol 'Van der Madeweg' on the course, entertainment symbol beside it (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/289445435",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/289445435 (Overpass 2026-10-14T18:04Z): station=subway 'Van der Madeweg', operator GVB; metro route relations 50, 53 and 54 include this station (Overpass 2026-10-14); 29 m from OSM 'Van der Madeweg' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-metro-weesperplein-km36-8",
+      "name": {
+        "en": "Weesperplein (metro)",
+        "nl": "Weesperplein (metro)"
+      },
+      "kilometer": 36.8,
+      "passes": [
+        36.8
+      ],
+      "transportType": "metro",
+      "lines": [
+        "Metro 51",
+        "Metro 53",
+        "Metro 54",
+        "Tram 1",
+        "Tram 7",
+        "Tram 19"
+      ],
+      "osmId": "node/7106910981",
+      "latitude": 52.36133,
+      "longitude": 4.90792,
+      "description": {
+        "en": "Organiser-named stop for the 37 km point: runners come along Sarphatistraat, pass under the Wibautstraat and climb the Torontobrug within sight of the square; three metro lines are unaffected by road closures, the trams may be diverted.",
+        "nl": "Door de organisator genoemde halte voor het 37 km-punt: lopers komen over de Sarphatistraat, gaan onder de Wibautstraat door en klimmen de Torontobrug op, zichtbaar vanaf het plein; de drie metrolijnen hebben geen last van afsluitingen, de trams mogelijk wel."
+      },
+      "courseSide": {
+        "en": "Metro exits open onto Weesperplein on both sides of the course; the main exit on the north-west side of Sarphatistraat is runners' right (south-westbound).",
+        "nl": "De metro-uitgangen komen uit op het Weesperplein aan beide zijden van het parcours; de hoofduitgang aan de noordwestzijde van de Sarphatistraat ligt rechts van de lopers (richting zuidwest)."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 50,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): '37 km, Wibaustraat: Runners pass under the Wibaustraat, then climb over the Torontobrug toward Vondelpark. Metro: Weesperplein'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '36 km' at Plantage Middenlaan, course past the 'Weesperplein' metro symbol, '37 km' at Torontobrug with Fietstunnel and through-traffic symbols (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/7106910981",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/7106910981 (Overpass 2026-10-14T18:04Z): subway stop 'Weesperplein'; member of GVB metro route relations 51, 53, 54 (Overpass 2026-10-14); 6 m from OSM 'Sarphatistraat' geometry; tram stop nodes 427560648/427560737 'Weesperplein' in GVB tram route relations 1, 7, 19"
+        }
+      ]
+    },
+    {
+      "id": "ams-metro-vijzelgracht-km38",
+      "name": {
+        "en": "Vijzelgracht (metro)",
+        "nl": "Vijzelgracht (metro)"
+      },
+      "kilometer": 38,
+      "passes": [
+        4,
+        38
+      ],
+      "transportType": "metro",
+      "lines": [
+        "Metro 52"
+      ],
+      "osmId": "node/5737467958",
+      "latitude": 52.36082,
+      "longitude": 4.89116,
+      "description": {
+        "en": "Organiser-recommended metro stop for the Vondelpark and Rijksmuseum sections; the 38 km point is on Stadhouderskade a short walk south of the exit, and the organiser map shows a pedestrian crossing here.",
+        "nl": "Door de organisator aanbevolen metrohalte voor het Vondelpark en het Rijksmuseum; het 38 km-punt ligt op de Stadhouderskade op loopafstand van de uitgang, en de parcourskaart toont hier een voetgangersoversteek."
+      },
+      "courseSide": {
+        "en": "Station exits are on the north side of Stadhouderskade, which is runners' right at km 38 (westbound); for km 4 walk west along the north side to the Rijksmuseum.",
+        "nl": "De uitgangen liggen aan de noordzijde van de Stadhouderskade, rechts van de lopers bij km 38 (richting west); voor km 4 loop je over de noordzijde naar het westen tot het Rijksmuseum."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 350,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km) ... Metro: Vijzelgracht'; 'Stadhouderskade (4 km and 38 km) ... Metro: Vijzelgracht and de Pijp'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '38 km' and a pedestrian-crossing symbol on Stadhouderskade at Vijzelgracht, metro symbol 'Vijzelgracht' just north; '4 km' at the Rijksmuseum (read visually)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5737467958",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/5737467958 (Overpass 2026-10-14T18:04Z): station=subway 'Vijzelgracht', operator GVB; metro route 52 relations include this station (Overpass 2026-10-14); 270 m from OSM 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-tram-museumplein-km38",
+      "name": {
+        "en": "Museumplein (tram)",
+        "nl": "Museumplein (tram)"
+      },
+      "kilometer": 38,
+      "passes": [
+        3,
+        4,
+        38,
+        39
+      ],
+      "transportType": "tram",
+      "lines": [
+        "Tram 2",
+        "Tram 5",
+        "Tram 24"
+      ],
+      "osmId": "node/291660551",
+      "latitude": 52.35885,
+      "longitude": 4.88124,
+      "description": {
+        "en": "From Museumplein you can walk to the Rijksmuseum passage (km 4 and 38) in a few minutes and to the Vondelpark bridge on Van Baerlestraat (km 3 and 39) without crossing the course; tram service on Van Baerlestraat may be limited on race day.",
+        "nl": "Vanaf Museumplein loop je in een paar minuten naar de Rijksmuseumpassage (km 4 en 38) en naar de Vondelparkbrug in de Van Baerlestraat (km 3 en 39) zonder het parcours over te steken; de tramdienst op de Van Baerlestraat kan op de wedstrijddag beperkt zijn."
+      },
+      "courseSide": {
+        "en": "The stop is inside the block enclosed by the course: at km 4.3 on Hobbemastraat it is runners' right (southbound); at km 38 on Stadhouderskade it is runners' left (westbound); the Van Baerlestraat bridge over the Vondelpark path needs no crossing.",
+        "nl": "De halte ligt binnen het blok dat het parcours omsluit: bij km 4,3 op de Hobbemastraat rechts van de lopers (richting zuid); bij km 38 op de Stadhouderskade links (richting west); de Van Baerlestraatbrug over het Vondelparkpad vereist geen oversteek."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 200,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km)', 'Stadhouderskade (4 km and 38 km): Runners pass through the Rijksmuseum at 4 km and come back this way at 38 km'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '3 km' in Vondelpark at Van Baerlestraat, '4 km' at Rijksmuseum/Museumplein, '38 km' on Stadhouderskade, '39 km' at the Vondelpark entrance near Leidseplein; after 4 km the route runs south along the canal east of Museumplein (read visually)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'Limited tram and bus services operate in the centre of Amsterdam'"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/291660551",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/291660551 (Overpass 2026-10-14T18:04Z): railway=tram_stop 'Museumplein'; member of GVB tram route relations 2, 5 and 24 (Overpass 2026-10-14); 172 m from OSM 'Hobbemastraat', 319 m from 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-tram-museumplein-km39",
+      "name": {
+        "en": "Museumplein (tram)",
+        "nl": "Museumplein (tram)"
+      },
+      "kilometer": 39,
+      "passes": [
+        3,
+        4,
+        38,
+        39
+      ],
+      "transportType": "tram",
+      "lines": [
+        "Tram 2",
+        "Tram 5",
+        "Tram 24"
+      ],
+      "osmId": "node/291660551",
+      "latitude": 52.35885,
+      "longitude": 4.88124,
+      "description": {
+        "en": "From Museumplein you can walk to the Rijksmuseum passage (km 4 and 38) in a few minutes and to the Vondelpark bridge on Van Baerlestraat (km 3 and 39) without crossing the course; tram service on Van Baerlestraat may be limited on race day.",
+        "nl": "Vanaf Museumplein loop je in een paar minuten naar de Rijksmuseumpassage (km 4 en 38) en naar de Vondelparkbrug in de Van Baerlestraat (km 3 en 39) zonder het parcours over te steken; de tramdienst op de Van Baerlestraat kan op de wedstrijddag beperkt zijn."
+      },
+      "courseSide": {
+        "en": "The stop is inside the block enclosed by the course: at km 4.3 on Hobbemastraat it is runners' right (southbound); at km 38 on Stadhouderskade it is runners' left (westbound); the Van Baerlestraat bridge over the Vondelpark path needs no crossing.",
+        "nl": "De halte ligt binnen het blok dat het parcours omsluit: bij km 4,3 op de Hobbemastraat rechts van de lopers (richting zuid); bij km 38 op de Stadhouderskade links (richting west); de Van Baerlestraatbrug over het Vondelparkpad vereist geen oversteek."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 200,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/spectators",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/spectators (checked 2026-10-14): 'Vondelpark (2 km and 40 km)', 'Stadhouderskade (4 km and 38 km): Runners pass through the Rijksmuseum at 4 km and come back this way at 38 km'"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map PDF 2026 v2 (checked 2026-10-14): '3 km' in Vondelpark at Van Baerlestraat, '4 km' at Rijksmuseum/Museumplein, '38 km' on Stadhouderskade, '39 km' at the Vondelpark entrance near Leidseplein; after 4 km the route runs south along the canal east of Museumplein (read visually)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day (checked 2026-10-14): 'Limited tram and bus services operate in the centre of Amsterdam'"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/291660551",
+          "checked": "2026-10-14",
+          "value": "https://www.openstreetmap.org/node/291660551 (Overpass 2026-10-14T18:04Z): railway=tram_stop 'Museumplein'; member of GVB tram route relations 2, 5 and 24 (Overpass 2026-10-14); 172 m from OSM 'Hobbemastraat', 319 m from 'Stadhouderskade' geometry"
+        }
+      ]
+    },
+    {
+      "id": "ams-finish-olympisch-stadion",
+      "name": {
+        "en": "Finish - Olympisch Stadion",
+        "nl": "Finish - Olympisch Stadion"
+      },
+      "kilometer": 42.195,
+      "passes": [
+        42.195
+      ],
+      "transportType": "walk",
+      "lines": [],
+      "osmId": "way/57855651",
+      "latitude": 52.34345,
+      "longitude": 4.85416,
+      "description": {
+        "en": "The finish is inside the Olympic Stadium in front of the grandstand; the finish closes at 17:00 (time limit 6 hours). Runners come south along Amstelveenseweg (41 km) into the stadium. Metro station Amstelveenseweg is completely closed on Sunday from 13:00 to 18:00, so travel via Amsterdam Zuid and follow the signed pedestrian route; the stadium area is the busiest spot of the day, so arrive well before your runner's expected finish time.",
+        "nl": "De finish is in het Olympisch Stadion voor de eretribune; de finish sluit om 17:00 (tijdslimiet 6 uur). Lopers komen over de Amstelveenseweg (41 km) naar het zuiden het stadion in. Metrostation Amstelveenseweg is zondag van 13:00 tot 18:00 volledig gesloten, reis dus via station Amsterdam Zuid en volg de bewegwijzerde looproute; het stadiongebied is de drukste plek van de dag, kom dus ruim voor de verwachte finishtijd van je loper."
+      },
+      "courseSide": {
+        "en": "Not a street-side stop. The finish line is inside the stadium, in front of the grandstand; the final approach runs south on Amstelveenseweg (41 km) into the stadium.",
+        "nl": "Geen halte aan de straat. De finishlijn ligt in het stadion, voor de eretribune; de laatste aanloop gaat over de Amstelveenseweg (41 km) naar het zuiden het stadion in."
+      },
+      "crossBeforeClosures": false,
+      "walkingMeters": 1700,
+      "sources": [
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/tcs-marathon",
+          "checked": "2026-10-14",
+          "value": "Reader 1 and reader 2 (independent reads): 'Start Area A is located on the field inside the Olympic Stadium' (Athletes Only Zone opens 07:00, start pens open 07:45, waves 1 and 2 on the field by 08:50); 'Start Area B is at the Stadionweg, right outside the Olympic Stadium' (access to the start waves from 08:00); 'Start time: 09.00 - 09.50 hours'; finish 'in front of the grandstand'; 'The finish in the Olympic Stadium closes at 17.00 hours'; time limit 6 hours"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.nl/tcs-marathon",
+          "checked": "2026-10-14",
+          "value": "Dutch mirror (both readers): 'Start Area A is op het veld in het Olympisch Stadion'; 'Start Area B is op de Stadionweg, direct naast het Olympisch Stadion'; 'Starttijd: 09.00 - 09.50 uur'; 'daarna sluit de finish in het Olympisch Stadion' (17.00)"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/frequently-asked-questions",
+          "checked": "2026-10-14",
+          "value": "'The start of the full marathon is split between the Olympic Stadium (Area A) and Stadionweg (Area B).' Start area is communicated by e-mail in the week before the race; a later start area is allowed, an earlier one is not (reader 1)"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/start-tcs-amsterdam-marathon-2026-sunday-v7-web-1.png",
+          "checked": "2026-10-14",
+          "value": "Organiser start map (reader 2 and the Amstelveenseweg verifier, read visually): Area A on the stadium field split into Athletes Only Zone and Fan Zone, bib check at the entrance; Area B start line on Stadionweg at Stadionplein, pens along Amstelveenseweg/Stadionplein, run direction east"
+        },
+        {
+          "url": "https://www.tcsamsterdammarathon.eu/travel-advice-race-day",
+          "checked": "2026-10-14",
+          "value": "'The nearest metro station is Station Zuid'; 'metro station Amstelveenseweg will be completely closed on Sunday from 13.00 to 18.00 hours'"
+        },
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/57855651/full.json",
+          "checked": "2026-10-14",
+          "value": "leisure=stadium 'Olympisch Stadion', way version 20 (2026-05-03); mean of 235 outline nodes 52.34345, 4.85416; bbox lat 52.34241-52.34460, lon 4.85267-4.85545 (this lane, 2026-10-14); same way and lat range cited independently by the Amstelveenseweg verifier (bbox read 2026-10-14)"
+        },
+        {
+          "url": "https://www.openstreetmap.org/node/5252944882",
+          "checked": "2026-10-14",
+          "value": "Amsterdam Zuid station node 52.33881, 4.87319 (agreed Zuid stop); straight-line to the stadium's east edge 1313 m, x1.3 rounded to 50 m = 1700 m (this lane, haversine 2026-10-14)"
+        },
+        {
+          "url": "https://do.occdn.net/p/75/f/parcours-tcs-amsterdam-marathon-zondag-2026-v2.pdf",
+          "checked": "2026-10-14",
+          "value": "Organiser course map 2026 v2 (reader 2 and the Amstelveenseweg verifier, read visually): '41 km' on Amstelveenseweg, course southbound into the Olympic Stadium at Stadionplein, 'FINISH 42 km' inside the stadium"
+        }
+      ]
+    }
+  ],
+  "spectatorTips": {
+    "en": [
+      "Buy a GVB day ticket (metro, tram and bus) and check gvb.nl and 9292.nl on the day: road closures affect tram and bus routes and services in the centre are limited, so the metro is the most reliable way between spots.",
+      "Ask your runner which start area they have: Area A is on the field inside the Olympic Stadium, Area B is on the Stadionweg directly outside it; the organiser e-mails the area in the week before the race.",
+      "Arrive at your spot well before the time in your plan: wave gun times run from 09:00 to 09:43 and it can take until 09:50 before your runner actually crosses the start line.",
+      "See your runner more than once from one spot: Museumplein (km 3, 4, 38 and 39), Amsterdam Zuid (km 6.6, 7.2 and 9.4) and Vijzelgracht (km 4 and 38).",
+      "For the finish, travel via Amsterdam Zuid and follow the signed pedestrian route to the Olympic Stadium: metro station Amstelveenseweg is completely closed on Sunday from 13:00 to 18:00, and the stadium area is the busiest place of the day.",
+      "Use the organiser's race app for live tracking and the official course map; this planner only estimates passing times from the wave start time and the planned pace.",
+      "The finish closes at 17:00 (time limit 6 hours); checkpoint cut-offs are 5 km 10:31, 10 km 11:13, 15 km 11:55, 20 km 12:36 and 25 km 13:18."
+    ],
+    "nl": [
+      "Koop een GVB-dagkaart (metro, tram en bus) en controleer op de dag gvb.nl en 9292.nl: wegafsluitingen beïnvloeden de tram- en busroutes en in het centrum rijdt beperkt tram en bus, dus de metro is de betrouwbaarste manier tussen kijkpunten.",
+      "Vraag je loper welk startgebied hij of zij heeft: Area A is op het veld in het Olympisch Stadion, Area B is op de Stadionweg direct naast het stadion; de organisator mailt het startgebied in de week voor de wedstrijd.",
+      "Kom ruim voor de tijd in je plan naar je kijkpunt: de wave-starttijden lopen van 09:00 tot 09:43 en het kan tot 09:50 duren voordat je loper echt de startlijn passeert.",
+      "Zie je loper meer dan een keer vanaf een plek: Museumplein (km 3, 4, 38 en 39), Amsterdam Zuid (km 6,6, 7,2 en 9,4) en Vijzelgracht (km 4 en 38).",
+      "Reis voor de finish via station Amsterdam Zuid en volg de bewegwijzerde looproute naar het Olympisch Stadion: metrostation Amstelveenseweg is zondag van 13:00 tot 18:00 volledig gesloten en het stadiongebied is de drukste plek van de dag.",
+      "Gebruik de race-app van de organisator voor live tracking en de officiële parcourskaart; deze planner schat passeertijden alleen op basis van de wave-starttijd en het geplande tempo.",
+      "De finish sluit om 17:00 (tijdslimiet 6 uur); de limieten onderweg zijn 5 km 10:31, 10 km 11:13, 15 km 11:55, 20 km 12:36 en 25 km 13:18."
+    ]
+  },
+  "verification": {
+    "log": "docs/designs/amsterdam-2026-verification.md",
+    "readers": 2,
+    "stopsVerified": 7,
+    "stopsOmitted": 5
+  }
+}
