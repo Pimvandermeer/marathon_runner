@@ -23,8 +23,8 @@ async function renderPlan() {
 }
 
 describe("tip link", () => {
-  it("TIP_URL is the maker's own bunq.me link (pinned so a swapped link fails the build)", () => {
-    expect(TIP_URL).toBe("https://bunq.me/marathonsupporter");
+  it("TIP_URL is pinned so a swapped link fails the build (currently off at the owner's request)", () => {
+    expect(TIP_URL).toBeNull();
   });
 
   it("shows under the stop list when set, opening in a new tab", async () => {

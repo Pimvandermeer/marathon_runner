@@ -5,4 +5,4 @@
  * is shown anywhere. The exact value is pinned in config.test.tsx, so a
  * swapped link fails the build before it can deploy.
  */
-export const TIP_URL: string | null = "https://bunq.me/marathonsupporter";
+export const TIP_URL: string | null = null;
