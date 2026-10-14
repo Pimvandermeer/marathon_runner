@@ -175,7 +175,6 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
   };
 
   const onSubmit = (data: RunnerInput) => {
-    console.log("Form submitted with data:", data);
     setIsCalculating(true);
 
     try {
@@ -250,10 +249,8 @@ export default function RunnerForm({ onSubmitSuccess }: RunnerFormProps) {
         }
       }
 
-      console.log("Calculating predictions with:", data);
       // Use the static calculation function instead of API call
       const result = calculateRunnerPredictions(data);
-      console.log("Calculation result:", result);
 
       // Pass the result to the parent component
       onSubmitSuccess(result);

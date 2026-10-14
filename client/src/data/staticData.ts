@@ -68,7 +68,6 @@ function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
     return "0:00";
   }
 
-  console.log("Calculating pace from finish time:", finishTime);
   
   const waveStartTimes = getWaveStartTimes();
   const startTime = waveStartTimes[wave];
@@ -90,19 +89,16 @@ function calculatePaceFromFinishTime(wave: string, finishTime: string): string {
   // For finish time input, we're not calculating from start time, but total race time
   // A marathon is 42.195 km, so we need to divide the total minutes by that distance
   
-  console.log("Total finish minutes:", totalFinishMinutes);
   
   // Calculate pace (minutes per km)
   const paceMinutes = totalFinishMinutes / 42.195;
   
-  console.log("Calculated pace minutes:", paceMinutes);
   
   // Format to mm:ss
   const mins = Math.floor(paceMinutes);
   const secs = Math.round((paceMinutes - mins) * 60);
   
   const result = `${mins}:${secs.toString().padStart(2, '0')}`;
-  console.log("Formatted pace result:", result);
   
   return result;
 }
@@ -116,7 +112,6 @@ export function calculateRunnerPredictions(runnerInput: RunnerInput) {
     throw new Error("Wave must be selected");
   }
 
-  console.log("Inputs:", { wave, pace, finishTime });
 
   // Determine pace - either use provided pace or calculate from finish time
   let effectivePace = "5:30"; // Default pace as fallback (reasonable marathon pace)
@@ -127,7 +122,6 @@ export function calculateRunnerPredictions(runnerInput: RunnerInput) {
     effectivePace = calculatePaceFromFinishTime(wave, finishTime);
   }
   
-  console.log("Effective pace:", effectivePace);
   
   const paceInMinutes = paceToMinutes(effectivePace);
   
