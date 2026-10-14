@@ -6,7 +6,7 @@ import { localize } from "@/data/marathonConfig";
 import type { RunnerPrediction } from "@/data/staticData";
 import { addMinutes, padTime, waveSwatch } from "@/lib/format";
 import StopCard from "./StopCard";
-import { TIP_URL } from "@/config";
+import { activeTipUrl } from "@/config";
 
 export interface PlannedRunner {
   key: string;
@@ -24,6 +24,7 @@ interface PlanViewProps {
 export default function PlanView({ pack, runner, onShare, onRemove }: PlanViewProps) {
   const { t, language } = useLanguage();
   const { prediction } = runner;
+  const tipUrl = activeTipUrl();
   const wave = prediction.runner.wave;
   const label = pack.waveLabels?.[wave];
   const swatch = waveSwatch(label?.en);
@@ -88,9 +89,9 @@ export default function PlanView({ pack, runner, onShare, onRemove }: PlanViewPr
             <StopCard key={stop.id} stop={stop} isLast={i === prediction.locationTimes.length - 1} />
           ))}
         </ol>
-        {TIP_URL && (
+        {tipUrl && (
           <a
-            href={TIP_URL}
+            href={tipUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 px-4 py-3 text-sm text-slate-700 hover:border-slate-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"

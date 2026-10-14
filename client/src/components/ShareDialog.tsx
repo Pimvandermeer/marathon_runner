@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarathonPack } from "@/data/packSchema";
 import { localize } from "@/data/marathonConfig";
 import { buildShareUrl, type SharedPlan } from "@/lib/shareLink";
-import { TIP_URL } from "@/config";
+import { activeTipUrl } from "@/config";
 
 interface ShareDialogProps {
   pack: MarathonPack;
@@ -19,6 +19,7 @@ interface ShareDialogProps {
 export default function ShareDialog({ pack, plan, onOpenChange }: ShareDialogProps) {
   const { t, language } = useLanguage();
   const [copied, setCopied] = useState<"idle" | "ok" | "failed">("idle");
+  const tipUrl = activeTipUrl();
 
   if (!plan) return null;
   const url = buildShareUrl(window.location.origin, window.location.pathname, plan);
@@ -76,9 +77,9 @@ export default function ShareDialog({ pack, plan, onOpenChange }: ShareDialogPro
           ) : <span />}
         </div>
 
-        {TIP_URL && (
+        {tipUrl && (
           <a
-            href={TIP_URL}
+            href={tipUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 flex items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50"
