@@ -23,8 +23,8 @@ async function renderPlan() {
 }
 
 describe("tip link", () => {
-  it("TIP_URL is either unset or a permanent https bunq.me link", () => {
-    if (TIP_URL !== null) expect(TIP_URL).toMatch(/^https:\/\/bunq\.me\/[A-Za-z0-9_-]+$/);
+  it("TIP_URL is the maker's own bunq.me link (pinned so a swapped link fails the build)", () => {
+    expect(TIP_URL).toBe("https://bunq.me/marathonsupporter");
   });
 
   it("shows under the stop list when set, opening in a new tab", async () => {
