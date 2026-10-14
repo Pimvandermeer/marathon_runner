@@ -1,4 +1,4 @@
-import { Share2, Trash2 } from "lucide-react";
+import { Coffee, Share2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarathonPack, ViewingLocation } from "@/data/packSchema";
@@ -6,6 +6,7 @@ import { localize } from "@/data/marathonConfig";
 import type { RunnerPrediction } from "@/data/staticData";
 import { padTime, waveSwatch } from "@/lib/format";
 import StopCard from "./StopCard";
+import { TIP_URL } from "@/config";
 
 export interface PlannedRunner {
   key: string;
@@ -77,6 +78,17 @@ export default function PlanView({ pack, runner, onShare, onRemove }: PlanViewPr
             <StopCard key={stop.id} stop={stop} isLast={i === prediction.locationTimes.length - 1} />
           ))}
         </ol>
+        {TIP_URL && (
+          <a
+            href={TIP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 px-4 py-3 text-sm text-slate-700 hover:border-slate-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          >
+            <Coffee className="h-4 w-4 text-brand" aria-hidden />
+            {t("footer.tip")}
+          </a>
+        )}
       </div>
     </section>
   );
