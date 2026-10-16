@@ -1109,6 +1109,7 @@ _No new tasks from Performance review beyond T3._
 - calculateRunnerPredictions now takes the pack as input; the R11 regression test passes the Rotterdam 2025 pack as a fixture with every expected value unchanged.
 - D9 reversed by the owner (2026-10-14): the organiser's 2026 course map is embedded as an image, the same way the Rotterdam page did, rendered from the organiser PDF to a 1000 px preview and a 2400 px zoom image. It is credited to the organiser with a link to the original PDF. The trade-off accepted: organiser artwork on the page without a written agreement (see TODOS "Organiser contact").
 - The tip link moved from the race pack to the site-wide setting TIP_URL (bunq.me), pinned in a test.
+- Analytics added by the owner (2026-10-16), replacing "no analytics by decision" in Section 4: cookie-free GoatCounter hit sent from client/src/lib/analytics.ts with path `/` or `/?marathon=<id>`, referring site and screen width only; see TODOS.md Completed.
 
 ## GSTACK REVIEW REPORT
 

@@ -28,18 +28,6 @@
 
 ## Product
 
-### Analytics and GDPR decision before Approach C
-
-**What:** Decide whether to add a cookie-free analytics provider (or none), what is retained, and the privacy line in the footer.
-
-**Why:** Approach C (runner share card) needs shares-per-runner and opens-per-share; GDPR applies the moment analytics appear.
-
-**Context:** Design doc Constraints and Approach C; reviewer concern R3-9. Revisit after the tip count on 2026-10-26.
-
-**Effort:** S
-**Priority:** P2
-**Depends on:** Tip count known (2026-10-26)
-
 ### Organiser contact about names and course maps
 
 **What:** Ask NN Marathon Rotterdam and TCS Amsterdam Marathon whether the planner may use their names and course maps.
@@ -53,3 +41,7 @@
 **Depends on:** None
 
 ## Completed
+
+### Analytics and GDPR decision before Approach C (done 2026-10-16)
+
+GoatCounter (cyclerunner.goatcounter.com), no cookies, added ahead of the 2026-10-26 tip count. client/src/lib/analytics.ts sends the hit itself instead of count.js, because count.js always forwards the query string and share links carry the runner's name. Sent: path `/` or `/?marathon=<id>` (link opens per edition), referring site without path, screen width; no Referer header. Footer links to GoatCounter's privacy page. Shares per runner (Approach C) are not measured.
