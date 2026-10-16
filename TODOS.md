@@ -28,6 +28,18 @@
 
 ## Product
 
+### Race pages for search and AI answers
+
+**What:** At build time, generate a static page per published pack (`/amsterdam-2026/`, `/en/amsterdam-2026/`) with race name and date, wave start times, the stops with km, passes, lines and descriptions, the spectator tips, the unofficial line, source links and a link to the planner. Link the pages from the footer and add them to sitemap.xml. Optionally generate `llms.txt` from the same data (cheap, but the benefit is unproven).
+
+**Why:** The app renders in JavaScript, so AI crawlers (GPTBot, ClaudeBot, PerplexityBot) see only the head tags; they have nothing to quote for "where to watch the Amsterdam marathon by metro". Content inside `#root` or in `<noscript>` would flash before the app paints, and several extractors drop `noscript`.
+
+**Context:** The packs are JSON and `vite-node` is available, so a script can import `@/data/marathonConfig`; check first that nothing touches `window` at module load. The URL scheme collides with plan.md step 6, which wants `/amsterdam-2026/` as a race path for the app, so choose one scheme before either ships. Start after Amsterdam 2026; aim to have it before the Rotterdam 2027 pack.
+
+**Effort:** M
+**Priority:** P2
+**Depends on:** Approach B pack pipeline (more races); URL scheme decision
+
 ### Organiser contact about names and course maps
 
 **What:** Ask NN Marathon Rotterdam and TCS Amsterdam Marathon whether the planner may use their names and course maps.

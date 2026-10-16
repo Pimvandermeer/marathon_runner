@@ -10,6 +10,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Each replacement must hit exactly once, so a changed tag fails the build.
 const ENGLISH_HEAD: [RegExp, string][] = [
   [/<html lang="nl">/, '<html lang="en">'],
+  [/<title>[^<]*<\/title>/, "<title>Marathon Supporter: see your runner more than once</title>"],
+  [/<link rel="canonical" href="[^"]*" \/>/, '<link rel="canonical" href="https://marathon-supporter.com/en/" />'],
+  [/"url": "https:\/\/marathon-supporter\.com\/"/, '"url": "https://marathon-supporter.com/en/"'],
+  [/"description": "[^"]*"/, '"description": "Unofficial supporter planner: enter start wave and pace and see when your runner passes each metro, tram and train stop along the marathon course. Share the plan with one link."'],
+  [/"inLanguage": "nl"/, '"inLanguage": "en"'],
   [/<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="See where and when to cheer your runner: passing times for every metro, tram and train stop along the marathon course. Free and unofficial." />'],
   [/<meta property="og:locale" content="nl_NL" \/>/, '<meta property="og:locale" content="en_GB" />'],
   [/<meta property="og:locale:alternate" content="en_GB" \/>/, '<meta property="og:locale:alternate" content="nl_NL" />'],

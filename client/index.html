@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marathon Supporter</title>
+    <title>Marathon Supporter: zie je loper vaker dan één keer</title>
     <meta name="description" content="Zie waar en wanneer je je loper kunt aanmoedigen: doorkomsttijden per metro-, tram- en treinhalte langs het marathonparcours. Gratis en onofficieel." />
+    <!-- Share links carry the runner's name; the canonical keeps them from being indexed as pages. -->
+    <link rel="canonical" href="https://marathon-supporter.com/" />
+    <link rel="alternate" hreflang="nl" href="https://marathon-supporter.com/" />
+    <link rel="alternate" hreflang="en" href="https://marathon-supporter.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://marathon-supporter.com/" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -25,6 +30,22 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Marathon Supporter: doorkomsttijden per halte langs het parcours" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- WebApplication, not Event: the planner is unofficial and must not pose as the race's page. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Marathon Supporter",
+        "url": "https://marathon-supporter.com/",
+        "description": "Onofficiële supportersplanner: vul startgolf en tempo in en zie hoe laat je loper langs elke metro-, tram- en treinhalte op het marathonparcours komt. Deel het plan met één link.",
+        "inLanguage": "nl",
+        "applicationCategory": "SportsApplication",
+        "operatingSystem": "Any web browser",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@type": "Person", "name": "Pim van der Meer", "url": "https://pimvandermeer.nl" }
+      }
+    </script>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // MIT License
