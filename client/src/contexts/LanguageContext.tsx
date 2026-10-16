@@ -106,6 +106,7 @@ export const enTranslations = {
 
   "footer.unofficial": "Unofficial planner, not affiliated with the race organiser. Always check the organiser's site for changes on race day.",
   "footer.osm": "Stop locations © OpenStreetMap contributors",
+  "footer.analytics": "Visitor counts via GoatCounter, no cookies",
   "footer.contact": "Contact",
   "footer.tip": "Did this help? Buy the maker a coffee",
   "footer.made": "Made by",
@@ -216,6 +217,7 @@ export const nlTranslations: Record<TranslationKey, string> = {
 
   "footer.unofficial": "Onofficiële planner, niet verbonden aan de organisatie van de race. Kijk op de racedag altijd op de site van de organisatie voor wijzigingen.",
   "footer.osm": "Haltelocaties © OpenStreetMap-bijdragers",
+  "footer.analytics": "Bezoekersaantallen via GoatCounter, zonder cookies",
   "footer.contact": "Contact",
   "footer.tip": "Heb je hier iets aan gehad? Trakteer de maker op koffie",
   "footer.made": "Gemaakt door",

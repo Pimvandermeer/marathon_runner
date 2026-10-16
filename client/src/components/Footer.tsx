@@ -20,6 +20,7 @@ export default function Footer() {
           <span>
             <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="hover:underline">{t("footer.osm")}</a>
           </span>
+          <a href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener noreferrer" className="hover:underline">{t("footer.analytics")}</a>
           <a href="mailto:mail@pimvandermeer.nl" className="hover:underline">{t("footer.contact")}</a>
           <span>
             {t("footer.made")} <a href="https://pimvandermeer.nl" target="_blank" rel="noopener noreferrer" className="hover:underline">pimvandermeer.nl</a>
