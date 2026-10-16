@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildShareUrl, decodePlan, encodePlan } from "@/lib/shareLink";
+import { buildShareUrl, decodePlan, encodePlan, languagePath, pathLanguage } from "@/lib/shareLink";
 
 const WAVES: Record<string, string[]> = { "amsterdam-2026": ["1", "2", "3", "4", "5", "6"] };
 const wavesFor = (id: string) => WAVES[id];
@@ -13,6 +13,23 @@ describe("share link round trip", () => {
   it("builds an absolute URL on the current page", () => {
     const url = buildShareUrl("https://marathon-supporter.com", "/", { marathonId: "amsterdam-2026", name: "A", wave: "1", pace: "4:15" });
     expect(url).toBe("https://marathon-supporter.com/?marathon=amsterdam-2026&name=A&wave=1&pace=4%3A15");
+  });
+
+  it("points an English sharer at the page with the English link preview", () => {
+    const plan = { marathonId: "amsterdam-2026", name: "A", wave: "1", pace: "4:15" };
+    expect(buildShareUrl("https://marathon-supporter.com", languagePath("en"), plan)).toBe("https://marathon-supporter.com/en/?marathon=amsterdam-2026&name=A&wave=1&pace=4%3A15");
+    expect(languagePath("nl")).toBe("/");
+    expect([pathLanguage("/en"), pathLanguage("/en/"), pathLanguage("/"), pathLanguage("/end")]).toEqual(["en", "en", null, null]);
+  });
+
+  it("carries only the plan, never a ref or campaign tag", () => {
+    const encoded = encodePlan({ marathonId: "amsterdam-2026", name: "A", wave: "1", pace: "4:15" });
+    expect(Array.from(new URLSearchParams(encoded).keys())).toEqual(["marathon", "name", "wave", "pace"]);
+  });
+
+  it("a ref tag next to the plan does not break it", () => {
+    expect(decodePlan("?ref=strava", wavesFor)).toEqual({ kind: "none" });
+    expect(decodePlan("?ref=strava&marathon=amsterdam-2026&name=A&wave=1&pace=4:15", wavesFor)).toEqual({ kind: "ok", marathonId: "amsterdam-2026", name: "A", wave: "1", pace: "4:15" });
   });
 
   it("an empty name is omitted and decodes as an empty string", () => {

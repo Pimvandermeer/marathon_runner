@@ -26,6 +26,7 @@ export default function App() {
         <Layout>
           <Switch>
             <Route path="/" component={Home} />
+            <Route path="/en" component={Home} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

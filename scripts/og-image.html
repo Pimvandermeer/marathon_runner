@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+  Source of the link-preview images (1200x630). Render from the repo root:
+    google-chrome --headless --hide-scrollbars --window-size=1200,630 \
+      --screenshot=client/public/og-image.png "file://$PWD/scripts/og-image.html#nl"
+  and with #en to client/public/og-image-en.png.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #0f172a; font-family: "Noto Sans", sans-serif; color: #fff; }
+  .brand { position: absolute; left: 80px; top: 80px; display: flex; align-items: center; gap: 21px; }
+  .badge { width: 96px; height: 96px; border-radius: 16px; background: #cd1d29; display: grid; place-items: center; font-size: 44px; font-weight: 700; }
+  .name { font-size: 41px; font-weight: 700; letter-spacing: -0.3px; }
+  h1 { position: absolute; left: 78px; top: 207px; font-size: 75px; line-height: 88px; font-weight: 700; letter-spacing: -1.5px; }
+  .body { position: absolute; left: 80px; top: 398px; font-size: 30px; line-height: 42px; color: #cbd5e1; }
+  .url { position: absolute; left: 80px; top: 536px; font-size: 28px; font-weight: 600; color: #94a3b8; }
+  .line { position: absolute; left: 903px; top: 120px; width: 6px; height: 424px; background: #334155; }
+  .stop { position: absolute; left: 891px; width: 199px; height: 52px; display: flex; align-items: center; gap: 21px; }
+  .dot { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 4px solid #94a3b8; }
+  .dot.end { background: #cd1d29; border-color: #cd1d29; }
+  .time { width: 150px; height: 52px; border-radius: 10px; background: #1e293b; display: grid; place-items: center; font-family: "DejaVu Sans Mono", monospace; font-size: 30px; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="brand"><div class="badge">42</div><div class="name">Marathon Supporter</div></div>
+  <h1 id="title"></h1>
+  <p class="body" id="body"></p>
+  <div class="url">marathon-supporter.com</div>
+  <div class="line"></div>
+  <div id="stops"></div>
+  <script>
+    var TEXT = {
+      nl: { title: "Zie je loper vaker<br>dan één keer", body: "Doorkomsttijden per metro-, tram- en treinhalte<br>langs het parcours. Deel je plan met één link." },
+      en: { title: "See your runner<br>more than once", body: "Passing times at every metro, tram and train stop<br>along the course. Share your plan with one link." },
+    };
+    var text = TEXT[location.hash.slice(1)] || TEXT.nl;
+    document.documentElement.lang = location.hash.slice(1) || "nl";
+    document.getElementById("title").innerHTML = text.title;
+    document.getElementById("body").innerHTML = text.body;
+    var stops = [[124, "09:11", true], [224, "09:31"], [324, "10:09"], [424, "11:24"], [504, "12:41", true]];
+    document.getElementById("stops").innerHTML = stops.map(function (s) {
+      return '<div class="stop" style="top:' + s[0] + 'px"><div class="dot' + (s[2] ? ' end' : '') + '"></div><div class="time">' + s[1] + '</div></div>';
+    }).join("");
+  </script>
+</body>
+</html>

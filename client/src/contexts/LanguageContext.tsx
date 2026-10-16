@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import { safeStorage } from "@/lib/safeStorage";
+import { pathLanguage } from "@/lib/shareLink";
 
 export type Language = "en" | "nl";
 
@@ -235,6 +236,9 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 function initialLanguage(): Language {
+  // A link to /en/ opens in English, whatever this browser chose before.
+  const fromPath = pathLanguage(window.location.pathname);
+  if (fromPath) return fromPath;
   const stored = safeStorage.getItem("language");
   if (stored === "en" || stored === "nl") return stored;
   try {

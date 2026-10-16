@@ -32,6 +32,19 @@ export function encodePlan(plan: SharedPlan): string {
   return params.toString();
 }
 
+/**
+ * The page whose link preview is in that language. WhatsApp and Facebook read
+ * only the static HTML, so an English preview needs its own page, /en/.
+ */
+export function languagePath(language: "en" | "nl"): string {
+  return language === "en" ? "/en/" : "/";
+}
+
+/** "en" on the English preview page, null elsewhere. */
+export function pathLanguage(pathname: string): "en" | null {
+  return /^\/en\/?$/.test(pathname) ? "en" : null;
+}
+
 export function buildShareUrl(origin: string, pathname: string, plan: SharedPlan): string {
   return `${origin}${pathname}?${encodePlan(plan)}`;
 }

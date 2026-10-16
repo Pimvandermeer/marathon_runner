@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarathonPack } from "@/data/packSchema";
 import { localize } from "@/data/marathonConfig";
-import { buildShareUrl, type SharedPlan } from "@/lib/shareLink";
+import { buildShareUrl, languagePath, type SharedPlan } from "@/lib/shareLink";
 import { activeTipUrl } from "@/config";
 
 interface ShareDialogProps {
@@ -22,7 +22,8 @@ export default function ShareDialog({ pack, plan, onOpenChange }: ShareDialogPro
   const tipUrl = activeTipUrl();
 
   if (!plan) return null;
-  const url = buildShareUrl(window.location.origin, window.location.pathname, plan);
+  // The link preview follows the sharer's language, not the page they opened.
+  const url = buildShareUrl(window.location.origin, languagePath(language), plan);
   const raceName = localize(pack.name, language);
   const message = `${t("share.message", { name: plan.name || t("plan.runnerFallback"), race: raceName })} ${url}`;
   const canNativeShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
